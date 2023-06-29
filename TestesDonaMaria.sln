@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33516.290
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestesDonaMaria.WinForms", "TestesDonaMaria.WinForms\TestesDonaMaria.WinForms.csproj", "{A03BE1C2-A2D3-41EF-B71F-F43F3DAD6F75}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestesDonaMaria.Dominio", "TestesDonaMaria.Dominio\TestesDonaMaria.Dominio.csproj", "{FEDBAE92-3CC2-4EBC-9A7D-4E0CAD693575}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestesDonaMaria.Infra", "TestesDonaMaria.Infra\TestesDonaMaria.Infra.csproj", "{121F75DD-EF61-460E-AD2D-E70EA9F0207C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Apresentacao", "1 - Apresentacao", "{C2E5AF20-7DB0-4FA8-A845-525148B77428}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Dominio", "2 - Dominio", "{7B3C4BF9-C6F7-43E2-B04B-B28D1AB5549D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Infra", "3 - Infra", "{C656628F-7A10-40E0-899E-9243565E51AA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A03BE1C2-A2D3-41EF-B71F-F43F3DAD6F75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A03BE1C2-A2D3-41EF-B71F-F43F3DAD6F75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A03BE1C2-A2D3-41EF-B71F-F43F3DAD6F75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A03BE1C2-A2D3-41EF-B71F-F43F3DAD6F75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEDBAE92-3CC2-4EBC-9A7D-4E0CAD693575}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEDBAE92-3CC2-4EBC-9A7D-4E0CAD693575}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEDBAE92-3CC2-4EBC-9A7D-4E0CAD693575}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEDBAE92-3CC2-4EBC-9A7D-4E0CAD693575}.Release|Any CPU.Build.0 = Release|Any CPU
+		{121F75DD-EF61-460E-AD2D-E70EA9F0207C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{121F75DD-EF61-460E-AD2D-E70EA9F0207C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{121F75DD-EF61-460E-AD2D-E70EA9F0207C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{121F75DD-EF61-460E-AD2D-E70EA9F0207C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A03BE1C2-A2D3-41EF-B71F-F43F3DAD6F75} = {C2E5AF20-7DB0-4FA8-A845-525148B77428}
+		{FEDBAE92-3CC2-4EBC-9A7D-4E0CAD693575} = {7B3C4BF9-C6F7-43E2-B04B-B28D1AB5549D}
+		{121F75DD-EF61-460E-AD2D-E70EA9F0207C} = {C656628F-7A10-40E0-899E-9243565E51AA}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3D3A0D3A-F5E7-46D5-BC13-B95FDF82B57B}
+	EndGlobalSection
+EndGlobal
