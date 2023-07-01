@@ -46,19 +46,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ALUNO\\.nuget\\packages\\": {}
+    "C:\\Users\\ruans\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ALUNO\\source\\repos\\TestesDonaMaria\\TestesDonaMaria.WinForms\\TestesDonaMaria.WinForms.csproj",
+      "projectUniqueName": "C:\\Users\\ruans\\OneDrive\\Documentos\\GitHub\\Testes_da_Mariana\\TestesDonaMaria.WinForms\\TestesDonaMaria.WinForms.csproj",
       "projectName": "TestesDonaMaria.WinForms",
-      "projectPath": "C:\\Users\\ALUNO\\source\\repos\\TestesDonaMaria\\TestesDonaMaria.WinForms\\TestesDonaMaria.WinForms.csproj",
-      "packagesPath": "C:\\Users\\ALUNO\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ALUNO\\source\\repos\\TestesDonaMaria\\TestesDonaMaria.WinForms\\obj\\",
+      "projectPath": "C:\\Users\\ruans\\OneDrive\\Documentos\\GitHub\\Testes_da_Mariana\\TestesDonaMaria.WinForms\\TestesDonaMaria.WinForms.csproj",
+      "packagesPath": "C:\\Users\\ruans\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ruans\\OneDrive\\Documentos\\GitHub\\Testes_da_Mariana\\TestesDonaMaria.WinForms\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\ALUNO\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ruans\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -72,11 +77,11 @@
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
           "projectReferences": {
-            "C:\\Users\\ALUNO\\source\\repos\\TestesDonaMaria\\TestesDonaMaria.Dominio\\TestesDonaMaria.Dominio.csproj": {
-              "projectPath": "C:\\Users\\ALUNO\\source\\repos\\TestesDonaMaria\\TestesDonaMaria.Dominio\\TestesDonaMaria.Dominio.csproj"
+            "C:\\Users\\ruans\\OneDrive\\Documentos\\GitHub\\Testes_da_Mariana\\TestesDonaMaria.Dominio\\TestesDonaMaria.Dominio.csproj": {
+              "projectPath": "C:\\Users\\ruans\\OneDrive\\Documentos\\GitHub\\Testes_da_Mariana\\TestesDonaMaria.Dominio\\TestesDonaMaria.Dominio.csproj"
             },
-            "C:\\Users\\ALUNO\\source\\repos\\TestesDonaMaria\\TestesDonaMaria.Infra\\TestesDonaMaria.Infra.csproj": {
-              "projectPath": "C:\\Users\\ALUNO\\source\\repos\\TestesDonaMaria\\TestesDonaMaria.Infra\\TestesDonaMaria.Infra.csproj"
+            "C:\\Users\\ruans\\OneDrive\\Documentos\\GitHub\\Testes_da_Mariana\\TestesDonaMaria.Infra\\TestesDonaMaria.Infra.csproj": {
+              "projectPath": "C:\\Users\\ruans\\OneDrive\\Documentos\\GitHub\\Testes_da_Mariana\\TestesDonaMaria.Infra\\TestesDonaMaria.Infra.csproj"
             }
           }
         }
@@ -109,7 +114,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
       }
     }
   }
