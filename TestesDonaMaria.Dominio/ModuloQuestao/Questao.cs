@@ -1,47 +1,43 @@
 ﻿using Microsoft.Data.SqlClient;
-using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TestesDonaMaria.Dominio.ModuloQuestao
 {
     public class Questao : EntidadeBase<Questao>
     {
         public string titulo;
-        public int questaoCorretaID;
+        public string questaoCorreta;
 
         public override void AtualizarInformacoes(Questao entidade)
         {
             this.titulo = entidade.titulo;
-            this.questaoCorretaID = entidade.questaoCorretaID;
+            this.questaoCorreta = entidade.questaoCorreta;
         }
 
         public override string ObterCampoSQL(bool ehParametro = false)
         {
-            string sufixo = "[";
-            string prefixo = "]";
+            string sufixo = "]";
+            string prefixo = "[";
             string campo = "";
 
             if (ehParametro)
             {
-                sufixo = "@";
-                prefixo = "";
+                prefixo = "@";
+                sufixo = "";
             }
-            campo += $"{sufixo}titulo{prefixo},";
-            campo += $"{sufixo}questaoCorreta{prefixo},";
+
+            campo += $"{prefixo}titulo{sufixo},";
+            campo += $"{prefixo}questaoCorreta{sufixo}";
+
             return campo;
         }
 
         public override SqlParameter[] ObterParametroSQL()
         {
             return new SqlParameter[]
-           {
+            {
                  new SqlParameter("@titulo", titulo),
-                 new SqlParameter("@questaoCorreta", questaoCorretaID)
-           };
+                 new SqlParameter("@questaoCorreta", questaoCorreta)
+            };
         }
 
         public override string[] Validar()
@@ -51,9 +47,9 @@ namespace TestesDonaMaria.Dominio.ModuloQuestao
             {
                 erros.Add("O titulo não pode ser vazio.");
             }
-            if(questaoCorretaID < 1)
+            if(string.IsNullOrEmpty(questaoCorreta))
             {
-                erros.Add("É necessario definir uma questão correta.");
+                erros.Add("É necessario definir a alternativa correta.");
             }
             return erros.ToArray();
         }

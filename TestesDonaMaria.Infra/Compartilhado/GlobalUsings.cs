@@ -1,0 +1,1 @@
+﻿global using TestesDonaMaria.Infra.Compartilhado;
