@@ -10,7 +10,7 @@ namespace TestesDonaMaria.Dominio.Compartilhado
 
         public abstract void AtualizarInformacoes(T entidade);
 
-        public abstract bool VerificarRepeticao(T entidade);
+        public abstract bool VerificarRepeticao(T registro);
 
         public abstract string ObterCampoSQL(bool ehParametro = false);
 

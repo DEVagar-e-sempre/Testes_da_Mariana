@@ -1,40 +1,37 @@
 ﻿using Microsoft.Data.SqlClient;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using TestesDonaMaria.Dominio.ModuloDisciplina;
 
 namespace TestesDonaMaria.Dominio.ModuloMateria
 {
     public class Materia : EntidadeBase<Materia>
     {
         public string nome;
-        public Materia(string nome)
-        {
-            this.nome = nome;
-        }
-        public Materia()
-        {
+        public Disciplina disciplina;
+        public int[] serie;
 
-        }
         public override void AtualizarInformacoes(Materia entidade)
         {
-            nome = entidade.nome;
+            this.nome = entidade.nome;
+            this.disciplina = entidade.disciplina;
+            this.serie = entidade.serie;
         }
 
         public override string ObterCampoSQL(bool ehParametro = false)
         {
-            string sufixo = "[";
-            string prefixo = "]";
+            string sufixo = "]";
+            string prefixo = "[";
             string campo = "";
 
             if (ehParametro)
             {
-                sufixo = "@";
-                prefixo = "";
+                prefixo = "@";
+                sufixo = "";
             }
-            campo += $"{sufixo}nome{prefixo},";
+
+            campo += $"{prefixo}nome{sufixo},";
+            campo += $"{prefixo}disciplina{sufixo},";
+            campo += $"{prefixo}serie{sufixo}";
+
             return campo;
         }
 
@@ -43,16 +40,28 @@ namespace TestesDonaMaria.Dominio.ModuloMateria
             return new SqlParameter[]
             {
                  new SqlParameter("@nome", nome),
+                 new SqlParameter("@disciplina", disciplina),
+                 new SqlParameter("@serie", serie)
             };
         }
 
         public override string[] Validar()
         {
             List<string> erros = new List<string>();
+
             if (string.IsNullOrEmpty(nome))
             {
-                erros.Add("O nome não pode ser vazio");
+                erros.Add("O campo do Nome é obrigatório!");
             }
+            else if(disciplina == null)
+            {
+                erros.Add("É obrigatório a seleção da disciplina!");
+            }
+            else if(serie == null)
+            {
+                erros.Add("É obrigatório a seleção de uma série!");
+            }
+
             return erros.ToArray();
         }
 
