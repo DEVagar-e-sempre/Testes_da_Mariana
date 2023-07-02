@@ -9,8 +9,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\TestesDonaMaria.Dominio\TestesDonaMaria.Dominio.csproj" />
     <ProjectReference Include="..\TestesDonaMaria.Infra\TestesDonaMaria.Infra.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ModuloMateria\" />
+    <Folder Include="ModuloTeste\" />
+    <Folder Include="ModuloDisciplina\" />
+    <Folder Include="ModuloQuestao\" />
   </ItemGroup>
 
 </Project>
