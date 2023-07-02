@@ -1,12 +1,18 @@
 ﻿using Microsoft.Data.SqlClient;
+using System.Data;
 using TestesDonaMaria.Dominio.Compartilhado;
 
 namespace TestesDonaMaria.Infra.Compartilhado
 {
-    public abstract class RepositorioSQLBase<TEntidade> : IRepositorio<TEntidade>
+    public abstract class RepositorioSQLBase<TEntidade>
         where TEntidade : EntidadeBase<TEntidade>
     {
         protected SqlConnection conexao;
+
+        public RepositorioSQLBase(SqlConnection conexao)
+        {
+            this.conexao = conexao;
+        }
 
         public bool Inserir(TEntidade registro)
         {
@@ -15,38 +21,61 @@ namespace TestesDonaMaria.Infra.Compartilhado
 
             SqlCommand comando = new SqlCommand(inserirSQL, conexao);
             comando.Parameters.AddRange(registro.ObterParametroSQL());
-            conexao.Open();
-            comando.ExecuteNonQuery();
+            comando.ExecuteScalar();
             return true;
         }
         public bool Editar(int id, TEntidade registroAtualizado)
         {
-            throw new NotImplementedException();
+           String editarSQL;
+            editarSQL = $"UPDATE TB{typeof(TEntidade).Name} SET {registroAtualizado.ObterCampoUpdate()} WHERE id = {id}";
+
+            SqlCommand comando = new SqlCommand(editarSQL, conexao);
+            comando.Parameters.AddRange(registroAtualizado.ObterParametroSQL());
+            comando.ExecuteScalar();
+            return true;
         }
 
         public void Excluir(TEntidade registroSelecionado)
         {
-            throw new NotImplementedException();
+            String excluirSQL;
+            excluirSQL = $"DELETE FROM TB{typeof(TEntidade).Name} WHERE id = {registroSelecionado.id}";
+            SqlCommand comando = new SqlCommand(excluirSQL, conexao);
+            comando.ExecuteScalar();
         }
-
-        public void AdicionarRegistroEContador(List<TEntidade> listaRegistros, int contador)
+        public TEntidade SelecionarPorId(int id, String campo = "")
         {
-            throw new NotImplementedException();
-        }
+            if (String.IsNullOrEmpty(campo))
+            {
+                campo = "*";
+            }
+            String selecionarPorIDSQL;
+            selecionarPorIDSQL = $"SELECT {campo} FROM TB{typeof(TEntidade).Name} WHERE id = {id}";
+            SqlCommand comando = new SqlCommand(selecionarPorIDSQL, conexao);
 
-        public bool EhRepetido(TEntidade entidade)
-        {
-            throw new NotImplementedException();
-        }
+            SqlDataReader leitor = comando.ExecuteReader();
 
-        public TEntidade SelecionarPorId(int id)
-        {
-            throw new NotImplementedException();
+            if (leitor.Read())
+            {
+                return (TEntidade)Activator.CreateInstance(typeof(TEntidade), leitor);
+            }
+
+            return null;
         }
 
         public List<TEntidade> SelecionarTodos()
         {
-            throw new NotImplementedException();
+            String selecionarTodosSQL;
+            selecionarTodosSQL = $"SELECT * FROM TB{typeof(TEntidade).Name}";
+            SqlCommand comando = new SqlCommand(selecionarTodosSQL, conexao);
+            SqlDataReader leitor = comando.ExecuteReader();
+
+            List<TEntidade> registros = new List<TEntidade>();
+            
+            while (leitor.Read())
+            {
+                registros.Add((TEntidade)Activator.CreateInstance(typeof(TEntidade), leitor));
+            }
+            return registros;
         }
     }
 }
