@@ -10,15 +10,15 @@ namespace TestesDonaMaria.Dominio.ModuloQuestao
         public string titulo;
         public string questaoCorreta;
         public int serie;
-        public Disciplina disciplina;
+        //public Disciplina disciplina;
         public Materia materia;
 
-        public Questao(string titulo, string questaoCorreta, int serie, Disciplina disciplina, Materia materia)
+        public Questao(string titulo, string questaoCorreta, int serie, Materia materia)
         {
             this.titulo = titulo;
             this.questaoCorreta = questaoCorreta;
             this.serie = serie;
-            this.disciplina = disciplina;
+            //this.disciplina = disciplina;
             this.materia = materia;
         }
 
