@@ -1,4 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
+using Microsoft.IdentityModel.Tokens;
+using TestesDonaMaria.Dominio.ModuloDisciplina;
+using TestesDonaMaria.Dominio.ModuloMateria;
 
 namespace TestesDonaMaria.Dominio.ModuloQuestao
 {
@@ -6,7 +9,23 @@ namespace TestesDonaMaria.Dominio.ModuloQuestao
     {
         public string titulo;
         public string questaoCorreta;
+        public int serie;
+        public Disciplina disciplina;
+        public Materia materia;
 
+        public Questao(string titulo, string questaoCorreta, int serie, Disciplina disciplina, Materia materia)
+        {
+            this.titulo = titulo;
+            this.questaoCorreta = questaoCorreta;
+            this.serie = serie;
+            this.disciplina = disciplina;
+            this.materia = materia;
+        }
+
+        public Questao()
+        {
+
+        }
         public override void AtualizarInformacoes(Questao entidade)
         {
             this.titulo = entidade.titulo;

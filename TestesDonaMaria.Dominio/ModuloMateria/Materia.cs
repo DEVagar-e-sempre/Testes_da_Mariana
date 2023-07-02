@@ -9,6 +9,18 @@ namespace TestesDonaMaria.Dominio.ModuloMateria
         public Disciplina disciplina;
         public int[] serie;
 
+        public Materia(string nome, Disciplina disciplina, int[] serie)
+        {
+            this.nome = nome;
+            this.disciplina = disciplina;
+            this.serie = serie;
+        }
+
+        public Materia()
+        {
+            
+        }
+
         public override void AtualizarInformacoes(Materia entidade)
         {
             this.nome = entidade.nome;
