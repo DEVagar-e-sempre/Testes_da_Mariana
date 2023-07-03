@@ -9,13 +9,24 @@ namespace TestesDonaMaria.Dominio.ModuloDisciplina
         {
             this.nome = nome;
         }
-        public Disciplina()
+        public override string[] Validar()
         {
-
+            List<string> erros = new List<string>();
+            if (string.IsNullOrEmpty(nome))
+            {
+                erros.Add("O nome não pode ser vazio");
+            }
+            return erros.ToArray();
         }
+
         public override void AtualizarInformacoes(Disciplina entidade)
         {
             nome = entidade.nome;
+        }
+        public override void AtualizarInformacoes(SqlDataReader leitor)
+        {
+            this.id = (int)leitor["id"];
+            this.nome = (string)leitor["nome"];
         }
 
         public override string ObterCampoSQL(bool ehParametro = false)
@@ -43,19 +54,15 @@ namespace TestesDonaMaria.Dominio.ModuloDisciplina
             };
         }
 
-        public override string[] Validar()
+        public override string ObterCampoUpdate()
         {
-            List<string> erros = new List<string>();
-            if (string.IsNullOrEmpty(nome))
-            {
-                erros.Add("O nome não pode ser vazio");
-            }
-            return erros.ToArray();
-        }
+            string sufixo = "]";
+            string prefixo = "[";
+            string campo = "";
 
-        public override bool VerificarRepeticao(Disciplina registro)
-        {
-            return id != registro.id && nome == registro.nome;
+            campo += $"{prefixo}nome{sufixo} = @nome";
+
+            return campo;
         }
     }
 }

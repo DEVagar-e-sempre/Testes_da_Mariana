@@ -7,25 +7,45 @@ namespace TestesDonaMaria.Dominio.ModuloMateria
     {
         public string nome;
         public Disciplina disciplina;
-        public int[] serie;
+        public int disciplinaId;
 
-        public Materia(string nome, Disciplina disciplina, int[] serie)
+        public Materia(string nome, Disciplina disciplina)
         {
             this.nome = nome;
             this.disciplina = disciplina;
-            this.serie = serie;
         }
-
-        public Materia()
+        public override string[] Validar()
         {
-            
+            List<string> erros = new List<string>();
+
+            if (string.IsNullOrEmpty(nome))
+            {
+                erros.Add("O campo do Nome é obrigatório!");
+            }
+            else if (disciplina == null)
+            {
+                erros.Add("É obrigatório a seleção da disciplina!");
+            }
+            /*
+            else if (serie == null)
+            {
+                erros.Add("É obrigatório a seleção de uma série!");
+            }
+            */
+            return erros.ToArray();
         }
 
         public override void AtualizarInformacoes(Materia entidade)
         {
             this.nome = entidade.nome;
             this.disciplina = entidade.disciplina;
-            this.serie = entidade.serie;
+            //this.serie = entidade.serie;
+        }
+        public override void AtualizarInformacoes(SqlDataReader leitor)
+        {
+            this.id = (int)leitor["id"];
+            this.nome = (string)leitor["nome"];
+            this.disciplinaId = (int)leitor["idDisciplina"];
         }
 
         public override string ObterCampoSQL(bool ehParametro = false)
@@ -42,7 +62,7 @@ namespace TestesDonaMaria.Dominio.ModuloMateria
 
             campo += $"{prefixo}nome{sufixo},";
             campo += $"{prefixo}disciplina{sufixo},";
-            campo += $"{prefixo}serie{sufixo}";
+            //campo += $"{prefixo}serie{sufixo}";
 
             return campo;
         }
@@ -52,34 +72,20 @@ namespace TestesDonaMaria.Dominio.ModuloMateria
             return new SqlParameter[]
             {
                  new SqlParameter("@nome", nome),
-                 new SqlParameter("@disciplina", disciplina),
-                 new SqlParameter("@serie", serie)
+                 new SqlParameter("@disciplina_id", disciplinaId),
             };
         }
 
-        public override string[] Validar()
+        public override string ObterCampoUpdate()
         {
-            List<string> erros = new List<string>();
+            string sufixo = "]";
+            string prefixo = "[";
+            string campo = "";
 
-            if (string.IsNullOrEmpty(nome))
-            {
-                erros.Add("O campo do Nome é obrigatório!");
-            }
-            else if(disciplina == null)
-            {
-                erros.Add("É obrigatório a seleção da disciplina!");
-            }
-            else if(serie == null)
-            {
-                erros.Add("É obrigatório a seleção de uma série!");
-            }
+            campo += $"{prefixo}nome{sufixo} = @nome,";
+            campo += $"{prefixo}disciplina_id{sufixo} = @disciplina_id";
 
-            return erros.ToArray();
-        }
-
-        public override bool VerificarRepeticao(Materia registro)
-        {
-            return id != registro.id && nome == registro.nome;
+            return campo;
         }
     }
 }
