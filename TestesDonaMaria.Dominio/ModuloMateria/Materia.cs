@@ -48,24 +48,7 @@ namespace TestesDonaMaria.Dominio.ModuloMateria
             this.disciplinaId = (int)leitor["idDisciplina"];
         }
 
-        public override string ObterCampoSQL(bool ehParametro = false)
-        {
-            string sufixo = "]";
-            string prefixo = "[";
-            string campo = "";
 
-            if (ehParametro)
-            {
-                prefixo = "@";
-                sufixo = "";
-            }
-
-            campo += $"{prefixo}nome{sufixo},";
-            campo += $"{prefixo}disciplina{sufixo},";
-            //campo += $"{prefixo}serie{sufixo}";
-
-            return campo;
-        }
 
         public override SqlParameter[] ObterParametroSQL()
         {
