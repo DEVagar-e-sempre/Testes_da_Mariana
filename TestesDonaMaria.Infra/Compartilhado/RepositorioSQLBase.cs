@@ -64,12 +64,12 @@ namespace TestesDonaMaria.Infra.Compartilhado
 
         public List<TEntidade> SelecionarTodos()
         {
+            List<TEntidade> registros = new List<TEntidade>();
             String selecionarTodosSQL;
+
             selecionarTodosSQL = $"SELECT * FROM TB{typeof(TEntidade).Name}";
             SqlCommand comando = new SqlCommand(selecionarTodosSQL, conexao);
             SqlDataReader leitor = comando.ExecuteReader();
-
-            List<TEntidade> registros = new List<TEntidade>();
             
             while (leitor.Read())
             {

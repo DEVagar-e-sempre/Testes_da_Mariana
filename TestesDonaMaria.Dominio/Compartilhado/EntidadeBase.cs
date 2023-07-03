@@ -5,9 +5,9 @@ namespace TestesDonaMaria.Dominio.Compartilhado
     public abstract class EntidadeBase<T>
     {
 
-        public EntidadeBase(SqlDataReader registro)
+        public EntidadeBase(SqlDataReader leitor)
         {
-            AtualizarInformacoes(registro);
+            AtualizarInformacoes(leitor);
         }
         public EntidadeBase()
         {
@@ -20,9 +20,7 @@ namespace TestesDonaMaria.Dominio.Compartilhado
 
         public abstract void AtualizarInformacoes(T entidade);
 
-        public abstract void AtualizarInformacoes(SqlDataReader registro);
-
-        public abstract bool VerificarRepeticao(T registro);
+        public abstract void AtualizarInformacoes(SqlDataReader leitor);
 
         public abstract string ObterCampoSQL(bool ehParametro = false);
 
