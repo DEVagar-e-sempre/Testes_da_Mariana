@@ -48,25 +48,32 @@ namespace TestesDonaMaria.Dominio.ModuloMateria
             this.disciplinaId = (int)leitor["idDisciplina"];
         }
 
-        public override string ObterCampoSQL(bool ehParametro = false)
-        {
-            string sufixo = "]";
-            string prefixo = "[";
-            string campo = "";
+        //public override string ObterCampoSQL(bool ehParametro = false)
+        //{
+        //    string sufixo = "]";
+        //    string prefixo = "[";
+        //    string campo = "";
 
-            if (ehParametro)
-            {
-                prefixo = "@";
-                sufixo = "";
-            }
+        //    if (ehParametro)
+        //    {
+        //        prefixo = "@";
+        //        sufixo = "";
+        //    }
 
+<<<<<<< Updated upstream
             campo += $"{prefixo}nome{sufixo},";
             campo += $"{prefixo}disciplina{sufixo},";
             //campo += $"{prefixo}serie{sufixo}";
+=======
+        //    campo += $"{prefixo}nome{sufixo},";
+        //    campo += $"{prefixo}disciplina{sufixo},";
+        //    campo += $"{prefixo}serie{sufixo}";
+>>>>>>> Stashed changes
 
-            return campo;
-        }
+        //    return campo;
+        //}
 
+<<<<<<< Updated upstream
         public override SqlParameter[] ObterParametroSQL()
         {
             return new SqlParameter[]
@@ -75,6 +82,17 @@ namespace TestesDonaMaria.Dominio.ModuloMateria
                  new SqlParameter("@disciplina_id", disciplinaId),
             };
         }
+=======
+        //public override SqlParameter[] ObterParametroSQL()
+        //{
+        //    return new SqlParameter[]
+        //    {
+        //         new SqlParameter("@nome", nome),
+        //         new SqlParameter("@disciplina", disciplina),
+        //         new SqlParameter("@serie", serie)
+        //    };
+        //}
+>>>>>>> Stashed changes
 
         public override string ObterCampoUpdate()
         {

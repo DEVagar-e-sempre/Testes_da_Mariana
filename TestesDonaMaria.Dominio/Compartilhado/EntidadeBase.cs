@@ -22,10 +22,14 @@ namespace TestesDonaMaria.Dominio.Compartilhado
 
         public abstract void AtualizarInformacoes(SqlDataReader leitor);
 
-        public abstract string ObterCampoSQL(bool ehParametro = false);
+        //public abstract string ObterCampoSQL(bool ehParametro = false);
 
+<<<<<<< Updated upstream
         public abstract SqlParameter[] ObterParametroSQL();
 
         public abstract string ObterCampoUpdate();
+=======
+        //public abstract SqlParameter[] ObterParametroSQL();
+>>>>>>> Stashed changes
     }
 }

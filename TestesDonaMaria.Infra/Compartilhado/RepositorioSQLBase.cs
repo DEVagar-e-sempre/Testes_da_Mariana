@@ -1,5 +1,9 @@
 ﻿using Microsoft.Data.SqlClient;
+<<<<<<< Updated upstream
 using System.Data;
+=======
+using Microsoft.Win32;
+>>>>>>> Stashed changes
 using TestesDonaMaria.Dominio.Compartilhado;
 
 namespace TestesDonaMaria.Infra.Compartilhado
@@ -7,24 +11,69 @@ namespace TestesDonaMaria.Infra.Compartilhado
     public abstract class RepositorioSQLBase<TEntidade>
         where TEntidade : EntidadeBase<TEntidade>
     {
-        protected SqlConnection conexao;
+        private SqlConnection conexao;
 
+<<<<<<< Updated upstream
         public RepositorioSQLBase(SqlConnection conexao)
         {
             this.conexao = conexao;
         }
 
         public bool Inserir(TEntidade registro)
-        {
-            String inserirSQL;
-            inserirSQL = $"INSERT INTO TB{typeof(TEntidade).Name} ({registro.ObterCampoSQL()}) VALUES ({registro.ObterCampoSQL(true)})";
+=======
+        protected abstract string StrInserir { get; }
+        protected abstract string StrEditar { get; }
+        protected abstract string StrSelecionarTodos { get; }
+        protected abstract string StrSelecionarPorId { get; }
 
+        protected const string strRemover = @"DELETE FROM [TESTEDB] WHERE [ID] = @ID";
+
+        private void IniciarConexaoBD()
+>>>>>>> Stashed changes
+        {
+            conexao.ConnectionString = @"Data Source=(Localdb)\\MSSQLLocaldb;
+                                        Initial Catalog=TesteMarianaDB;
+                                        Integrated Security=True;
+                                        Pooling=False";
+
+<<<<<<< Updated upstream
             SqlCommand comando = new SqlCommand(inserirSQL, conexao);
             comando.Parameters.AddRange(registro.ObterParametroSQL());
             comando.ExecuteScalar();
+=======
+            conexao.Open();
+        }
+
+        public virtual bool Inserir(TEntidade registro)
+        {
+            IniciarConexaoBD();
+            
+
+            conexao.Close();
+>>>>>>> Stashed changes
             return true;
         }
-        public bool Editar(int id, TEntidade registroAtualizado)
+        public virtual bool Editar(int id, TEntidade registroAtualizado)
+        {
+            IniciarConexaoBD();
+            string editarSQL;
+
+            return true;
+        }
+
+        public virtual void Excluir(TEntidade registroSelecionado)
+        {
+            IniciarConexaoBD();
+
+            SqlCommand comando = new SqlCommand(strRemover, conexao);
+
+            comando.Parameters.AddWithValue("@ID", registroSelecionado.id);
+
+            comando.ExecuteNonQuery();
+            conexao.Close();
+        }
+
+        public virtual void AdicionarRegistroEContador(List<TEntidade> listaRegistros, int contador)
         {
            String editarSQL;
             editarSQL = $"UPDATE TB{typeof(TEntidade).Name} SET {registroAtualizado.ObterCampoUpdate()} WHERE id = {id}";
@@ -35,14 +84,19 @@ namespace TestesDonaMaria.Infra.Compartilhado
             return true;
         }
 
-        public void Excluir(TEntidade registroSelecionado)
+        public virtual bool EhRepetido(TEntidade entidade)
         {
             String excluirSQL;
             excluirSQL = $"DELETE FROM TB{typeof(TEntidade).Name} WHERE id = {registroSelecionado.id}";
             SqlCommand comando = new SqlCommand(excluirSQL, conexao);
             comando.ExecuteScalar();
         }
+<<<<<<< Updated upstream
         public TEntidade SelecionarPorId(int id, String campo = "")
+=======
+
+        public virtual TEntidade SelecionarPorId(int id)
+>>>>>>> Stashed changes
         {
             if (String.IsNullOrEmpty(campo))
             {
@@ -52,6 +106,7 @@ namespace TestesDonaMaria.Infra.Compartilhado
             selecionarPorIDSQL = $"SELECT {campo} FROM TB{typeof(TEntidade).Name} WHERE id = {id}";
             SqlCommand comando = new SqlCommand(selecionarPorIDSQL, conexao);
 
+<<<<<<< Updated upstream
             SqlDataReader leitor = comando.ExecuteReader();
 
             if (leitor.Read())
@@ -63,6 +118,9 @@ namespace TestesDonaMaria.Infra.Compartilhado
         }
 
         public List<TEntidade> SelecionarTodos()
+=======
+        public virtual List<TEntidade> SelecionarTodos()
+>>>>>>> Stashed changes
         {
             List<TEntidade> registros = new List<TEntidade>();
             String selecionarTodosSQL;
