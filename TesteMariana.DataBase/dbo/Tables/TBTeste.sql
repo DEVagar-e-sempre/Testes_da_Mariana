@@ -4,9 +4,9 @@
     [materia_id]    INT           NOT NULL,
     [quantQuestoes] INT           NOT NULL,
     [serie]         INT           NOT NULL,
-    [questao_id]    INT           NOT NULL,
     CONSTRAINT [PK_TBTeste] PRIMARY KEY CLUSTERED ([id] ASC),
-    CONSTRAINT [FK_TBTeste_TBMateria] FOREIGN KEY ([materia_id]) REFERENCES [dbo].[TBMateria] ([id]),
-    CONSTRAINT [FK_TBTeste_TBQuestão] FOREIGN KEY ([questao_id]) REFERENCES [dbo].[TBQuestao] ([id])
+    CONSTRAINT [FK_TBTeste_TBMateria] FOREIGN KEY ([materia_id]) REFERENCES [dbo].[TBMateria] ([id])
 );
+
+
 
