@@ -15,9 +15,6 @@ namespace TestesDonaMaria.Infra.Compartilhado
 
         protected String inserirSQL;
         protected String editarSQL;
-        protected String excluirSQL;
-        protected String selecionarPorIdSQL;
-        protected String selecionarTodosSQL;
 
         public RepositorioSQLBase(SqlConnection conexao)
         {
@@ -48,7 +45,7 @@ namespace TestesDonaMaria.Infra.Compartilhado
         {
             conexao.Open();
 
-            excluirSQL = $"DELETE FROM TB{typeof(TEntidade).Name} WHERE id = {registroSelecionado.id}";
+            String excluirSQL = $"DELETE FROM TB{typeof(TEntidade).Name} WHERE id = {registroSelecionado.id}";
             SqlCommand comando = new SqlCommand(excluirSQL, conexao);
 
             comando.ExecuteScalar();
@@ -58,8 +55,8 @@ namespace TestesDonaMaria.Infra.Compartilhado
         public TEntidade SelecionarPorId(int id)
         {
             conexao.Open();
-            
-            selecionarPorIdSQL = $"SELECT * FROM TB{typeof(TEntidade).Name} WHERE id = @id";
+
+            String selecionarPorIdSQL = $"SELECT * FROM TB{typeof(TEntidade).Name} WHERE id = @id";
 
             SqlCommand comando = new SqlCommand(selecionarPorIdSQL, conexao);
             comando.Parameters.AddWithValue("@id", id);
