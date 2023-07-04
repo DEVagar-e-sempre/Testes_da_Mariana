@@ -10,6 +10,13 @@ namespace TestesDonaMaria.Dominio.ModuloDisciplina
             this.id = id;
             this.nome = nome;
         }
+
+        public override void AtualizarInformacoes(Disciplina entidade)
+        {
+            this.id = entidade.id;
+            this.nome = entidade.nome;
+        }
+
         public override string[] Validar()
         {
             List<string> erros = new List<string>();
@@ -22,12 +29,6 @@ namespace TestesDonaMaria.Dominio.ModuloDisciplina
                 erros.Add("O nome deve ter mais de 5 caracteres");
             }
             return erros.ToArray();
-        }
-
-        public override void AtualizarInformacoes(Disciplina entidade)
-        {
-            this.id = entidade.id;
-            nome = entidade.nome;
         }
     }
 }
