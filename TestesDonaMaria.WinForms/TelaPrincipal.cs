@@ -123,7 +123,6 @@ namespace TestesDonaMaria.WinForms
 
         private void ConfigurarEstados(ControladorBase controlador)
         {
-            //desnecessário. Já que todos serão habilitados, não precisa mexer neles
             btn_inserir.Enabled = controlador.InserirHabilitado;
             btn_editar.Enabled = controlador.EditarHabilitado;
             btn_excluir.Enabled = controlador.ExcluirHabilitado;
