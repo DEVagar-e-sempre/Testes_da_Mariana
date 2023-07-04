@@ -2,7 +2,7 @@
 
 namespace TestesDonaMaria.Infra.ModuloTeste
 {
-    public class RepositorioSQLTeste : RepositorioSQLBase<Teste>
+    public class RepositorioSQLTeste //: RepositorioSQLBase<Teste>
     {
     }
 }

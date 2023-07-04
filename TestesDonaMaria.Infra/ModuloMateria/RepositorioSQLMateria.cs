@@ -14,7 +14,7 @@ namespace TestesDonaMaria.Infra.ModuloMateria
         protected override string selecionarPorIdSQL => "SELECT m.id AS materia_id, m.nome AS nome_materia, d.id AS disciplina_id, d.nome AS nome_disciplina FROM TBMateria AS m INNER JOIN TBDisciplina AS d ON m.disciplina_id = d.id WHERE m.id = @id";
 
         protected override string selecionarTodosSQL => "SELECT m.id AS materia_id, m.nome AS nome_materia, d.id AS disciplina_id, d.nome AS nome_disciplina FROM TBMateria AS m INNER JOIN TBDisciplina AS d ON m.disciplina_id = d.id";
-        public RepositorioSQLMateria(SqlConnection conexao) : base(conexao)
+        public RepositorioSQLMateria() : base()
         {
         }
     }

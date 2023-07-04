@@ -19,16 +19,25 @@ namespace TestesDonaMaria.Infra.Compartilhado
         protected virtual String selecionarTodosSQL => "";
         protected virtual String selecionarPorIdSQL => selecionarTodosSQL + " WHERE id = @id";
         
-        public RepositorioSQLBase(SqlConnection conexao)
+        public RepositorioSQLBase()
         {
-            this.conexao = conexao;
             this.mapeador = new TMapeador();
+        }
+
+        private void Conexao()
+        {
+            conexao.ConnectionString = @"Data Source=(Localdb)\MSSQLLocaldb;
+                                        Initial Catalog=TesteMarianaDB;
+                                        Integrated Security=True;";
+                                        
+
+            conexao.Open();
         }
 
         public bool Inserir(TEntidade registro)
         {
+            Conexao();
             int id;
-            conexao.Open();
 
             SqlCommand comando = new SqlCommand(inserirSQL, conexao);
 
@@ -44,7 +53,7 @@ namespace TestesDonaMaria.Infra.Compartilhado
         }
         public bool Editar(int id, TEntidade registroAtualizado)
         {
-            conexao.Open();
+            Conexao();
 
             SqlCommand comando = new SqlCommand(editarSQL, conexao);
 
@@ -59,7 +68,7 @@ namespace TestesDonaMaria.Infra.Compartilhado
 
         public void Excluir(TEntidade registroSelecionado)
         {
-            conexao.Open();
+            Conexao();
 
             SqlCommand comando = new SqlCommand(excluirSQL, conexao);
 
@@ -69,7 +78,7 @@ namespace TestesDonaMaria.Infra.Compartilhado
         }
         public TEntidade SelecionarPorId(int id)
         {
-            conexao.Open();
+            Conexao();
 
             SqlCommand comando = new SqlCommand(selecionarPorIdSQL, conexao);
 
@@ -77,11 +86,14 @@ namespace TestesDonaMaria.Infra.Compartilhado
 
             SqlDataReader leitor = comando.ExecuteReader();
 
+            conexao.Close();
             return mapeador.ConverterRegistro(leitor);
         }
 
         public List<TEntidade> SelecionarTodos()
         {
+            Conexao();
+
             List<TEntidade> registros = new List<TEntidade>();
 
             SqlCommand comando = new SqlCommand(selecionarTodosSQL, conexao);
@@ -93,6 +105,7 @@ namespace TestesDonaMaria.Infra.Compartilhado
                registros.Add(mapeador.ConverterRegistro(leitor));
             }
 
+            conexao.Close();
             return registros;
         }
     }

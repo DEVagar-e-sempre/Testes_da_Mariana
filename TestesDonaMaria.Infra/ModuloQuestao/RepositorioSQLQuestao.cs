@@ -2,7 +2,7 @@
 
 namespace TestesDonaMaria.Infra.ModuloQuestao
 {
-    public class RepositorioSQLQuestao : RepositorioSQLBase<Questao>
+    public class RepositorioSQLQuestao //: RepositorioSQLBase<Questao>
     {
     }
 }

@@ -7,6 +7,7 @@ namespace TestesDonaMaria.WinForms.ModuloDisciplina
         public override string ObterTipoCadastro => "Cadastro de Disciplina";
 
         private RepositorioSQLDisciplina repDisciplina;
+        private TabelaDisciplina tabelaDisc;
 
         public ControladorDisciplina(RepositorioSQLDisciplina repDisciplina)
         {
@@ -30,7 +31,12 @@ namespace TestesDonaMaria.WinForms.ModuloDisciplina
 
         public override UserControl ObterListagem()
         {
-            throw new NotImplementedException();
+            if(tabelaDisc == null)
+            {
+                tabelaDisc = new TabelaDisciplina();
+            }
+
+            CarregarDisciplina
         }
     }
 }

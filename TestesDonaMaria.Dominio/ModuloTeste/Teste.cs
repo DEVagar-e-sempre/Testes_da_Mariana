@@ -28,5 +28,10 @@ namespace TestesDonaMaria.Dominio.ModuloTeste
         {
             throw new NotImplementedException();
         }
+
+        public override string[] Validar()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
