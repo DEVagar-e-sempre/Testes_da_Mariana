@@ -7,6 +7,7 @@ namespace TestesDonaMaria.WinForms.ModuloQuestao
         public override string ObterTipoCadastro => "Cadastro de Questão";
         
         private RepositorioSQLQuestao repQuestao;
+        private TabelaQuestao tabelaQuestao;
 
         public ControladorQuestao(RepositorioSQLQuestao repQuestao)
         {
@@ -30,7 +31,19 @@ namespace TestesDonaMaria.WinForms.ModuloQuestao
 
         public override UserControl ObterListagem()
         {
-            throw new NotImplementedException();
+            if(tabelaQuestao == null)
+            {
+                tabelaQuestao = new TabelaQuestao();
+            }
+
+            CarregarQuestao();
+            return tabelaQuestao;
+        }
+
+        private void CarregarQuestao()
+        {
+            //List<Questao> listaQuestoes = repQuestao.Selecionartodos();
+            //tabelaQuestao.AtualizarRegistros(listaQuestoes);
         }
     }
 }

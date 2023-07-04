@@ -30,11 +30,11 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TelaPrincipal));
             painel_botoesEntidades = new Panel();
-            label2 = new Label();
             btn_teste = new Button();
             btn_materia = new Button();
-            btn_questoes = new Button();
+            btn_questao = new Button();
             btn_disciplina = new Button();
+            label2 = new Label();
             painel_principal = new Panel();
             toolStrip1 = new ToolStrip();
             btn_inserir = new ToolStripButton();
@@ -63,23 +63,13 @@
             painel_botoesEntidades.BackColor = Color.CornflowerBlue;
             painel_botoesEntidades.Controls.Add(btn_teste);
             painel_botoesEntidades.Controls.Add(btn_materia);
-            painel_botoesEntidades.Controls.Add(btn_questoes);
+            painel_botoesEntidades.Controls.Add(btn_questao);
             painel_botoesEntidades.Controls.Add(btn_disciplina);
             painel_botoesEntidades.Dock = DockStyle.Left;
             painel_botoesEntidades.Location = new Point(0, 0);
             painel_botoesEntidades.Name = "painel_botoesEntidades";
             painel_botoesEntidades.Size = new Size(192, 457);
             painel_botoesEntidades.TabIndex = 0;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe Print", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(582, 339);
-            label2.Name = "label2";
-            label2.Size = new Size(132, 23);
-            label2.TabIndex = 1;
-            label2.Text = "DEVagar e sempre";
             // 
             // btn_teste
             // 
@@ -115,22 +105,22 @@
             btn_materia.TextImageRelation = TextImageRelation.ImageBeforeText;
             btn_materia.UseVisualStyleBackColor = false;
             // 
-            // btn_questoes
+            // btn_questao
             // 
-            btn_questoes.BackColor = Color.CornflowerBlue;
-            btn_questoes.FlatAppearance.BorderColor = Color.CornflowerBlue;
-            btn_questoes.FlatStyle = FlatStyle.Flat;
-            btn_questoes.Font = new Font("Segoe Print", 15.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            btn_questoes.ForeColor = Color.Black;
-            btn_questoes.Image = Properties.Resources.format_list_numbered_FILL0_wght400_GRAD200_opsz24;
-            btn_questoes.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_questoes.Location = new Point(3, 187);
-            btn_questoes.Name = "btn_questoes";
-            btn_questoes.Size = new Size(186, 47);
-            btn_questoes.TabIndex = 2;
-            btn_questoes.Text = "Questões";
-            btn_questoes.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btn_questoes.UseVisualStyleBackColor = false;
+            btn_questao.BackColor = Color.CornflowerBlue;
+            btn_questao.FlatAppearance.BorderColor = Color.CornflowerBlue;
+            btn_questao.FlatStyle = FlatStyle.Flat;
+            btn_questao.Font = new Font("Segoe Print", 15.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            btn_questao.ForeColor = Color.Black;
+            btn_questao.Image = Properties.Resources.format_list_numbered_FILL0_wght400_GRAD200_opsz24;
+            btn_questao.ImageAlign = ContentAlignment.MiddleLeft;
+            btn_questao.Location = new Point(3, 187);
+            btn_questao.Name = "btn_questao";
+            btn_questao.Size = new Size(186, 47);
+            btn_questao.TabIndex = 2;
+            btn_questao.Text = "Questão";
+            btn_questao.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btn_questao.UseVisualStyleBackColor = false;
             // 
             // btn_disciplina
             // 
@@ -149,6 +139,16 @@
             btn_disciplina.TextImageRelation = TextImageRelation.ImageBeforeText;
             btn_disciplina.UseVisualStyleBackColor = false;
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe Print", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.Location = new Point(500, 339);
+            label2.Name = "label2";
+            label2.Size = new Size(132, 23);
+            label2.TabIndex = 1;
+            label2.Text = "DEVagar e sempre";
+            // 
             // painel_principal
             // 
             painel_principal.Controls.Add(label2);
@@ -157,7 +157,7 @@
             painel_principal.Dock = DockStyle.Bottom;
             painel_principal.Location = new Point(192, 73);
             painel_principal.Name = "painel_principal";
-            painel_principal.Size = new Size(714, 384);
+            painel_principal.Size = new Size(644, 384);
             painel_principal.TabIndex = 1;
             // 
             // toolStrip1
@@ -165,7 +165,7 @@
             toolStrip1.Items.AddRange(new ToolStripItem[] { btn_inserir, btn_editar, btn_excluir, toolStripSeparator1, toolStripButton4, toolStripButton5, toolStripSeparator2, toolStripButton6, toolStripSeparator3, lbl_tipoCad });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(714, 31);
+            toolStrip1.Size = new Size(644, 31);
             toolStrip1.TabIndex = 1;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -258,7 +258,7 @@
             statusStrip1.Items.AddRange(new ToolStripItem[] { lbl_status });
             statusStrip1.Location = new Point(0, 362);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(714, 22);
+            statusStrip1.Size = new Size(644, 22);
             statusStrip1.TabIndex = 0;
             statusStrip1.Text = "statusStrip1";
             // 
@@ -282,7 +282,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe Print", 18F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
             label1.ForeColor = Color.Black;
-            label1.Location = new Point(398, 18);
+            label1.Location = new Point(343, 18);
             label1.Name = "label1";
             label1.Size = new Size(313, 43);
             label1.TabIndex = 0;
@@ -292,7 +292,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(906, 457);
+            ClientSize = new Size(836, 457);
             Controls.Add(panel1);
             Controls.Add(painel_principal);
             Controls.Add(painel_botoesEntidades);
@@ -318,7 +318,7 @@
         private StatusStrip statusStrip1;
         private Button btn_teste;
         private Button btn_materia;
-        private Button btn_questoes;
+        private Button btn_questao;
         private ToolStripStatusLabel lbl_status;
         private Panel panel1;
         private Label label2;
