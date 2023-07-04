@@ -5,7 +5,7 @@ namespace TestesDonaMaria.Infra.ModuloMateria
 {
     public class RepositorioSQLMateria : RepositorioSQLBase<Materia, MapeadorMateria>
     {
-        protected override string inserirSQL => "INSERT INTO TBMateria (nome, disciplina_id) VALUES (@nome, @disciplina_id)";
+        protected override string inserirSQL => "INSERT INTO TBMateria (nome, disciplina_id) VALUES (@nome, @disciplina_id) SELECT SCOPE_IDENTITY();";
 
         protected override string editarSQL => "UPDATE TBMateria SET nome = @nome, disciplina_id = @disciplina_id WHERE id = @id";
 
