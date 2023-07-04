@@ -5,8 +5,9 @@ namespace TestesDonaMaria.Dominio.ModuloDisciplina
     public class Disciplina : EntidadeBase<Disciplina>
     {
         public string nome;
-        public Disciplina(string nome)
+        public Disciplina(int id, string nome)
         {
+            this.id = id;
             this.nome = nome;
         }
         public override string[] Validar()
@@ -16,53 +17,17 @@ namespace TestesDonaMaria.Dominio.ModuloDisciplina
             {
                 erros.Add("O nome não pode ser vazio");
             }
+            if (nome.Length > 5)
+            {
+                erros.Add("O nome deve ter mais de 5 caracteres");
+            }
             return erros.ToArray();
         }
 
         public override void AtualizarInformacoes(Disciplina entidade)
         {
+            this.id = entidade.id;
             nome = entidade.nome;
-        }
-        public override void AtualizarInformacoes(SqlDataReader leitor)
-        {
-            this.id = (int)leitor["id"];
-            this.nome = (string)leitor["nome"];
-        }
-
-        public override string ObterCampoSQL(bool ehParametro = false)
-        {
-            string sufixo = "]";
-            string prefixo = "[";
-            string campo = "";
-
-            if (ehParametro)
-            {
-                prefixo = "@";
-                sufixo = "";
-            }
-
-            campo += $"{prefixo}nome{sufixo}";
-
-            return campo;
-        }
-
-        public override SqlParameter[] ObterParametroSQL()
-        {
-            return new SqlParameter[]
-            {
-                 new SqlParameter("@nome", nome),
-            };
-        }
-
-        public override string ObterCampoUpdate()
-        {
-            string sufixo = "]";
-            string prefixo = "[";
-            string campo = "";
-
-            campo += $"{prefixo}nome{sufixo} = @nome";
-
-            return campo;
         }
     }
 }
