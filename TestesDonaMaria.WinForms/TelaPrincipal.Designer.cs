@@ -31,22 +31,24 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TelaPrincipal));
             painel_botoesEntidades = new Panel();
             label2 = new Label();
-            button4 = new Button();
-            button3 = new Button();
-            button2 = new Button();
-            button1 = new Button();
+            btn_teste = new Button();
+            btn_materia = new Button();
+            btn_questoes = new Button();
+            btn_disciplina = new Button();
             painel_principal = new Panel();
             toolStrip1 = new ToolStrip();
-            toolStripButton1 = new ToolStripButton();
-            toolStripButton2 = new ToolStripButton();
-            toolStripButton3 = new ToolStripButton();
+            btn_inserir = new ToolStripButton();
+            btn_editar = new ToolStripButton();
+            btn_excluir = new ToolStripButton();
             toolStripSeparator1 = new ToolStripSeparator();
             toolStripButton4 = new ToolStripButton();
             toolStripButton5 = new ToolStripButton();
             toolStripSeparator2 = new ToolStripSeparator();
             toolStripButton6 = new ToolStripButton();
+            toolStripSeparator3 = new ToolStripSeparator();
+            lbl_tipoCad = new ToolStripLabel();
             statusStrip1 = new StatusStrip();
-            toolStripStatusLabel1 = new ToolStripStatusLabel();
+            lbl_status = new ToolStripStatusLabel();
             panel1 = new Panel();
             label1 = new Label();
             painel_botoesEntidades.SuspendLayout();
@@ -59,11 +61,10 @@
             // painel_botoesEntidades
             // 
             painel_botoesEntidades.BackColor = Color.CornflowerBlue;
-            painel_botoesEntidades.Controls.Add(label2);
-            painel_botoesEntidades.Controls.Add(button4);
-            painel_botoesEntidades.Controls.Add(button3);
-            painel_botoesEntidades.Controls.Add(button2);
-            painel_botoesEntidades.Controls.Add(button1);
+            painel_botoesEntidades.Controls.Add(btn_teste);
+            painel_botoesEntidades.Controls.Add(btn_materia);
+            painel_botoesEntidades.Controls.Add(btn_questoes);
+            painel_botoesEntidades.Controls.Add(btn_disciplina);
             painel_botoesEntidades.Dock = DockStyle.Left;
             painel_botoesEntidades.Location = new Point(0, 0);
             painel_botoesEntidades.Name = "painel_botoesEntidades";
@@ -74,82 +75,83 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe Print", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(0, 434);
+            label2.Location = new Point(582, 339);
             label2.Name = "label2";
             label2.Size = new Size(132, 23);
             label2.TabIndex = 1;
             label2.Text = "DEVagar e sempre";
             // 
-            // button4
+            // btn_teste
             // 
-            button4.BackColor = Color.CornflowerBlue;
-            button4.FlatAppearance.BorderColor = Color.CornflowerBlue;
-            button4.FlatStyle = FlatStyle.Flat;
-            button4.Font = new Font("Segoe Print", 15.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            button4.ForeColor = Color.Black;
-            button4.Image = Properties.Resources.task_FILL0_wght400_GRAD200_opsz24;
-            button4.ImageAlign = ContentAlignment.MiddleLeft;
-            button4.Location = new Point(3, 240);
-            button4.Name = "button4";
-            button4.Size = new Size(186, 47);
-            button4.TabIndex = 4;
-            button4.Text = "Teste";
-            button4.TextImageRelation = TextImageRelation.ImageBeforeText;
-            button4.UseVisualStyleBackColor = false;
+            btn_teste.BackColor = Color.CornflowerBlue;
+            btn_teste.FlatAppearance.BorderColor = Color.CornflowerBlue;
+            btn_teste.FlatStyle = FlatStyle.Flat;
+            btn_teste.Font = new Font("Segoe Print", 15.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            btn_teste.ForeColor = Color.Black;
+            btn_teste.Image = Properties.Resources.task_FILL0_wght400_GRAD200_opsz24;
+            btn_teste.ImageAlign = ContentAlignment.MiddleLeft;
+            btn_teste.Location = new Point(3, 240);
+            btn_teste.Name = "btn_teste";
+            btn_teste.Size = new Size(186, 47);
+            btn_teste.TabIndex = 4;
+            btn_teste.Text = "Teste";
+            btn_teste.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btn_teste.UseVisualStyleBackColor = false;
             // 
-            // button3
+            // btn_materia
             // 
-            button3.BackColor = Color.CornflowerBlue;
-            button3.FlatAppearance.BorderColor = Color.CornflowerBlue;
-            button3.FlatStyle = FlatStyle.Flat;
-            button3.Font = new Font("Segoe Print", 15.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            button3.ForeColor = Color.Black;
-            button3.Image = Properties.Resources.menu_book_FILL0_wght400_GRAD200_opsz24;
-            button3.ImageAlign = ContentAlignment.MiddleLeft;
-            button3.Location = new Point(3, 134);
-            button3.Name = "button3";
-            button3.Size = new Size(186, 47);
-            button3.TabIndex = 3;
-            button3.Text = "Matéria";
-            button3.TextImageRelation = TextImageRelation.ImageBeforeText;
-            button3.UseVisualStyleBackColor = false;
+            btn_materia.BackColor = Color.CornflowerBlue;
+            btn_materia.FlatAppearance.BorderColor = Color.CornflowerBlue;
+            btn_materia.FlatStyle = FlatStyle.Flat;
+            btn_materia.Font = new Font("Segoe Print", 15.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            btn_materia.ForeColor = Color.Black;
+            btn_materia.Image = Properties.Resources.menu_book_FILL0_wght400_GRAD200_opsz24;
+            btn_materia.ImageAlign = ContentAlignment.MiddleLeft;
+            btn_materia.Location = new Point(3, 134);
+            btn_materia.Name = "btn_materia";
+            btn_materia.Size = new Size(186, 47);
+            btn_materia.TabIndex = 3;
+            btn_materia.Text = "Matéria";
+            btn_materia.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btn_materia.UseVisualStyleBackColor = false;
             // 
-            // button2
+            // btn_questoes
             // 
-            button2.BackColor = Color.CornflowerBlue;
-            button2.FlatAppearance.BorderColor = Color.CornflowerBlue;
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.Font = new Font("Segoe Print", 15.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            button2.ForeColor = Color.Black;
-            button2.Image = Properties.Resources.format_list_numbered_FILL0_wght400_GRAD200_opsz24;
-            button2.ImageAlign = ContentAlignment.MiddleLeft;
-            button2.Location = new Point(3, 187);
-            button2.Name = "button2";
-            button2.Size = new Size(186, 47);
-            button2.TabIndex = 2;
-            button2.Text = "Questões";
-            button2.TextImageRelation = TextImageRelation.ImageBeforeText;
-            button2.UseVisualStyleBackColor = false;
+            btn_questoes.BackColor = Color.CornflowerBlue;
+            btn_questoes.FlatAppearance.BorderColor = Color.CornflowerBlue;
+            btn_questoes.FlatStyle = FlatStyle.Flat;
+            btn_questoes.Font = new Font("Segoe Print", 15.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            btn_questoes.ForeColor = Color.Black;
+            btn_questoes.Image = Properties.Resources.format_list_numbered_FILL0_wght400_GRAD200_opsz24;
+            btn_questoes.ImageAlign = ContentAlignment.MiddleLeft;
+            btn_questoes.Location = new Point(3, 187);
+            btn_questoes.Name = "btn_questoes";
+            btn_questoes.Size = new Size(186, 47);
+            btn_questoes.TabIndex = 2;
+            btn_questoes.Text = "Questões";
+            btn_questoes.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btn_questoes.UseVisualStyleBackColor = false;
             // 
-            // button1
+            // btn_disciplina
             // 
-            button1.BackColor = Color.CornflowerBlue;
-            button1.FlatAppearance.BorderColor = Color.CornflowerBlue;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Font = new Font("Segoe Print", 15.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            button1.ForeColor = Color.Black;
-            button1.Image = Properties.Resources.collections_bookmark_FILL0_wght400_GRAD200_opsz24;
-            button1.ImageAlign = ContentAlignment.MiddleLeft;
-            button1.Location = new Point(3, 81);
-            button1.Name = "button1";
-            button1.Size = new Size(186, 47);
-            button1.TabIndex = 1;
-            button1.Text = "Disciplina";
-            button1.TextImageRelation = TextImageRelation.ImageBeforeText;
-            button1.UseVisualStyleBackColor = false;
+            btn_disciplina.BackColor = Color.CornflowerBlue;
+            btn_disciplina.FlatAppearance.BorderColor = Color.CornflowerBlue;
+            btn_disciplina.FlatStyle = FlatStyle.Flat;
+            btn_disciplina.Font = new Font("Segoe Print", 15.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            btn_disciplina.ForeColor = Color.Black;
+            btn_disciplina.Image = Properties.Resources.collections_bookmark_FILL0_wght400_GRAD200_opsz24;
+            btn_disciplina.ImageAlign = ContentAlignment.MiddleLeft;
+            btn_disciplina.Location = new Point(3, 81);
+            btn_disciplina.Name = "btn_disciplina";
+            btn_disciplina.Size = new Size(186, 47);
+            btn_disciplina.TabIndex = 1;
+            btn_disciplina.Text = "Disciplina";
+            btn_disciplina.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btn_disciplina.UseVisualStyleBackColor = false;
             // 
             // painel_principal
             // 
+            painel_principal.Controls.Add(label2);
             painel_principal.Controls.Add(toolStrip1);
             painel_principal.Controls.Add(statusStrip1);
             painel_principal.Dock = DockStyle.Bottom;
@@ -160,44 +162,50 @@
             // 
             // toolStrip1
             // 
-            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButton1, toolStripButton2, toolStripButton3, toolStripSeparator1, toolStripButton4, toolStripButton5, toolStripSeparator2, toolStripButton6 });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { btn_inserir, btn_editar, btn_excluir, toolStripSeparator1, toolStripButton4, toolStripButton5, toolStripSeparator2, toolStripButton6, toolStripSeparator3, lbl_tipoCad });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(714, 25);
+            toolStrip1.Size = new Size(714, 31);
             toolStrip1.TabIndex = 1;
             toolStrip1.Text = "toolStrip1";
             // 
-            // toolStripButton1
+            // btn_inserir
             // 
-            toolStripButton1.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            toolStripButton1.Image = (Image)resources.GetObject("toolStripButton1.Image");
-            toolStripButton1.ImageTransparentColor = Color.Magenta;
-            toolStripButton1.Name = "toolStripButton1";
-            toolStripButton1.Size = new Size(23, 22);
-            toolStripButton1.Text = "toolStripButton1";
+            btn_inserir.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            btn_inserir.Image = Properties.Resources.add_circle_FILL0_wght400_GRAD0_opsz24;
+            btn_inserir.ImageTransparentColor = Color.Magenta;
+            btn_inserir.Name = "btn_inserir";
+            btn_inserir.Padding = new Padding(4);
+            btn_inserir.Size = new Size(28, 28);
+            btn_inserir.Text = "Adicionar";
+            btn_inserir.Click += botaoBarraFerramentas_Click;
             // 
-            // toolStripButton2
+            // btn_editar
             // 
-            toolStripButton2.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            toolStripButton2.Image = (Image)resources.GetObject("toolStripButton2.Image");
-            toolStripButton2.ImageTransparentColor = Color.Magenta;
-            toolStripButton2.Name = "toolStripButton2";
-            toolStripButton2.Size = new Size(23, 22);
-            toolStripButton2.Text = "toolStripButton2";
+            btn_editar.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            btn_editar.Image = Properties.Resources.edit_FILL0_wght400_GRAD0_opsz24;
+            btn_editar.ImageTransparentColor = Color.Magenta;
+            btn_editar.Name = "btn_editar";
+            btn_editar.Padding = new Padding(4);
+            btn_editar.Size = new Size(28, 28);
+            btn_editar.Text = "Editar";
+            btn_editar.Click += botaoBarraFerramentas_Click;
             // 
-            // toolStripButton3
+            // btn_excluir
             // 
-            toolStripButton3.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            toolStripButton3.Image = (Image)resources.GetObject("toolStripButton3.Image");
-            toolStripButton3.ImageTransparentColor = Color.Magenta;
-            toolStripButton3.Name = "toolStripButton3";
-            toolStripButton3.Size = new Size(23, 22);
-            toolStripButton3.Text = "toolStripButton3";
+            btn_excluir.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            btn_excluir.Image = Properties.Resources.delete_forever_FILL0_wght400_GRAD0_opsz24;
+            btn_excluir.ImageTransparentColor = Color.Magenta;
+            btn_excluir.Name = "btn_excluir";
+            btn_excluir.Padding = new Padding(4);
+            btn_excluir.Size = new Size(28, 28);
+            btn_excluir.Text = "Remover";
+            btn_excluir.Click += botaoBarraFerramentas_Click;
             // 
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(6, 25);
+            toolStripSeparator1.Size = new Size(6, 31);
             // 
             // toolStripButton4
             // 
@@ -205,7 +213,8 @@
             toolStripButton4.Image = (Image)resources.GetObject("toolStripButton4.Image");
             toolStripButton4.ImageTransparentColor = Color.Magenta;
             toolStripButton4.Name = "toolStripButton4";
-            toolStripButton4.Size = new Size(23, 22);
+            toolStripButton4.Padding = new Padding(4);
+            toolStripButton4.Size = new Size(28, 28);
             toolStripButton4.Text = "toolStripButton4";
             // 
             // toolStripButton5
@@ -214,13 +223,14 @@
             toolStripButton5.Image = (Image)resources.GetObject("toolStripButton5.Image");
             toolStripButton5.ImageTransparentColor = Color.Magenta;
             toolStripButton5.Name = "toolStripButton5";
-            toolStripButton5.Size = new Size(23, 22);
+            toolStripButton5.Padding = new Padding(4);
+            toolStripButton5.Size = new Size(28, 28);
             toolStripButton5.Text = "toolStripButton5";
             // 
             // toolStripSeparator2
             // 
             toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new Size(6, 25);
+            toolStripSeparator2.Size = new Size(6, 31);
             // 
             // toolStripButton6
             // 
@@ -228,23 +238,35 @@
             toolStripButton6.Image = (Image)resources.GetObject("toolStripButton6.Image");
             toolStripButton6.ImageTransparentColor = Color.Magenta;
             toolStripButton6.Name = "toolStripButton6";
-            toolStripButton6.Size = new Size(23, 22);
+            toolStripButton6.Padding = new Padding(4);
+            toolStripButton6.Size = new Size(28, 28);
             toolStripButton6.Text = "toolStripButton6";
+            // 
+            // toolStripSeparator3
+            // 
+            toolStripSeparator3.Name = "toolStripSeparator3";
+            toolStripSeparator3.Size = new Size(6, 31);
+            // 
+            // lbl_tipoCad
+            // 
+            lbl_tipoCad.Name = "lbl_tipoCad";
+            lbl_tipoCad.Size = new Size(97, 28);
+            lbl_tipoCad.Text = "Tipo do Cadastro";
             // 
             // statusStrip1
             // 
-            statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel1 });
+            statusStrip1.Items.AddRange(new ToolStripItem[] { lbl_status });
             statusStrip1.Location = new Point(0, 362);
             statusStrip1.Name = "statusStrip1";
             statusStrip1.Size = new Size(714, 22);
             statusStrip1.TabIndex = 0;
             statusStrip1.Text = "statusStrip1";
             // 
-            // toolStripStatusLabel1
+            // lbl_status
             // 
-            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            toolStripStatusLabel1.Size = new Size(118, 17);
-            toolStripStatusLabel1.Text = "toolStripStatusLabel1";
+            lbl_status.Name = "lbl_status";
+            lbl_status.Size = new Size(39, 17);
+            lbl_status.Text = "Status";
             // 
             // panel1
             // 
@@ -277,7 +299,6 @@
             Name = "TelaPrincipal";
             Text = "Tela Principal";
             painel_botoesEntidades.ResumeLayout(false);
-            painel_botoesEntidades.PerformLayout();
             painel_principal.ResumeLayout(false);
             painel_principal.PerformLayout();
             toolStrip1.ResumeLayout(false);
@@ -293,23 +314,25 @@
 
         private Panel painel_botoesEntidades;
         private Panel painel_principal;
-        private Button button1;
+        private Button btn_disciplina;
         private StatusStrip statusStrip1;
-        private Button button4;
-        private Button button3;
-        private Button button2;
-        private ToolStripStatusLabel toolStripStatusLabel1;
+        private Button btn_teste;
+        private Button btn_materia;
+        private Button btn_questoes;
+        private ToolStripStatusLabel lbl_status;
         private Panel panel1;
         private Label label2;
         private Label label1;
         private ToolStrip toolStrip1;
-        private ToolStripButton toolStripButton1;
-        private ToolStripButton toolStripButton2;
-        private ToolStripButton toolStripButton3;
+        private ToolStripButton btn_inserir;
+        private ToolStripButton btn_editar;
+        private ToolStripButton btn_excluir;
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripButton toolStripButton4;
         private ToolStripButton toolStripButton5;
         private ToolStripSeparator toolStripSeparator2;
         private ToolStripButton toolStripButton6;
+        private ToolStripSeparator toolStripSeparator3;
+        private ToolStripLabel lbl_tipoCad;
     }
 }
