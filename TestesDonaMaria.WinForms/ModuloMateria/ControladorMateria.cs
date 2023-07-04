@@ -1,4 +1,5 @@
-﻿using TestesDonaMaria.Infra.ModuloMateria;
+﻿using TestesDonaMaria.Dominio.ModuloMateria;
+using TestesDonaMaria.Infra.ModuloMateria;
 
 namespace TestesDonaMaria.WinForms.ModuloMateria
 {
@@ -8,10 +9,25 @@ namespace TestesDonaMaria.WinForms.ModuloMateria
         
         private RepositorioSQLMateria repMateria;
         private TabelaMateria tabelaMateria;
+        private TelaCadMateria telaCadMateria;
 
         public ControladorMateria(RepositorioSQLMateria repMateria)
         {
             this.repMateria = repMateria;
+        }
+
+        public override void Inserir()
+        {
+            telaCadMateria = new TelaCadMateria(repMateria);
+
+            DialogResult opcao = telaCadMateria.ShowDialog();
+
+            if(opcao == DialogResult.OK)
+            {
+                repMateria.Inserir(telaCadMateria.MateriaP);
+                MessageBox.Show("Matéria gravado com Sucesso!");
+                CarregarMateria();
+            }
         }
 
         public override void Editar()
@@ -20,11 +36,6 @@ namespace TestesDonaMaria.WinForms.ModuloMateria
         }
 
         public override void Excluir()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void Inserir()
         {
             throw new NotImplementedException();
         }
@@ -42,8 +53,8 @@ namespace TestesDonaMaria.WinForms.ModuloMateria
 
         private void CarregarMateria()
         {
-            //List<Materia> listaMaterias = repMateria.Selecionartodos();
-            //tabelaMateria.AtualizarRegistros(listaMaterias);
+            List<Materia> listaMaterias = repMateria.SelecionarTodos();
+            tabelaMateria.AtualizarRegistros(listaMaterias);
         }
     }
 }

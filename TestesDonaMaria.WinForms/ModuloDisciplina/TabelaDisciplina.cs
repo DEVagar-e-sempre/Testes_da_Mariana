@@ -1,5 +1,4 @@
 ﻿using TestesDonaMaria.Dominio.ModuloDisciplina;
-using TestesDonaMaria.Dominio.ModuloMateria;
 
 namespace TestesDonaMaria.WinForms.ModuloDisciplina
 {

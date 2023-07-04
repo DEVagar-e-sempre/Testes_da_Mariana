@@ -1,4 +1,5 @@
-﻿using TestesDonaMaria.Infra.ModuloDisciplina;
+﻿using TestesDonaMaria.Dominio.ModuloDisciplina;
+using TestesDonaMaria.Infra.ModuloDisciplina;
 
 namespace TestesDonaMaria.WinForms.ModuloDisciplina
 {
@@ -8,25 +9,86 @@ namespace TestesDonaMaria.WinForms.ModuloDisciplina
 
         private RepositorioSQLDisciplina repDisciplina;
         private TabelaDisciplina tabelaDisc;
+        private TelaCadDisciplina telaCadDisciplina;
 
         public ControladorDisciplina(RepositorioSQLDisciplina repDisciplina)
         {
             this.repDisciplina = repDisciplina;
         }
 
+        public override void Inserir()
+        {
+            telaCadDisciplina = new TelaCadDisciplina(repDisciplina);
+
+            DialogResult opcaoEscolhida = telaCadDisciplina.ShowDialog();
+
+            if (opcaoEscolhida == DialogResult.OK)
+            {
+                repDisciplina.Inserir(telaCadDisciplina.Disciplina);
+                MessageBox.Show("Matéria gravado com Sucesso!");
+                CarregarDisciplina();
+            }
+        }
+
         public override void Editar()
         {
-            throw new NotImplementedException();
+            Disciplina disciplinaSelec = ObterDisciplinaSelecionado();
+
+            if (disciplinaSelec == null)
+            {
+                MessageBox.Show($"Selecione uma Disciplina primeiro!",
+                    "Edição de Disciplina",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation);
+            }
+            else
+            {
+                telaCadDisciplina = new TelaCadDisciplina(repDisciplina);
+                telaCadDisciplina.Disciplina = disciplinaSelec;
+                
+                DialogResult opcaoEscolhida = telaCadDisciplina.ShowDialog();
+
+                if (opcaoEscolhida == DialogResult.OK)
+                {
+                    repDisciplina.Editar(telaCadDisciplina.Disciplina.id, telaCadDisciplina.Disciplina);
+
+                    CarregarDisciplina();
+                }
+            }
         }
 
         public override void Excluir()
         {
-            throw new NotImplementedException();
+            Disciplina disciplinaSelec = ObterDisciplinaSelecionado();
+
+            if (disciplinaSelec == null)
+            {
+                MessageBox.Show($"Selecione uma Disciplina primeiro!",
+                    "Exclusão de Disciplinas",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation);
+            }
+            else
+            {
+                DialogResult opcaoEscolhida = MessageBox.Show($"Deseja excluir a Disciplina {disciplinaSelec.nome}?",
+                    "Exclusão de Disciplinas",
+                    MessageBoxButtons.OKCancel,
+                    MessageBoxIcon.Question);
+
+                if (opcaoEscolhida == DialogResult.OK)
+                {
+                    repDisciplina.Excluir(disciplinaSelec);
+
+                    CarregarDisciplina();
+                }
+            }
         }
 
-        public override void Inserir()
+        private Disciplina ObterDisciplinaSelecionado()
         {
-            throw new NotImplementedException();
+            int id = tabelaDisc.ObterIdSelecionado();
+
+            return repDisciplina.SelecionarPorId(id);
         }
 
         public override UserControl ObterListagem()
@@ -42,8 +104,8 @@ namespace TestesDonaMaria.WinForms.ModuloDisciplina
 
         private void CarregarDisciplina()
         {
-            //List<Disciplina> listaDisc = repDisciplina.Selecionartodos();
-            //tabelaDisc.AtualizarRegistros(listaDisc);
+            List<Disciplina> listaDisc = repDisciplina.SelecionarTodos();
+            tabelaDisc.AtualizarRegistros(listaDisc);
         }
     }
 }

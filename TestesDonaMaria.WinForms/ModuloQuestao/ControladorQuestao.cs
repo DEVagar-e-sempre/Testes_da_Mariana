@@ -42,7 +42,7 @@ namespace TestesDonaMaria.WinForms.ModuloQuestao
 
         private void CarregarQuestao()
         {
-            //List<Questao> listaQuestoes = repQuestao.Selecionartodos();
+            //List<Questao> listaQuestoes = repQuestao.;
             //tabelaQuestao.AtualizarRegistros(listaQuestoes);
         }
     }
