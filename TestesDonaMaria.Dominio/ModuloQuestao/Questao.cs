@@ -8,74 +8,44 @@ namespace TestesDonaMaria.Dominio.ModuloQuestao
     public class Questao : EntidadeBase<Questao>
     {
         public string titulo;
-        public string questaoCorreta;
+        public string alternativaCorreta;
         public int serie;
-        //public Disciplina disciplina;
+        public Disciplina disciplina;
         public Materia materia;
 
         public Questao(string titulo, string questaoCorreta, int serie, Materia materia)
         {
             this.titulo = titulo;
-            this.questaoCorreta = questaoCorreta;
+            this.alternativaCorreta = questaoCorreta;
             this.serie = serie;
-            //this.disciplina = disciplina;
+            this.disciplina = disciplina;
             this.materia = materia;
-        }
-
-        public Questao()
-        {
-
         }
         public override void AtualizarInformacoes(Questao entidade)
         {
             this.titulo = entidade.titulo;
-            this.questaoCorreta = entidade.questaoCorreta;
-        }
-
-        public override string ObterCampoSQL(bool ehParametro = false)
-        {
-            string sufixo = "]";
-            string prefixo = "[";
-            string campo = "";
-
-            if (ehParametro)
-            {
-                prefixo = "@";
-                sufixo = "";
-            }
-
-            campo += $"{prefixo}titulo{sufixo},";
-            campo += $"{prefixo}questaoCorreta{sufixo}";
-
-            return campo;
-        }
-
-        public override SqlParameter[] ObterParametroSQL()
-        {
-            return new SqlParameter[]
-            {
-                 new SqlParameter("@titulo", titulo),
-                 new SqlParameter("@questaoCorreta", questaoCorreta)
-            };
+            this.alternativaCorreta = entidade.alternativaCorreta;
+            this.serie = entidade.serie;
+            this.disciplina = entidade.disciplina;
+            this.materia = entidade.materia;
         }
 
         public override string[] Validar()
         {
-            List<string> erros = new List<string>();
+            List<String> erros = new();
             if (string.IsNullOrEmpty(titulo))
             {
-                erros.Add("O titulo não pode ser vazio.");
+                erros.Add("O título não pode ser vazio");
             }
-            if(string.IsNullOrEmpty(questaoCorreta))
+            if (titulo.Length > 5)
             {
-                erros.Add("É necessario definir a alternativa correta.");
+                erros.Add("O título deve ter mais de 5 caracteres");
+            }
+            if (string.IsNullOrEmpty(alternativaCorreta))
+            {
+                erros.Add("A alternativa correta não pode ser vazia");
             }
             return erros.ToArray();
-        }
-
-        public override bool VerificarRepeticao(Questao registro)
-        {
-            return id != registro.id && titulo == registro.titulo;
         }
     }
 }
