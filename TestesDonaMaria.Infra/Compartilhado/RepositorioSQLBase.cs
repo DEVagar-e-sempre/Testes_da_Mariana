@@ -13,9 +13,12 @@ namespace TestesDonaMaria.Infra.Compartilhado
 
         protected TMapeador mapeador;
 
-        protected String inserirSQL;
-        protected String editarSQL;
-
+        protected virtual String inserirSQL => "";
+        protected virtual String editarSQL => "";
+        protected virtual String excluirSQL => "";
+        protected virtual String selecionarTodosSQL => "";
+        protected virtual String selecionarPorIdSQL => selecionarTodosSQL + " WHERE id = @id";
+        
         public RepositorioSQLBase(SqlConnection conexao)
         {
             this.conexao = conexao;
@@ -25,19 +28,29 @@ namespace TestesDonaMaria.Infra.Compartilhado
         public bool Inserir(TEntidade registro)
         {
             conexao.Open();
+
             SqlCommand comando = new SqlCommand(inserirSQL, conexao);
+
             mapeador.ConfigurarParametros(comando, registro);
+
             comando.ExecuteScalar();
+
             conexao.Close();
+
             return true;
         }
         public bool Editar(int id, TEntidade registroAtualizado)
         {
             conexao.Open();
+
             SqlCommand comando = new SqlCommand(editarSQL, conexao);
+
             mapeador.ConfigurarParametros(comando, registroAtualizado);
+
             comando.ExecuteScalar();
+
             conexao.Close();
+
             return true;
         }
 
@@ -45,7 +58,6 @@ namespace TestesDonaMaria.Infra.Compartilhado
         {
             conexao.Open();
 
-            String excluirSQL = $"DELETE FROM TB{typeof(TEntidade).Name} WHERE id = {registroSelecionado.id}";
             SqlCommand comando = new SqlCommand(excluirSQL, conexao);
 
             comando.ExecuteScalar();
@@ -56,9 +68,8 @@ namespace TestesDonaMaria.Infra.Compartilhado
         {
             conexao.Open();
 
-            String selecionarPorIdSQL = $"SELECT * FROM TB{typeof(TEntidade).Name} WHERE id = @id";
-
             SqlCommand comando = new SqlCommand(selecionarPorIdSQL, conexao);
+
             comando.Parameters.AddWithValue("@id", id);
 
             SqlDataReader leitor = comando.ExecuteReader();
@@ -69,9 +80,6 @@ namespace TestesDonaMaria.Infra.Compartilhado
         public List<TEntidade> SelecionarTodos()
         {
             List<TEntidade> registros = new List<TEntidade>();
-            String selecionarTodosSQL;
-
-            selecionarTodosSQL = $"SELECT * FROM TB{typeof(TEntidade).Name}";
 
             SqlCommand comando = new SqlCommand(selecionarTodosSQL, conexao);
 
@@ -81,6 +89,7 @@ namespace TestesDonaMaria.Infra.Compartilhado
             {
                registros.Add(mapeador.ConverterRegistro(leitor));
             }
+
             return registros;
         }
     }

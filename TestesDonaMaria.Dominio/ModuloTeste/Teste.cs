@@ -28,25 +28,5 @@ namespace TestesDonaMaria.Dominio.ModuloTeste
         {
             throw new NotImplementedException();
         }
-
-        public override string ObterCampoSQL(bool ehParametro = false)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override SqlParameter[] ObterParametroSQL()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override string[] Validar()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override bool VerificarRepeticao(Teste registro)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
