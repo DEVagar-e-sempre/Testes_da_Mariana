@@ -4,11 +4,6 @@ namespace TestesDonaMaria.Dominio.Compartilhado
 {
     public abstract class EntidadeBase<T>
     {
-
-        public EntidadeBase(SqlDataReader leitor)
-        {
-            AtualizarInformacoes(leitor);
-        }
         public EntidadeBase()
         {
 
@@ -19,12 +14,6 @@ namespace TestesDonaMaria.Dominio.Compartilhado
         public abstract string[] Validar();
 
         public abstract void AtualizarInformacoes(T entidade);
-
-        public abstract void AtualizarInformacoes(SqlDataReader leitor);
-
-        public abstract SqlParameter[] ObterParametroSQL();
-
-        public abstract string ObterCampoUpdate();
 
 
     }
