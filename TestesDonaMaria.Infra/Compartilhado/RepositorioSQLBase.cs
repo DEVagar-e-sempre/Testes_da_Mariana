@@ -27,13 +27,16 @@ namespace TestesDonaMaria.Infra.Compartilhado
 
         public bool Inserir(TEntidade registro)
         {
+            int id;
             conexao.Open();
 
             SqlCommand comando = new SqlCommand(inserirSQL, conexao);
 
             mapeador.ConfigurarParametros(comando, registro);
 
-            comando.ExecuteScalar();
+            id = Convert.ToInt32(comando.ExecuteScalar());
+
+            registro.id = id;
 
             conexao.Close();
 
