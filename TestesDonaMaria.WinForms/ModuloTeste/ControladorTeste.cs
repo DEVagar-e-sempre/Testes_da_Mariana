@@ -30,12 +30,6 @@ namespace TestesDonaMaria.WinForms.ModuloTeste
             
         }
 
-        private void CarregarTeste()
-        {
-            //List<Teste> listaTestes = repTeste.Selecionartodos();
-            //tabelaTeste.AtualizarRegistros(listaTestes);
-        }
-
         public override UserControl ObterListagem()
         {
             if(tabelaTeste == null)
@@ -46,6 +40,12 @@ namespace TestesDonaMaria.WinForms.ModuloTeste
             CarregarTeste();
 
             return tabelaTeste;
+        }
+
+        private void CarregarTeste()
+        {
+            //List<Teste> listaTestes = repTeste.Selecionartodos();
+            //tabelaTeste.AtualizarRegistros(listaTestes);
         }
     }
 }

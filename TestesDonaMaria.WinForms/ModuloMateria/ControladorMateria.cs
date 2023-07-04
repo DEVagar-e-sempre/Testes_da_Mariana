@@ -7,6 +7,7 @@ namespace TestesDonaMaria.WinForms.ModuloMateria
         public override string ObterTipoCadastro => "Cadastro de Materia";
         
         private RepositorioSQLMateria repMateria;
+        private TabelaMateria tabelaMateria;
 
         public ControladorMateria(RepositorioSQLMateria repMateria)
         {
@@ -30,7 +31,19 @@ namespace TestesDonaMaria.WinForms.ModuloMateria
 
         public override UserControl ObterListagem()
         {
-            throw new NotImplementedException();
+            if(tabelaMateria == null)
+            {
+                tabelaMateria = new TabelaMateria();
+            }
+
+            CarregarMateria();
+            return tabelaMateria;
+        }
+
+        private void CarregarMateria()
+        {
+            //List<Materia> listaMaterias = repMateria.Selecionartodos();
+            //tabelaMateria.AtualizarRegistros(listaMaterias);
         }
     }
 }

@@ -11,6 +11,14 @@ namespace TestesDonaMaria.Dominio.ModuloTeste
         public Disciplina disciplina;
         public Materia materia;
         public int quantQuestoes;
+        public int PegarQuantQuestoes
+        {
+            get
+            {
+                return listaQuestoes.Count;
+            }
+        }
+
         public int serie;
         public List<Questao> listaQuestoes;
 

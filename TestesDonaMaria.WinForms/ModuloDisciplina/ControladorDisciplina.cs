@@ -36,7 +36,14 @@ namespace TestesDonaMaria.WinForms.ModuloDisciplina
                 tabelaDisc = new TabelaDisciplina();
             }
 
-            CarregarDisciplina
+            CarregarDisciplina();
+            return tabelaDisc;
+        }
+
+        private void CarregarDisciplina()
+        {
+            //List<Disciplina> listaDisc = repDisciplina.Selecionartodos();
+            //tabelaDisc.AtualizarRegistros(listaDisc);
         }
     }
 }
