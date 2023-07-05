@@ -20,9 +20,12 @@ namespace TestesDonaMaria.Infra.ModuloQuestao
 	                                                            M.nome AS MATERIA_NOME,
 	                                                            D.id AS DISCIPLINA_ID,
 	                                                            D.nome AS DISCIPLINA_NOME
-                                                            FROM TBQuestao AS Q
-                                                            INNER JOIN TBMateria AS M ON M.id = Q.id
-                                                            INNER JOIN TBDisciplina AS D ON D.id = M.disciplina_id
+                                                            FROM 
+                                                                TBQuestao AS Q
+                                                            INNER JOIN 
+                                                                TBMateria AS M ON M.id = Q.id
+                                                            INNER JOIN 
+                                                                TBDisciplina AS D ON D.id = M.disciplina_id
 
 ";
 
