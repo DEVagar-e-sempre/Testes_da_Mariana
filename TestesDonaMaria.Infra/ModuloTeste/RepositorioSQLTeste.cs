@@ -78,8 +78,7 @@ namespace TestesDonaMaria.Infra.ModuloTeste
 
         public override bool TemDependente(Teste registro)
         {
-            Conexao();
-            string 
+            return false;
         }
     }
 }
