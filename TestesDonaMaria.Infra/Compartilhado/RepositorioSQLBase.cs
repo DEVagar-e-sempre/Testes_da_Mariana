@@ -1,7 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
-using System.Data;
 using TestesDonaMaria.Dominio.Compartilhado;
-using TestesDonaMaria.Dominio.ModuloDisciplina;
 
 namespace TestesDonaMaria.Infra.Compartilhado
 {
