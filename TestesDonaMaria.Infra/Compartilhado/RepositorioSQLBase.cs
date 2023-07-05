@@ -7,7 +7,11 @@ namespace TestesDonaMaria.Infra.Compartilhado
         where TEntidade : EntidadeBase<TEntidade>
         where TMapeador : MapeadorBase<TEntidade>, new()
     {
-        protected SqlConnection conexao;
+        protected const string enderecoBD = @"Data Source=(Localdb)\MSSQLLocaldb;
+                                        Initial Catalog=TesteMarianaDB;
+                                        Integrated Security=True;";
+
+        private SqlConnection conexao;
 
         protected TMapeador mapeador;
 
@@ -24,9 +28,7 @@ namespace TestesDonaMaria.Infra.Compartilhado
 
         protected void Conexao()
         {
-            conexao.ConnectionString = @"Data Source=(Localdb)\MSSQLLocaldb;
-                                        Initial Catalog=TesteMarianaDB;
-                                        Integrated Security=True;";
+            conexao = new SqlConnection(enderecoBD);
             
             conexao.Open();
         }
