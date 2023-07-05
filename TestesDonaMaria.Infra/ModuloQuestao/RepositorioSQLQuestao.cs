@@ -118,5 +118,31 @@ namespace TestesDonaMaria.Infra.ModuloQuestao
             }
             conexao.Close();
         }
+
+        public override bool EhRepetido(Questao registro)
+        {
+            Conexao();
+            String verificarDepedenteSQL = @"
+                            SELECT COUNT(*)
+                            FROM TBQuestao
+                            WHERE TBQuestao.titulo LIKE '%@titulo%';
+
+";
+
+            SqlCommand comando = new SqlCommand(verificarDepedenteSQL, conexao);
+
+            comando.Parameters.AddWithValue("@titulo", registro.titulo);
+
+            int quantidade = Convert.ToInt32(comando.ExecuteScalar());
+
+            conexao.Close();
+
+            return quantidade > 0;
+        }
+
+        public override bool TemDependente(Questao registro)
+        {
+            return false;
+        }
     }
 }
