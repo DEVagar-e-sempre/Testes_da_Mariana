@@ -32,6 +32,19 @@ namespace TestesDonaMaria.Dominio.ModuloTeste
             this.listaQuestoes = new List<Questao>();
 
         }
+
+        public Teste(int id, string titulo, Disciplina disciplina, Materia materia, int quantQuestoes, int serie)
+        {
+            this.id = id;
+            this.titulo = titulo;
+            this.disciplina = disciplina;
+            this.materia = materia;
+            this.quantQuestoes = quantQuestoes;
+            this.serie = serie;
+            this.listaQuestoes = new List<Questao>();
+
+        }
+
         public override void AtualizarInformacoes(Teste entidade)
         {
             throw new NotImplementedException();

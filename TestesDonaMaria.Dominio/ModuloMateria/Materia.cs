@@ -8,12 +8,19 @@ namespace TestesDonaMaria.Dominio.ModuloMateria
         public string nome;
         public Disciplina disciplina;
 
+        public Materia(string nome, Disciplina disciplina)
+        {
+            this.nome = nome;
+            this.disciplina = disciplina;
+        }
+
         public Materia(int id, string nome, Disciplina disciplina)
         {
             this.id = id;
             this.nome = nome;
             this.disciplina = disciplina;
         }
+
         public override string[] Validar()
         {
             List<string> erros = new List<string>();
