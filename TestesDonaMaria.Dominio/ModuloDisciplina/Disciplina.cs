@@ -10,6 +10,13 @@ namespace TestesDonaMaria.Dominio.ModuloDisciplina
             this.nome = nome;
         }
 
+        public Disciplina(int id, string nome)
+        {
+            this.id = id;
+            this.nome = nome;
+        }
+
+
         public override void AtualizarInformacoes(Disciplina entidade)
         {
             this.nome = entidade.nome;

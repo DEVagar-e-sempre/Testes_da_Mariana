@@ -17,7 +17,15 @@ namespace TestesDonaMaria.Infra.ModuloTeste
 
         public override Teste ConverterRegistro(SqlDataReader leitorRegistros)
         {
-            
+            //int id, string titulo, Disciplina disciplina, Materia materia, int quantQuestoes, int serie
+            int id = Convert.ToInt32(leitorRegistros["teste_id"]);
+            string titulo = Convert.ToString(leitorRegistros["titulo"]);
+            int disciplina_id = Convert.ToInt32(leitorRegistros["disciplina_id"]);
+            int materia_id = Convert.ToInt32(leitorRegistros["materia_id"]);
+            int qtdQuestao = Convert.ToInt32(leitorRegistros["quantQuestoes"]);
+            int serie = Convert.ToInt32(leitorRegistros["serie"]);
+
+            Teste teste = new Teste(id, titulo, disciplina_id, materia_id, qtdQuestao, serie);
         }
     }
 }
