@@ -9,9 +9,9 @@ namespace TestesDonaMaria.Infra.ModuloQuestao
     {
         public override void ConfigurarParametros(SqlCommand comando, Questao registro)
         {
-            comando.Parameters.AddWithValue("@id", registro.id);
             comando.Parameters.AddWithValue("@titulo", registro.titulo);
-            //comando.Parameters.AddWithValue("@enunciado", registro.enunciado);
+            comando.Parameters.AddWithValue("@serie", registro.serie);
+            comando.Parameters.AddWithValue("@materia_id", registro.materia.id);
 
         }
 
@@ -21,7 +21,7 @@ namespace TestesDonaMaria.Infra.ModuloQuestao
             String questao_titulo = leitorRegistros["QUESTAO_TITULO"].ToString();
             int questao_serie = Convert.ToInt32(leitorRegistros["QUESTAO_SERIE"]);
             
-            String materia_id = leitorRegistros["MATERIA_ID"].ToString();
+            int materia_id = Convert.ToInt32(leitorRegistros["MATERIA_ID"]);
             String materia_nome = leitorRegistros["MATERIA_NOME"].ToString();
 
             int disciplina_id = Convert.ToInt32(leitorRegistros["DISCIPLINA_ID"]);

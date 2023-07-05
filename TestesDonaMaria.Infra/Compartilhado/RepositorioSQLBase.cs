@@ -54,6 +54,8 @@ namespace TestesDonaMaria.Infra.Compartilhado
 
             mapeador.ConfigurarParametros(comando, registroAtualizado);
 
+            comando.Parameters.AddWithValue("@id", id);
+
             comando.ExecuteScalar();
 
             conexao.Close();
