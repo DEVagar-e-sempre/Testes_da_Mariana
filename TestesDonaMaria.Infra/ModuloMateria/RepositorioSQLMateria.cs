@@ -1,4 +1,5 @@
-﻿using TestesDonaMaria.Dominio.ModuloMateria;
+﻿using Microsoft.Data.SqlClient;
+using TestesDonaMaria.Dominio.ModuloMateria;
 
 namespace TestesDonaMaria.Infra.ModuloMateria
 {
@@ -22,6 +23,50 @@ namespace TestesDonaMaria.Infra.ModuloMateria
         protected override string selecionarPorIdSQL => selecionarTodosSQL + " WHERE TBMateria.id = @id";
         public RepositorioSQLMateria() : base()
         {
+        }
+
+        public override bool EhRepetido(Materia registro)
+        {
+            Conexao();
+            string verificarDepedenteSQL = @" SELECT COUNT(*)
+                                                FROM 
+                                                    TBMATERIA
+                                                WHERE 
+                                                    TBMATERIA.NOME = @nome";
+
+            SqlCommand comando = new SqlCommand(verificarDepedenteSQL, conexao);
+
+            comando.Parameters.AddWithValue("@nome", registro.nome);
+
+            int quantidade = Convert.ToInt32(comando.ExecuteScalar());
+
+            conexao.Close();
+
+            return quantidade > 0;
+        }
+
+        public override bool TemDependente(Materia registro)
+        {
+            SqlCommand comando;
+            int quantidade = 0;
+
+            string verificarDepedenteSQL = @" SELECT COUNT(*)
+                                                FROM 
+                                                    TBTeste, TBQuestao
+                                                WHERE 
+                                                    TBTeste.materia_id = @id
+                                                OR
+                                                    TBQuestao.materia_id = @id";
+
+            comando = new SqlCommand(verificarDepedenteSQL, conexao);
+
+            comando.Parameters.AddWithValue("@id", registro.id);
+
+            quantidade = Convert.ToInt32(comando.ExecuteScalar());
+
+            conexao.Close();
+
+            return quantidade > 0;
         }
     }
 }

@@ -38,7 +38,7 @@ namespace TestesDonaMaria.Infra.ModuloDisciplina
         public override bool TemDependente(Disciplina registro)
         {
             Conexao();
-            String verificarDepedenteSQL = @"
+            string verificarDepedenteSQL = @"
                             SELECT COUNT(*) 
                             FROM TBMateria 
                             WHERE TBMateria.disciplina_id = @id

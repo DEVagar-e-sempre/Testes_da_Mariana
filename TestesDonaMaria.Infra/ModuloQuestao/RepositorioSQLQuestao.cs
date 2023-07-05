@@ -71,12 +71,14 @@ namespace TestesDonaMaria.Infra.ModuloQuestao
             }
             return questoes;
         }
+
         public void EditarAlternativas(Questao questao)
         {
             base.Editar(questao.id, questao);
             ExcluirAlternativas(questao);
             InserirAlternativas(questao);
         }
+
         private void ExcluirAlternativas(Questao questao)
         {
             Conexao();
