@@ -8,26 +8,27 @@ namespace TestesDonaMaria.Dominio.ModuloQuestao
     public class Questao : EntidadeBase<Questao>
     {
         public string titulo;
-        public string alternativaCorreta;
         public int serie;
-        public Disciplina disciplina;
         public Materia materia;
+        public List<Alternativa> alternativas;
 
-        public Questao(string titulo, string questaoCorreta, int serie, Materia materia)
+        public Questao(string titulo, int serie, Materia materia, List<Alternativa> alternativas)
         {
             this.titulo = titulo;
-            this.alternativaCorreta = questaoCorreta;
             this.serie = serie;
-            this.disciplina = disciplina;
             this.materia = materia;
+            this.alternativas = alternativas;
+        }
+        public Questao()
+        {
+            this.alternativas = new List<Alternativa>();
         }
         public override void AtualizarInformacoes(Questao entidade)
         {
             this.titulo = entidade.titulo;
-            this.alternativaCorreta = entidade.alternativaCorreta;
             this.serie = entidade.serie;
-            this.disciplina = entidade.disciplina;
             this.materia = entidade.materia;
+            this.alternativas = entidade.alternativas;
         }
 
         public override string[] Validar()
@@ -41,9 +42,9 @@ namespace TestesDonaMaria.Dominio.ModuloQuestao
             {
                 erros.Add("O título deve ter mais de 5 caracteres");
             }
-            if (string.IsNullOrEmpty(alternativaCorreta))
+            if (alternativas.Count < 2)
             {
-                erros.Add("A alternativa correta não pode ser vazia");
+                erros.Add("A questão deve ter pelo menos 2 alternativas");
             }
             return erros.ToArray();
         }

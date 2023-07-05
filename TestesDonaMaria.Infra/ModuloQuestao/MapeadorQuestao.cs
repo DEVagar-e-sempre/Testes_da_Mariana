@@ -1,9 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using TestesDonaMaria.Dominio.ModuloDisciplina;
+using TestesDonaMaria.Dominio.ModuloMateria;
 using TestesDonaMaria.Dominio.ModuloQuestao;
 
 namespace TestesDonaMaria.Infra.ModuloQuestao
@@ -15,13 +12,46 @@ namespace TestesDonaMaria.Infra.ModuloQuestao
             comando.Parameters.AddWithValue("@id", registro.id);
             comando.Parameters.AddWithValue("@titulo", registro.titulo);
             //comando.Parameters.AddWithValue("@enunciado", registro.enunciado);
-            comando.Parameters.AddWithValue("@alternativaCorreta", registro.alternativaCorreta);
 
         }
 
         public override Questao ConverterRegistro(SqlDataReader leitorRegistros)
         {
-            throw new NotImplementedException();
+            int questao_id = Convert.ToInt32(leitorRegistros["QUESTAO_ID"]);
+            String questao_titulo = leitorRegistros["QUESTAO_TITULO"].ToString();
+            int questao_serie = Convert.ToInt32(leitorRegistros["QUESTAO_SERIE"]);
+            
+            String materia_id = leitorRegistros["MATERIA_ID"].ToString();
+            String materia_nome = leitorRegistros["MATERIA_NOME"].ToString();
+
+            int disciplina_id = Convert.ToInt32(leitorRegistros["DISCIPLINA_ID"]);
+            String disciplina_nome = leitorRegistros["DISCIPLINA_NOME"].ToString();
+            
+            Disciplina disciplina = new(disciplina_id, disciplina_nome);
+            Materia materia = new(materia_id, materia_nome, disciplina);
+            Questao questao = new(questao_id, questao_titulo, questao_serie, materia);
+            return questao;
+        }
+
+        public Alternativa ConverterRegistroAlternativa(SqlDataReader leitorRegistros)
+        {
+            int id = Convert.ToInt32(leitorRegistros["id"]);
+
+            String alternativa = leitorRegistros["alternativa"].ToString();
+
+            bool correta = Convert.ToBoolean(leitorRegistros["correta"]);
+
+            int questao_id = Convert.ToInt32(leitorRegistros["questao_id"]);
+
+            Alternativa alternativaObj = new(id, alternativa, correta, questao_id);
+
+            return alternativaObj;
+        }
+        public void ConfigurarParamentrosAlternativa(SqlCommand comando, Alternativa alternativa)
+        {
+            comando.Parameters.AddWithValue("alternativa", alternativa.alternativa);
+            comando.Parameters.AddWithValue("questao_id", alternativa.questaoId);
+            comando.Parameters.AddWithValue("correta", alternativa.correta);
         }
     }
 }
