@@ -118,5 +118,15 @@ namespace TestesDonaMaria.Infra.ModuloQuestao
             }
             conexao.Close();
         }
+
+        public override bool EhRepetido(Questao registro)
+        {
+
+        }
+
+        public override bool TemDependente(Questao registro)
+        {
+
+        }
     }
 }
