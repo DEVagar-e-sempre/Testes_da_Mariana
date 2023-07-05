@@ -12,20 +12,18 @@ namespace TestesDonaMaria.Dominio.ModuloQuestao
         public Materia materia;
         public List<Alternativa> alternativas;
 
-        public Questao(int id, string titulo, int serie, Materia materia, List<Alternativa> alternativas) : this()
+        public Questao(int id, string titulo, int serie, Materia materia) : this()
         {
             this.id = id;
             this.titulo = titulo;
             this.serie = serie;
             this.materia = materia;
-            this.alternativas = alternativas;
         }
-        public Questao(string titulo, int serie, Materia materia, List<Alternativa> alternativas) : this()
+        public Questao(string titulo, int serie, Materia materia) : this()
         {
             this.titulo = titulo;
             this.serie = serie;
             this.materia = materia;
-            this.alternativas = alternativas;
         }
         public Questao()
         {
