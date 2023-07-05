@@ -34,7 +34,6 @@
             btn_materia = new Button();
             btn_questao = new Button();
             btn_disciplina = new Button();
-            label2 = new Label();
             painel_principal = new Panel();
             toolStrip1 = new ToolStrip();
             btn_inserir = new ToolStripButton();
@@ -51,6 +50,7 @@
             lbl_status = new ToolStripStatusLabel();
             panel1 = new Panel();
             label1 = new Label();
+            toolStripLabel1 = new ToolStripLabel();
             painel_botoesEntidades.SuspendLayout();
             painel_principal.SuspendLayout();
             toolStrip1.SuspendLayout();
@@ -139,19 +139,8 @@
             btn_disciplina.TextImageRelation = TextImageRelation.ImageBeforeText;
             btn_disciplina.UseVisualStyleBackColor = false;
             // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe Print", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(500, 339);
-            label2.Name = "label2";
-            label2.Size = new Size(132, 23);
-            label2.TabIndex = 1;
-            label2.Text = "DEVagar e sempre";
-            // 
             // painel_principal
             // 
-            painel_principal.Controls.Add(label2);
             painel_principal.Controls.Add(toolStrip1);
             painel_principal.Controls.Add(statusStrip1);
             painel_principal.Dock = DockStyle.Bottom;
@@ -162,7 +151,7 @@
             // 
             // toolStrip1
             // 
-            toolStrip1.Items.AddRange(new ToolStripItem[] { btn_inserir, btn_editar, btn_excluir, toolStripSeparator1, toolStripButton4, toolStripButton5, toolStripSeparator2, toolStripButton6, toolStripSeparator3, lbl_tipoCad });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { btn_inserir, btn_editar, btn_excluir, toolStripSeparator1, toolStripButton4, toolStripButton5, toolStripSeparator2, toolStripButton6, toolStripSeparator3, lbl_tipoCad, toolStripLabel1 });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(644, 31);
@@ -288,6 +277,14 @@
             label1.TabIndex = 0;
             label1.Text = "Testes da Dona Mariana";
             // 
+            // toolStripLabel1
+            // 
+            toolStripLabel1.Alignment = ToolStripItemAlignment.Right;
+            toolStripLabel1.Font = new Font("Segoe Print", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            toolStripLabel1.Name = "toolStripLabel1";
+            toolStripLabel1.Size = new Size(123, 28);
+            toolStripLabel1.Text = "DEVagar e sempre";
+            // 
             // TelaPrincipal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -321,7 +318,6 @@
         private Button btn_questao;
         private ToolStripStatusLabel lbl_status;
         private Panel panel1;
-        private Label label2;
         private Label label1;
         private ToolStrip toolStrip1;
         private ToolStripButton btn_inserir;
@@ -334,5 +330,6 @@
         private ToolStripButton toolStripButton6;
         private ToolStripSeparator toolStripSeparator3;
         private ToolStripLabel lbl_tipoCad;
+        private ToolStripLabel toolStripLabel1;
     }
 }
