@@ -29,7 +29,6 @@ namespace TestesDonaMaria.Infra.ModuloTeste
         protected override string selecionarTodosSQL => @"SELECT 
 	                                                           T.[ID]            AS TESTE_ID
                                                               ,T.[TITULO]		 AS TESTE_TITULO
-                                                              ,T.[MATERIA_ID]	 AS TESTE_MATERIA_ID
                                                               ,T.[QUANTQUESTOES] AS TESTE_QTD_QUESTOES
                                                               ,T.[SERIE]		 AS TESTE_SERIE
 
