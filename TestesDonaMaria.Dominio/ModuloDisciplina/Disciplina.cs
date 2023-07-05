@@ -5,15 +5,13 @@ namespace TestesDonaMaria.Dominio.ModuloDisciplina
     public class Disciplina : EntidadeBase<Disciplina>
     {
         public string nome;
-        public Disciplina(int id, string nome)
+        public Disciplina(string nome)
         {
-            this.id = id;
             this.nome = nome;
         }
 
         public override void AtualizarInformacoes(Disciplina entidade)
         {
-            this.id = entidade.id;
             this.nome = entidade.nome;
         }
 

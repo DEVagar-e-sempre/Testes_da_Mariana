@@ -1,4 +1,3 @@
-using Microsoft.Data.SqlClient;
 using TestesDonaMaria.Infra.ModuloDisciplina;
 using TestesDonaMaria.Infra.ModuloMateria;
 using TestesDonaMaria.Infra.ModuloQuestao;
@@ -12,11 +11,12 @@ namespace TestesDonaMaria.WinForms
 {
     public partial class TelaPrincipal : Form
     {
-        private ControladorBase controlador;
         private RepositorioSQLDisciplina repDisciplina = new RepositorioSQLDisciplina();
         private RepositorioSQLMateria repMateria = new RepositorioSQLMateria();
         private RepositorioSQLQuestao repQuestao = new RepositorioSQLQuestao();
         private RepositorioSQLTeste repTeste = new RepositorioSQLTeste();
+        private ControladorBase controlador;
+        private static TelaPrincipal telaPrincipal;
         public TelaPrincipal()
         {
             InitializeComponent();
@@ -24,8 +24,17 @@ namespace TestesDonaMaria.WinForms
             this.ConfigurarTelas();
 
             ObterEntidade();
+
+            telaPrincipal = this;
         }
 
+        public static TelaPrincipal TelaPrincipalP
+        {
+            get
+            {
+                return telaPrincipal;
+            }
+        }
         private void ObterEntidade()
         {
             foreach (Button btn in painel_botoesEntidades.Controls)

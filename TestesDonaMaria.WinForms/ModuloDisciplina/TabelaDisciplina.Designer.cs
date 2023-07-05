@@ -38,7 +38,7 @@
             // panel1
             // 
             panel1.Controls.Add(grid);
-            panel1.Location = new Point(59, 90);
+            panel1.Location = new Point(61, 70);
             panel1.Name = "panel1";
             panel1.Size = new Size(535, 276);
             panel1.TabIndex = 0;
@@ -70,7 +70,7 @@
             Controls.Add(label1);
             Controls.Add(panel1);
             Name = "TabelaDisciplina";
-            Size = new Size(663, 456);
+            Size = new Size(663, 395);
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)grid).EndInit();
             ResumeLayout(false);

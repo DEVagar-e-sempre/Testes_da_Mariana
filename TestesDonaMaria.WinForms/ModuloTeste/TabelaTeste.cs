@@ -1,7 +1,4 @@
-﻿using TestesDonaMaria.Dominio.ModuloDisciplina;
-using TestesDonaMaria.Dominio.ModuloMateria;
-using TestesDonaMaria.Dominio.ModuloQuestao;
-using TestesDonaMaria.Dominio.ModuloTeste;
+﻿using TestesDonaMaria.Dominio.ModuloTeste;
 
 namespace TestesDonaMaria.WinForms.ModuloTeste
 {

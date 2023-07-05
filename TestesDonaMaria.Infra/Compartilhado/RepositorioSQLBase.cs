@@ -29,10 +29,11 @@ namespace TestesDonaMaria.Infra.Compartilhado
             conexao.ConnectionString = @"Data Source=(Localdb)\MSSQLLocaldb;
                                         Initial Catalog=TesteMarianaDB;
                                         Integrated Security=True;";
-                                        
-
+            
             conexao.Open();
         }
+
+        /*protected void EhRepetido(TEntidade registros){} --> verificação de repetição dos objetos*/
 
         public bool Inserir(TEntidade registro)
         {
