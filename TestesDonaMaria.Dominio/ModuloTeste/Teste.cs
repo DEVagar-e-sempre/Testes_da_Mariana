@@ -8,7 +8,6 @@ namespace TestesDonaMaria.Dominio.ModuloTeste
     public class Teste : EntidadeBase<Teste>
     {
         public string titulo;
-        public Disciplina disciplina;
         public Materia materia;
         public int quantQuestoes;
         public int PegarQuantQuestoes
@@ -22,10 +21,9 @@ namespace TestesDonaMaria.Dominio.ModuloTeste
         public int serie;
         public List<Questao> listaQuestoes;
 
-        public Teste(string titulo, Disciplina disciplina, Materia materia, int quantQuestoes, int serie)
+        public Teste(string titulo, Materia materia, int quantQuestoes, int serie)
         {
             this.titulo = titulo;
-            this.disciplina = disciplina;
             this.materia = materia;
             this.quantQuestoes = quantQuestoes;
             this.serie = serie;
@@ -33,11 +31,10 @@ namespace TestesDonaMaria.Dominio.ModuloTeste
 
         }
 
-        public Teste(int id, string titulo, Disciplina disciplina, Materia materia, int quantQuestoes, int serie)
+        public Teste(int id, string titulo, Materia materia, int quantQuestoes, int serie)
         {
             this.id = id;
             this.titulo = titulo;
-            this.disciplina = disciplina;
             this.materia = materia;
             this.quantQuestoes = quantQuestoes;
             this.serie = serie;
