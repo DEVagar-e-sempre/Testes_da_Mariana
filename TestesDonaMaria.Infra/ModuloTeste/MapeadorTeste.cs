@@ -1,4 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
+using TestesDonaMaria.Dominio.ModuloDisciplina;
+using TestesDonaMaria.Dominio.ModuloMateria;
 using TestesDonaMaria.Dominio.ModuloTeste;
 
 namespace TestesDonaMaria.Infra.ModuloTeste
@@ -9,7 +11,6 @@ namespace TestesDonaMaria.Infra.ModuloTeste
         {
             comando.Parameters.AddWithValue("@id", registro.id);
             comando.Parameters.AddWithValue("@titulo", registro.titulo);
-            comando.Parameters.AddWithValue("@disciplina_id", registro.disciplina.id);
             comando.Parameters.AddWithValue("@materia_id", registro.materia.id);
             comando.Parameters.AddWithValue("@quantQuestoes", registro.quantQuestoes);
             comando.Parameters.AddWithValue("@serie", registro.serie);
@@ -17,15 +18,21 @@ namespace TestesDonaMaria.Infra.ModuloTeste
 
         public override Teste ConverterRegistro(SqlDataReader leitorRegistros)
         {
-            //int id, string titulo, Disciplina disciplina, Materia materia, int quantQuestoes, int serie
-            int id = Convert.ToInt32(leitorRegistros["teste_id"]);
-            string titulo = Convert.ToString(leitorRegistros["titulo"]);
-            int disciplina_id = Convert.ToInt32(leitorRegistros["disciplina_id"]);
-            int materia_id = Convert.ToInt32(leitorRegistros["materia_id"]);
-            int qtdQuestao = Convert.ToInt32(leitorRegistros["quantQuestoes"]);
-            int serie = Convert.ToInt32(leitorRegistros["serie"]);
+            int id = Convert.ToInt32(leitorRegistros["TESTE_ID"]);
+            string titulo = leitorRegistros["TESTE_TITULO"].ToString();
+            int qtdQuestao = Convert.ToInt32(leitorRegistros["TESTE_QTD_QUESTOES"]);
+            int serie = Convert.ToInt32(leitorRegistros["TESTE_SERIE"]);
 
-            Teste teste = new Teste(id, titulo, disciplina_id, materia_id, qtdQuestao, serie);
+            int disciplina_id = Convert.ToInt32(leitorRegistros["MATERIA_DISCIPLINA_ID"]);
+            string nomeDisci = leitorRegistros["DISCIPLINA_NOME"].ToString();
+
+            int materia_id = Convert.ToInt32(leitorRegistros["MATERIA_ID"]);
+            string materiaNome = leitorRegistros["MATERIA_NOME"].ToString();
+
+            Disciplina disciplina = new Disciplina(disciplina_id, nomeDisci);
+            Materia materia = new Materia(materia_id, materiaNome, disciplina);
+
+            return new Teste(id, titulo, materia, qtdQuestao, serie);
         }
     }
 }
