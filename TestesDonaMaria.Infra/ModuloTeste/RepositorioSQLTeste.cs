@@ -1,4 +1,5 @@
-﻿using TestesDonaMaria.Dominio.ModuloTeste;
+﻿using Microsoft.Data.SqlClient;
+using TestesDonaMaria.Dominio.ModuloTeste;
 
 namespace TestesDonaMaria.Infra.ModuloTeste
 {
@@ -50,6 +51,35 @@ namespace TestesDonaMaria.Infra.ModuloTeste
         protected override string selecionarPorIdSQL => selecionarTodosSQL + " WHERE id = @id";
         public RepositorioSQLTeste() : base()
         {
+        }
+
+        public override bool EhRepetido(Teste registro)
+        {
+            Conexao(); // LIKE é comparador de strings
+            string verificarDepedenteSQL = @" SELECT COUNT(*)
+                                                FROM 
+                                                    TBTeste
+                                                WHERE 
+                                                    TBTESTE.TITULO = @titulo 
+                                                AND 
+                                                    TBTESTE.MATERIA_ID = @materia_id;";
+
+            SqlCommand comando = new SqlCommand(verificarDepedenteSQL, conexao);
+
+            comando.Parameters.AddWithValue("@titulo", registro.titulo);
+            comando.Parameters.AddWithValue("@materia_id", registro.materia.id);
+
+            int quantidade = Convert.ToInt32(comando.ExecuteScalar());
+
+            conexao.Close();
+
+            return quantidade > 0;
+        }
+
+        public override bool TemDependente(Teste registro)
+        {
+            Conexao();
+            string 
         }
     }
 }
