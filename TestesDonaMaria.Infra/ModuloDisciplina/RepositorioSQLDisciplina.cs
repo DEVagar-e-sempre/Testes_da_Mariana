@@ -1,4 +1,5 @@
-﻿using TestesDonaMaria.Dominio.ModuloDisciplina;
+﻿using Microsoft.Data.SqlClient;
+using TestesDonaMaria.Dominio.ModuloDisciplina;
 
 namespace TestesDonaMaria.Infra.ModuloDisciplina
 {
@@ -13,5 +14,45 @@ namespace TestesDonaMaria.Infra.ModuloDisciplina
         {
         }
 
+        public override bool EhRepetido(Disciplina registro)
+        {
+            Conexao();
+            String verificarDepedenteSQL = @"
+                            SELECT COUNT(*)
+                            FROM TBDisciplina
+                            WHERE TBDisciplina.nome LIKE '%@nome%';
+
+";
+
+            SqlCommand comando = new SqlCommand(verificarDepedenteSQL, conexao);
+
+            comando.Parameters.AddWithValue("@nome", registro.nome);
+
+            int quantidade = Convert.ToInt32(comando.ExecuteScalar());
+
+            conexao.Close();
+
+            return quantidade > 0;
+        }
+
+        public override bool TemDependente(Disciplina registro)
+        {
+            Conexao();
+            String verificarDepedenteSQL = @"
+                            SELECT COUNT(*) 
+                            FROM TBMateria 
+                            WHERE TBMateria.disciplina_id = @id
+";
+
+            SqlCommand comando = new SqlCommand(verificarDepedenteSQL, conexao);
+
+            comando.Parameters.AddWithValue("@id", registro.id);
+
+            int quantidade = Convert.ToInt32(comando.ExecuteScalar());
+
+            conexao.Close();
+
+            return quantidade > 0;
+        }
     }
 }
