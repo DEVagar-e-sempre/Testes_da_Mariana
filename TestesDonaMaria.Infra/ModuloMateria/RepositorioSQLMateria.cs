@@ -11,9 +11,16 @@ namespace TestesDonaMaria.Infra.ModuloMateria
 
         protected override string excluirSQL => "DELETE FROM TBMateria WHERE id = @id";
 
-        protected override string selecionarPorIdSQL => "SELECT m.id AS materia_id, m.nome AS nome_materia, d.id AS disciplina_id, d.nome AS nome_disciplina FROM TBMateria AS m INNER JOIN TBDisciplina AS d ON m.disciplina_id = d.id WHERE m.id = @id";
-
-        protected override string selecionarTodosSQL => "SELECT m.id AS materia_id, m.nome AS nome_materia, d.id AS disciplina_id, d.nome AS nome_disciplina FROM TBMateria AS m INNER JOIN TBDisciplina AS d ON m.disciplina_id = d.id";
+        protected override string selecionarTodosSQL => @"
+                                                         SELECT 
+	                                                        M.id AS materia_id, 
+	                                                        M.nome AS materia_nome, 
+	                                                        D.id AS disciplina_id, 
+	                                                        D.nome AS disciplina_nome 
+                                                        FROM TBMateria AS M
+                                                        INNER JOIN TBDisciplina AS D ON D.id = M.disciplina_id 
+";
+        protected override string selecionarPorIdSQL => selecionarTodosSQL + " WHERE TBMateria.id = @id";
         public RepositorioSQLMateria() : base()
         {
         }
