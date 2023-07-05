@@ -21,25 +21,26 @@ namespace TestesDonaMaria.Dominio.ModuloTeste
         public int serie;
         public List<Questao> listaQuestoes;
 
-        public Teste(string titulo, Materia materia, int quantQuestoes, int serie)
+        public Teste(string titulo, Materia materia, int quantQuestoes, int serie) : this()
         {
             this.titulo = titulo;
             this.materia = materia;
             this.quantQuestoes = quantQuestoes;
             this.serie = serie;
-            this.listaQuestoes = new List<Questao>();
-
         }
 
-        public Teste(int id, string titulo, Materia materia, int quantQuestoes, int serie)
+        public Teste(int id, string titulo, Materia materia, int quantQuestoes, int serie) : this()
         {
             this.id = id;
             this.titulo = titulo;
             this.materia = materia;
             this.quantQuestoes = quantQuestoes;
             this.serie = serie;
-            this.listaQuestoes = new List<Questao>();
+        }
 
+        public Teste()
+        {
+            this.listaQuestoes = new List<Questao>();
         }
 
         public override void AtualizarInformacoes(Teste entidade)
