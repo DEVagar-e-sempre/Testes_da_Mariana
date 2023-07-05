@@ -11,11 +11,11 @@ namespace TestesDonaMaria.Infra.Compartilhado
 
         protected TMapeador mapeador;
 
-        protected virtual String inserirSQL => "";
-        protected virtual String editarSQL => "";
-        protected virtual String excluirSQL => "";
-        protected virtual String selecionarTodosSQL => "";
-        protected virtual String selecionarPorIdSQL => selecionarTodosSQL + " WHERE id = @id";
+        protected virtual string inserirSQL => "";
+        protected virtual string editarSQL => "";
+        protected virtual string excluirSQL => "";
+        protected virtual string selecionarTodosSQL => "";
+        protected virtual string selecionarPorIdSQL => selecionarTodosSQL + " WHERE id = @id";
         
         public RepositorioSQLBase()
         {
@@ -103,5 +103,8 @@ namespace TestesDonaMaria.Infra.Compartilhado
             conexao.Close();
             return registros;
         }
+
+        public abstract bool EhRepetido(TEntidade registro);
+        public abstract bool TemDependente(TEntidade registro);
     }
 }
