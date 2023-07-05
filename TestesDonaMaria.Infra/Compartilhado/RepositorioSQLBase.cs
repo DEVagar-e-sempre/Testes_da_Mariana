@@ -22,7 +22,7 @@ namespace TestesDonaMaria.Infra.Compartilhado
             this.mapeador = new TMapeador();
         }
 
-        private void Conexao()
+        protected void Conexao()
         {
             conexao.ConnectionString = @"Data Source=(Localdb)\MSSQLLocaldb;
                                         Initial Catalog=TesteMarianaDB;
@@ -31,9 +31,7 @@ namespace TestesDonaMaria.Infra.Compartilhado
             conexao.Open();
         }
 
-        /*protected void EhRepetido(TEntidade registros){} --> verificação de repetição dos objetos*/
-
-        public bool Inserir(TEntidade registro)
+        public virtual void Inserir(TEntidade registro)
         {
             Conexao();
             int id;
@@ -47,10 +45,8 @@ namespace TestesDonaMaria.Infra.Compartilhado
             registro.id = id;
 
             conexao.Close();
-
-            return true;
         }
-        public bool Editar(int id, TEntidade registroAtualizado)
+        public virtual void Editar(int id, TEntidade registroAtualizado)
         {
             Conexao();
 
@@ -61,11 +57,9 @@ namespace TestesDonaMaria.Infra.Compartilhado
             comando.ExecuteScalar();
 
             conexao.Close();
-
-            return true;
         }
 
-        public void Excluir(TEntidade registroSelecionado)
+        public virtual void Excluir(TEntidade registroSelecionado)
         {
             Conexao();
 
@@ -75,7 +69,7 @@ namespace TestesDonaMaria.Infra.Compartilhado
 
             conexao.Close();
         }
-        public TEntidade SelecionarPorId(int id)
+        public virtual TEntidade SelecionarPorId(int id)
         {
             Conexao();
 
@@ -89,7 +83,7 @@ namespace TestesDonaMaria.Infra.Compartilhado
             return mapeador.ConverterRegistro(leitor);
         }
 
-        public List<TEntidade> SelecionarTodos()
+        public virtual List<TEntidade> SelecionarTodos()
         {
             Conexao();
 
