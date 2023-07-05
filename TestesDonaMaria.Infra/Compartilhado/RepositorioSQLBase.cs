@@ -11,7 +11,7 @@ namespace TestesDonaMaria.Infra.Compartilhado
                                         Initial Catalog=TesteMarianaDB;
                                         Integrated Security=True;";
 
-        private SqlConnection conexao;
+        protected SqlConnection conexao;
 
         protected TMapeador mapeador;
 

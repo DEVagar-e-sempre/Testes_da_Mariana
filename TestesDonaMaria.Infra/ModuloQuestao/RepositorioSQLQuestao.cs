@@ -144,7 +144,22 @@ namespace TestesDonaMaria.Infra.ModuloQuestao
 
         public override bool TemDependente(Questao registro)
         {
-            return false;
+            Conexao();
+            String verificarDepedenteSQL = @"
+                            SELECT COUNT(*)
+                            FROM TBTeste_TBQuestao
+                            WHERE TBTeste_TBQuestao.questao_id = @id
+";
+
+            SqlCommand comando = new SqlCommand(verificarDepedenteSQL, conexao);
+
+            comando.Parameters.AddWithValue("@id", registro.id);
+
+            int quantidade = Convert.ToInt32(comando.ExecuteScalar());
+
+            conexao.Close();
+
+            return quantidade > 0;
         }
     }
 }
