@@ -44,7 +44,7 @@ namespace TestesDonaMaria.WinForms.ModuloQuestao
 
             foreach (Questao questao in listaQuestoes)
             {
-                grid.Rows.Add(questao.id, questao.disciplina.nome, questao.materia.nome);
+                grid.Rows.Add(questao.id, questao.materia.disciplina.nome, questao.materia.nome);
             }
         }
         public int ObterIdSelecionado()

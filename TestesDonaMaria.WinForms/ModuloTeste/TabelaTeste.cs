@@ -48,7 +48,7 @@ namespace TestesDonaMaria.WinForms.ModuloTeste
 
             foreach (Teste teste in listaTestes)
             {
-                grid.Rows.Add(teste.id, teste.titulo, teste.disciplina.nome, teste.materia.nome, teste.quantQuestoes);
+                grid.Rows.Add(teste.id, teste.titulo, teste.materia.disciplina.nome, teste.materia.nome, teste.quantQuestoes);
             }
         }
         public int ObterIdSelecionado()
