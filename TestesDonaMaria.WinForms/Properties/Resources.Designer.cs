@@ -153,6 +153,16 @@ namespace TestesDonaMaria.WinForms.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap picture_as_pdf_FILL0_wght400_GRAD0_opsz24 {
+            get {
+                object obj = ResourceManager.GetObject("picture_as_pdf_FILL0_wght400_GRAD0_opsz24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap task_FILL0_wght400_GRAD200_opsz24 {
             get {
                 object obj = ResourceManager.GetObject("task_FILL0_wght400_GRAD200_opsz24", resourceCulture);

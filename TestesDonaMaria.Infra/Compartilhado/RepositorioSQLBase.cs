@@ -57,7 +57,7 @@ namespace TestesDonaMaria.Infra.Compartilhado
 
             mapeador.ConfigurarParametros(comando, registroAtualizado);
 
-            comando.Parameters.AddWithValue("id", id);
+            //comando.Parameters.AddWithValue("id", id);
 
             comando.ExecuteNonQuery();
 

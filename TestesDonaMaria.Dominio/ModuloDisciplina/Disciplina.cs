@@ -29,7 +29,7 @@ namespace TestesDonaMaria.Dominio.ModuloDisciplina
             {
                 erros.Add("O nome não pode ser vazio");
             }
-            if (nome.Length > 5)
+            if (nome.Length < 5)
             {
                 erros.Add("O nome deve ter mais de 5 caracteres");
             }
