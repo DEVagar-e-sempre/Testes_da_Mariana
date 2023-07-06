@@ -43,7 +43,7 @@
             btn_filtrar = new ToolStripButton();
             btn_listar = new ToolStripButton();
             toolStripSeparator2 = new ToolStripSeparator();
-            toolStripButton6 = new ToolStripButton();
+            btn_pdf = new ToolStripButton();
             toolStripSeparator3 = new ToolStripSeparator();
             lbl_tipoCad = new ToolStripLabel();
             panel1 = new Panel();
@@ -161,10 +161,10 @@
             // 
             ts_ferramentas.BackColor = Color.Transparent;
             ts_ferramentas.Dock = DockStyle.None;
-            ts_ferramentas.Items.AddRange(new ToolStripItem[] { btn_inserir, btn_editar, btn_excluir, toolStripSeparator1, btn_filtrar, btn_listar, toolStripSeparator2, toolStripButton6, toolStripSeparator3, lbl_tipoCad });
+            ts_ferramentas.Items.AddRange(new ToolStripItem[] { btn_inserir, btn_editar, btn_excluir, toolStripSeparator1, btn_filtrar, btn_listar, toolStripSeparator2, btn_pdf, toolStripSeparator3, lbl_tipoCad });
             ts_ferramentas.Location = new Point(195, 78);
             ts_ferramentas.Name = "ts_ferramentas";
-            ts_ferramentas.Size = new Size(354, 31);
+            ts_ferramentas.Size = new Size(385, 31);
             ts_ferramentas.TabIndex = 1;
             ts_ferramentas.Text = "toolStrip1";
             // 
@@ -215,6 +215,7 @@
             btn_filtrar.Padding = new Padding(4);
             btn_filtrar.Size = new Size(28, 28);
             btn_filtrar.Text = "Filtrar";
+            btn_filtrar.Click += botaoBarraFerramentas_Click;
             // 
             // btn_listar
             // 
@@ -225,20 +226,22 @@
             btn_listar.Padding = new Padding(4);
             btn_listar.Size = new Size(28, 28);
             btn_listar.Text = "Listagem";
+            btn_listar.Click += botaoBarraFerramentas_Click;
             // 
             // toolStripSeparator2
             // 
             toolStripSeparator2.Name = "toolStripSeparator2";
             toolStripSeparator2.Size = new Size(6, 31);
             // 
-            // toolStripButton6
+            // btn_pdf
             // 
-            toolStripButton6.Image = Properties.Resources.picture_as_pdf_FILL0_wght400_GRAD0_opsz24;
-            toolStripButton6.ImageTransparentColor = Color.Magenta;
-            toolStripButton6.Name = "toolStripButton6";
-            toolStripButton6.Padding = new Padding(4);
-            toolStripButton6.Size = new Size(87, 28);
-            toolStripButton6.Text = "Gerar PDF";
+            btn_pdf.Image = Properties.Resources.picture_as_pdf_FILL0_wght400_GRAD0_opsz24;
+            btn_pdf.ImageTransparentColor = Color.Magenta;
+            btn_pdf.Name = "btn_pdf";
+            btn_pdf.Padding = new Padding(4);
+            btn_pdf.Size = new Size(87, 28);
+            btn_pdf.Text = "Gerar PDF";
+            btn_pdf.Click += botaoBarraFerramentas_Click;
             // 
             // toolStripSeparator3
             // 
@@ -341,7 +344,7 @@
         private ToolStripButton btn_filtrar;
         private ToolStripButton btn_listar;
         private ToolStripSeparator toolStripSeparator2;
-        private ToolStripButton toolStripButton6;
+        private ToolStripButton btn_pdf;
         private ToolStripSeparator toolStripSeparator3;
         private ToolStripLabel lbl_tipoCad;
         private Label label2;
