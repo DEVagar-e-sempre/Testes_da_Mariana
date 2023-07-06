@@ -46,16 +46,15 @@
             toolStripButton6 = new ToolStripButton();
             toolStripSeparator3 = new ToolStripSeparator();
             lbl_tipoCad = new ToolStripLabel();
-            statusStrip1 = new StatusStrip();
-            lbl_status = new ToolStripStatusLabel();
             panel1 = new Panel();
             label1 = new Label();
-            toolStripLabel1 = new ToolStripLabel();
+            label2 = new Label();
+            statusStrip1 = new StatusStrip();
+            lbl_status = new ToolStripStatusLabel();
             painel_botoesEntidades.SuspendLayout();
-            painel_principal.SuspendLayout();
             toolStrip1.SuspendLayout();
-            statusStrip1.SuspendLayout();
             panel1.SuspendLayout();
+            statusStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // painel_botoesEntidades
@@ -141,20 +140,19 @@
             // 
             // painel_principal
             // 
-            painel_principal.Controls.Add(toolStrip1);
-            painel_principal.Controls.Add(statusStrip1);
-            painel_principal.Dock = DockStyle.Bottom;
-            painel_principal.Location = new Point(192, 73);
+            painel_principal.Location = new Point(192, 112);
             painel_principal.Name = "painel_principal";
-            painel_principal.Size = new Size(644, 384);
+            painel_principal.Size = new Size(644, 320);
             painel_principal.TabIndex = 1;
             // 
             // toolStrip1
             // 
-            toolStrip1.Items.AddRange(new ToolStripItem[] { btn_inserir, btn_editar, btn_excluir, toolStripSeparator1, toolStripButton4, toolStripButton5, toolStripSeparator2, toolStripButton6, toolStripSeparator3, lbl_tipoCad, toolStripLabel1 });
-            toolStrip1.Location = new Point(0, 0);
+            toolStrip1.BackColor = Color.Transparent;
+            toolStrip1.Dock = DockStyle.None;
+            toolStrip1.Items.AddRange(new ToolStripItem[] { btn_inserir, btn_editar, btn_excluir, toolStripSeparator1, toolStripButton4, toolStripButton5, toolStripSeparator2, toolStripButton6, toolStripSeparator3, lbl_tipoCad });
+            toolStrip1.Location = new Point(195, 78);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(644, 31);
+            toolStrip1.Size = new Size(295, 31);
             toolStrip1.TabIndex = 1;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -242,21 +240,6 @@
             lbl_tipoCad.Size = new Size(97, 28);
             lbl_tipoCad.Text = "Tipo do Cadastro";
             // 
-            // statusStrip1
-            // 
-            statusStrip1.Items.AddRange(new ToolStripItem[] { lbl_status });
-            statusStrip1.Location = new Point(0, 362);
-            statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(644, 22);
-            statusStrip1.TabIndex = 0;
-            statusStrip1.Text = "statusStrip1";
-            // 
-            // lbl_status
-            // 
-            lbl_status.Name = "lbl_status";
-            lbl_status.Size = new Size(39, 17);
-            lbl_status.Text = "Status";
-            // 
             // panel1
             // 
             panel1.BackColor = Color.RoyalBlue;
@@ -277,34 +260,55 @@
             label1.TabIndex = 0;
             label1.Text = "Testes da Dona Mariana";
             // 
-            // toolStripLabel1
+            // label2
             // 
-            toolStripLabel1.Alignment = ToolStripItemAlignment.Right;
-            toolStripLabel1.Font = new Font("Segoe Print", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            toolStripLabel1.Name = "toolStripLabel1";
-            toolStripLabel1.Size = new Size(123, 28);
-            toolStripLabel1.Text = "DEVagar e sempre";
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe Print", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.Location = new Point(704, 81);
+            label2.Name = "label2";
+            label2.Size = new Size(132, 23);
+            label2.TabIndex = 3;
+            label2.Text = "DEVagar e sempre";
+            // 
+            // statusStrip1
+            // 
+            statusStrip1.BackColor = Color.Transparent;
+            statusStrip1.Items.AddRange(new ToolStripItem[] { lbl_status });
+            statusStrip1.Location = new Point(192, 435);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Size = new Size(644, 22);
+            statusStrip1.TabIndex = 4;
+            statusStrip1.Text = "statusStrip1";
+            // 
+            // lbl_status
+            // 
+            lbl_status.Name = "lbl_status";
+            lbl_status.Size = new Size(39, 17);
+            lbl_status.Text = "Status";
             // 
             // TelaPrincipal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.White;
             ClientSize = new Size(836, 457);
+            Controls.Add(statusStrip1);
+            Controls.Add(label2);
             Controls.Add(panel1);
+            Controls.Add(toolStrip1);
             Controls.Add(painel_principal);
             Controls.Add(painel_botoesEntidades);
             Name = "TelaPrincipal";
             Text = "Tela Principal";
             painel_botoesEntidades.ResumeLayout(false);
-            painel_principal.ResumeLayout(false);
-            painel_principal.PerformLayout();
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
-            statusStrip1.ResumeLayout(false);
-            statusStrip1.PerformLayout();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            statusStrip1.ResumeLayout(false);
+            statusStrip1.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -312,11 +316,9 @@
         private Panel painel_botoesEntidades;
         private Panel painel_principal;
         private Button btn_disciplina;
-        private StatusStrip statusStrip1;
         private Button btn_teste;
         private Button btn_materia;
         private Button btn_questao;
-        private ToolStripStatusLabel lbl_status;
         private Panel panel1;
         private Label label1;
         private ToolStrip toolStrip1;
@@ -330,6 +332,8 @@
         private ToolStripButton toolStripButton6;
         private ToolStripSeparator toolStripSeparator3;
         private ToolStripLabel lbl_tipoCad;
-        private ToolStripLabel toolStripLabel1;
+        private Label label2;
+        private StatusStrip statusStrip1;
+        private ToolStripStatusLabel lbl_status;
     }
 }

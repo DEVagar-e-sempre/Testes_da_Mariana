@@ -8,8 +8,12 @@ namespace TestesDonaMaria.Infra.ModuloDisciplina
         protected override string inserirSQL => "INSERT INTO TBDisciplina (nome) VALUES (@nome) SELECT SCOPE_IDENTITY();";
         protected override string editarSQL => "UPDATE TBDisciplina SET nome = @nome WHERE id = @id";
         protected override string excluirSQL => "DELETE FROM TBDisciplina WHERE id = @id";
-        protected override string selecionarPorIdSQL => "";
-        protected override string selecionarTodosSQL => "";
+        protected override string selecionarTodosSQL => @"SELECT 
+                                                            [ID]
+                                                            ,[NOME]
+                                                        FROM 
+                                                            [TBDISCIPLINA]";
+        protected override string selecionarPorIdSQL => selecionarTodosSQL + "WHERE [ID] = @ID";
         public RepositorioSQLDisciplina() : base()
         {
         }

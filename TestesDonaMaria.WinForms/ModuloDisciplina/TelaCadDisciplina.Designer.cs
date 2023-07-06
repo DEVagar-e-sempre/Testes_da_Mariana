@@ -108,6 +108,7 @@
             Controls.Add(btn_cancelar);
             Controls.Add(btn_gravar);
             Name = "TelaCadDisciplina";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "TelaCadDisciplina";
             ResumeLayout(false);
             PerformLayout();

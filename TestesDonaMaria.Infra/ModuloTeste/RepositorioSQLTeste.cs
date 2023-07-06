@@ -19,6 +19,7 @@ namespace TestesDonaMaria.Infra.ModuloTeste
                                                         ,@quantquestoes
                                                         ,@serie
                                                     )";
+
         protected override string editarSQL => @"UPDATE [TBTESTE] 
                                                     SET 
                                                         titulo = @titulo
@@ -26,6 +27,7 @@ namespace TestesDonaMaria.Infra.ModuloTeste
                                                         , quantQuestoes = @quantQuestoes
                                                         , serie = @serie 
                                                     WHERE id = @id";
+
         protected override string excluirSQL => @"DELETE FROM Teste WHERE id = @id";
         protected override string selecionarTodosSQL => @"SELECT 
 	                                                           T.[ID]            AS TESTE_ID
@@ -46,7 +48,7 @@ namespace TestesDonaMaria.Infra.ModuloTeste
 	                                                           T.[MATERIA_ID] = M.[ID] INNER JOIN
 	                                                           [TBDISCIPLINA] AS D
                                                           ON   
-	                                                           M.[DISCIPLINA_ID] = D.[ID]";
+	                                                           M.[DISCIPLINA_ID] = D.[ID] ";
 
         protected override string selecionarPorIdSQL => selecionarTodosSQL + " WHERE id = @id";
         public RepositorioSQLTeste() : base()

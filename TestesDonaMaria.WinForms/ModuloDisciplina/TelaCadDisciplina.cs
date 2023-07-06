@@ -51,7 +51,7 @@ namespace TestesDonaMaria.WinForms.ModuloDisciplina
                 }
                 else
                 {
-                    telaPrincipal.AtualizarRodape("");
+                    telaPrincipal.AtualizarRodape("Status");
 
                 }
             }
