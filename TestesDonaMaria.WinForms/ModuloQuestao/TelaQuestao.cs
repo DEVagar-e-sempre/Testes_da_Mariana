@@ -23,6 +23,7 @@ namespace TestesDonaMaria.WinForms.ModuloQuestao
         public TelaQuestao(RepositorioSQLQuestao repQuestao, RepositorioSQLMateria repMateria, RepositorioSQLDisciplina repDisciplina)
         {
             InitializeComponent();
+            this.ConfigurarTelas();
             this.repQuestao = repQuestao;
             this.repMateria = repMateria;
             this.repDisciplina = repDisciplina;
