@@ -11,20 +11,21 @@ namespace TestesDonaMaria.Infra.ModuloTeste
         private Disciplina disciplina;
         private Materia materia;
         private Teste teste;
-        public override void ConfigurarParametros(SqlCommand comando, Teste registro)
+        public override void ConfigurarParametros(SqlCommand comando, Teste teste)
         {
-            comando.Parameters.AddWithValue("@id", registro.id);
-            comando.Parameters.AddWithValue("@titulo", registro.titulo);
-            comando.Parameters.AddWithValue("@materia_id", registro.materia.id);
-            comando.Parameters.AddWithValue("@quantQuestoes", registro.quantQuestoes);
-            comando.Parameters.AddWithValue("@serie", registro.serie);
+            comando.Parameters.AddWithValue("@id", teste.id);
+            comando.Parameters.AddWithValue("@titulo", teste.titulo);
+            comando.Parameters.AddWithValue("@materia_id", teste.materia.id);
+            comando.Parameters.AddWithValue("@quantQuestoes", teste.quantQuestoes);
+            comando.Parameters.AddWithValue("@serie", teste.serie);
         }
 
-        public void ConfigurarParametrosQuestao(SqlCommand comando, Questao registro)
+        public void ConfigurarParametrosRelacaoQuestao(SqlCommand comando, int questao_id, int teste_id)
         {
-            comando.Parameters.AddWithValue("@titulo", registro.titulo);
-            comando.Parameters.AddWithValue("@serie", registro.serie);
-            comando.Parameters.AddWithValue("@materia_id", registro.materia.id);
+            comando.Parameters.AddWithValue("@teste_id", teste_id);
+            comando.Parameters.AddWithValue("@questao_id", questao_id);
+
+            comando.ExecuteNonQuery();
         }
 
         public void ConfigurarParamentrosAlternativa(SqlCommand comando, Alternativa alternativa)
