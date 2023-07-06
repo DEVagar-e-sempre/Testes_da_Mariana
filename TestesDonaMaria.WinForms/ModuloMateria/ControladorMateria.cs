@@ -1,5 +1,6 @@
 ﻿using TestesDonaMaria.Dominio.ModuloDisciplina;
 using TestesDonaMaria.Dominio.ModuloMateria;
+using TestesDonaMaria.Infra.ModuloDisciplina;
 using TestesDonaMaria.Infra.ModuloMateria;
 
 namespace TestesDonaMaria.WinForms.ModuloMateria
@@ -7,19 +8,21 @@ namespace TestesDonaMaria.WinForms.ModuloMateria
     public class ControladorMateria : ControladorBase
     {
         public override string ObterTipo => "Cadastro de Materia";
-        
+
+        private RepositorioSQLDisciplina repDisciplina;
         private RepositorioSQLMateria repMateria;
         private TabelaMateria tabelaMateria;
-        private TelaCadMateria telaCadMateria;
+        private TelaMateria telaCadMateria;
 
-        public ControladorMateria(RepositorioSQLMateria repMateria)
+        public ControladorMateria(RepositorioSQLMateria repMateria, RepositorioSQLDisciplina repDisciplina)
         {
             this.repMateria = repMateria;
+            this.repDisciplina = repDisciplina;
         }
 
         public override void Inserir()
         {
-            telaCadMateria = new TelaCadMateria(repMateria);
+            telaCadMateria = new TelaMateria(repMateria, repDisciplina);
 
             DialogResult opcaoEscolhida = telaCadMateria.ShowDialog();
 
@@ -44,7 +47,7 @@ namespace TestesDonaMaria.WinForms.ModuloMateria
             }
             else
             {
-                telaCadMateria = new TelaCadMateria(repMateria);
+                telaCadMateria = new TelaMateria(repMateria, repDisciplina);
                 telaCadMateria.MateriaP = materiaSelec;
 
                 DialogResult opcaoEscolhida = telaCadMateria.ShowDialog();

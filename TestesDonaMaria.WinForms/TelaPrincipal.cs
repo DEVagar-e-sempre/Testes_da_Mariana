@@ -52,7 +52,7 @@ namespace TestesDonaMaria.WinForms
                     break;
 
                 case "btn_materia":
-                    controlador = new ControladorMateria(repMateria);
+                    controlador = new ControladorMateria(repMateria, repDisciplina);
                     break;
 
                 case "btn_questao":

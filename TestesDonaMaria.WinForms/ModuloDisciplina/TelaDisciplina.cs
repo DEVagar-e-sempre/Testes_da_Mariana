@@ -44,7 +44,7 @@ namespace TestesDonaMaria.WinForms.ModuloDisciplina
 
             if (repDisc.EhRepetido(disciplina))
             {
-                telaPrincipal.AtualizarRodape("Nome de cliente já existente, por favor insira um novo nome!");
+                telaPrincipal.AtualizarRodape("Nome de disciplina já existente, por favor insira um novo nome!");
 
                 DialogResult = DialogResult.None;
             }

@@ -10,7 +10,7 @@
     <Compile Update="ModuloMateria\TabelaMateria.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="ModuloMateria\TelaCadMateria.cs">
+    <Compile Update="ModuloMateria\TelaMateria.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="ModuloQuestao\TabelaQuestao.cs">
@@ -22,7 +22,7 @@
     <Compile Update="ModuloTeste\TabelaTeste.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="ModuloTeste\TelaCadTeste.cs">
+    <Compile Update="ModuloTeste\TelaTeste.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="TelaPrincipal.cs">
