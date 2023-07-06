@@ -87,10 +87,10 @@ namespace TestesDonaMaria.WinForms.ModuloQuestao
         }
         private void btn_gravar_Click(object sender, EventArgs e)
         {
-            Questao aluguel = ObterQuestao();
-            string[] erros = aluguel.Validar();
+            Questao questao = ObterQuestao();
+            string[] erros = questao.Validar();
 
-            if (repQuestao.EhRepetido(aluguel))
+            if (repQuestao.EhRepetido(questao))
             {
                 TelaPrincipal.InstanciaAtual.AtualizarRodape("Questão repetida");
                 return;
