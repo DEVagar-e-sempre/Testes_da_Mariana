@@ -99,8 +99,7 @@ namespace TestesDonaMaria.WinForms
             btn_excluir.ToolTipText = controlador.ToolTipExcluir;
 
             btn_filtrar.ToolTipText = controlador.ToolTipFiltrar;
-            //btn_addItem.ToolTipText = controlador.ToolTipAdd;
-            //btn_list.ToolTipText = controlador.ToolTipListar;
+            btn_listar.ToolTipText = controlador.ToolTipListar;
         }
 
         public void AtualizarRodape(string msg)
@@ -114,7 +113,7 @@ namespace TestesDonaMaria.WinForms
 
             if (controlador == null)
             {
-                MessageBox.Show("Selecione alguma categoria antes de realizar uma ação",
+                MessageBox.Show("Selecione alguma categoria antes de realizar uma aï¿½ï¿½o",
                     "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
