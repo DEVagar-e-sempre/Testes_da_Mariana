@@ -3,12 +3,12 @@ using TestesDonaMaria.Infra.ModuloDisciplina;
 
 namespace TestesDonaMaria.WinForms.ModuloDisciplina
 {
-    public partial class TelaCadDisciplina : Form
+    public partial class TelaDisciplina : Form
     {
         private Disciplina disciplina;
         private RepositorioSQLDisciplina repDisc;
 
-        public TelaCadDisciplina(RepositorioSQLDisciplina repDisc)//o repositorio é para compara e ver se é repetido
+        public TelaDisciplina(RepositorioSQLDisciplina repDisc)//o repositorio é para compara e ver se é repetido
         {
             InitializeComponent();
 
@@ -24,6 +24,11 @@ namespace TestesDonaMaria.WinForms.ModuloDisciplina
             }
 
             get => disciplina;
+        }
+
+        public void DefinirID(int id)
+        {
+            txb_id.Text = id.ToString();
         }
 
         private void btn_gravar_Click(object sender, EventArgs e)

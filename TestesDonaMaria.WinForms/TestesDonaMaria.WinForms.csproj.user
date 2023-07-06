@@ -4,7 +4,7 @@
     <Compile Update="ModuloDisciplina\TabelaDisciplina.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="ModuloDisciplina\TelaCadDisciplina.cs">
+    <Compile Update="ModuloDisciplina\TelaDisciplina.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="ModuloMateria\TabelaMateria.cs">

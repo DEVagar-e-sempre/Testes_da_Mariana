@@ -4,24 +4,30 @@ using TestesDonaMaria.Dominio.ModuloMateria;
 using TestesDonaMaria.Dominio.ModuloQuestao;
 using TestesDonaMaria.Infra.ModuloDisciplina;
 using TestesDonaMaria.Infra.ModuloMateria;
+using TestesDonaMaria.Infra.ModuloQuestao;
 
 namespace TestesDonaMaria.WinForms.ModuloQuestao
 {
     public partial class TelaQuestao : Form
     {
+
+        private RepositorioSQLQuestao repQuestao;
+
         private RepositorioSQLMateria repMateria;
 
         private RepositorioSQLDisciplina repDisciplina;
         private int disciplina_id;
         private int serie;
 
-        public TelaQuestao(RepositorioSQLMateria repMateria, RepositorioSQLDisciplina repDisciplina)
+        public TelaQuestao(RepositorioSQLQuestao repQuestao, RepositorioSQLMateria repMateria, RepositorioSQLDisciplina repDisciplina)
         {
             InitializeComponent();
+            this.repQuestao = repQuestao;
             this.repMateria = repMateria;
             this.repDisciplina = repDisciplina;
             CarregarDisciplina();
             CarregarMateria();
+            this.Text = "Cadastro de Questão";
         }
 
         private void TelaQuestao_Load(object sender, EventArgs e)
@@ -80,6 +86,13 @@ namespace TestesDonaMaria.WinForms.ModuloQuestao
         {
             Questao aluguel = ObterQuestao();
             string[] erros = aluguel.Validar();
+
+            if (repQuestao.EhRepetido(aluguel))
+            {
+                TelaPrincipal.InstanciaAtual.AtualizarRodape("Questão repetida");
+                return;
+            }
+
             if (erros.Length > 0)
             {
                 TelaPrincipal.InstanciaAtual.AtualizarRodape(erros[0]);
@@ -118,12 +131,13 @@ namespace TestesDonaMaria.WinForms.ModuloQuestao
             this.disciplina_id = ((Disciplina)cbxDisciplina.SelectedItem).id;
             cbxSerie.Enabled = true;
             cbxMateria.Enabled = true;
-            
+
             CarregarMateria();
         }
 
         internal void ConfigurarTela(Questao questaoSelecionada)
         {
+            this.Text = "Atualização de Questão";
             CarregarDisciplina();
             txtID.Text = questaoSelecionada.id.ToString();
             txtEnunciado.Text = questaoSelecionada.enunciado;

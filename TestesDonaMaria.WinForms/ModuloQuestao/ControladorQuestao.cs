@@ -45,7 +45,7 @@ namespace TestesDonaMaria.WinForms.ModuloQuestao
 
                 return;
             }
-            TelaQuestao telaQuestao = new TelaQuestao(repMateria, repDisciplina);
+            TelaQuestao telaQuestao = new TelaQuestao(repQuestao, repMateria, repDisciplina);
 
             telaQuestao.ConfigurarTela(questaoSelecionada);
 
@@ -97,20 +97,29 @@ namespace TestesDonaMaria.WinForms.ModuloQuestao
 
         public override void Inserir()
         {
-            TelaQuestao telaQuestao = new TelaQuestao(repMateria, repDisciplina);
+            TelaQuestao telaQuestao = new TelaQuestao(repQuestao, repMateria, repDisciplina);
 
             telaQuestao.DefinirID(repQuestao.ObterProximoID());
 
             DialogResult opcaoEscolhida = telaQuestao.ShowDialog();
 
+            Questao auxQuestao = null;
+
             if (opcaoEscolhida == DialogResult.OK)
             {
-                Questao auxQuestao = telaQuestao.ObterQuestao();
+                auxQuestao = telaQuestao.ObterQuestao();
 
                 repQuestao.Inserir(auxQuestao);
 
                 CarregarQuestao();
             }
+            /*
+            MessageBox.Show($"{auxQuestao.id}, {auxQuestao.enunciado}",
+                              $"Inserção de {ObterTipo}",
+                              MessageBoxButtons.OK,
+                              MessageBoxIcon.Information);
+            TelaPrincipal.InstanciaAtual.AtualizarRodape($"Nova {ObterTipo} inserida com sucesso");
+            */
         }
 
         public override UserControl ObterListagem()
