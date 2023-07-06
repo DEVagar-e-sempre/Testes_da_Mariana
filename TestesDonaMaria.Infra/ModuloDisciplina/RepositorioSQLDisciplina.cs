@@ -13,7 +13,7 @@ namespace TestesDonaMaria.Infra.ModuloDisciplina
                                                             ,[NOME]
                                                         FROM 
                                                             [TBDISCIPLINA]";
-        protected override string selecionarPorIdSQL => selecionarTodosSQL + "WHERE [ID] = @ID";
+        protected override string selecionarPorIdSQL => selecionarTodosSQL + " WHERE [ID] = @ID";
         public RepositorioSQLDisciplina() : base()
         {
         }

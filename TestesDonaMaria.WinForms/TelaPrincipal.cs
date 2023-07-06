@@ -15,7 +15,7 @@ namespace TestesDonaMaria.WinForms
         private RepositorioSQLMateria repMateria = new RepositorioSQLMateria();
         private RepositorioSQLQuestao repQuestao = new RepositorioSQLQuestao();
         private RepositorioSQLTeste repTeste = new RepositorioSQLTeste();
-        private ControladorBase controlador;
+        private ControladorBase controlador = null;
         private static TelaPrincipal telaPrincipal;
         public TelaPrincipal()
         {
@@ -37,9 +37,13 @@ namespace TestesDonaMaria.WinForms
         }
         private void ObterEntidade()
         {
-            foreach (Button btn in painel_botoesEntidades.Controls)
+            foreach (Control ctrl in painel_botoesEntidades.Controls)
             {
-                btn.Click += EscolherEntidade;
+                if (ctrl is Button)
+                {
+                    Button btn = (Button)ctrl;
+                    btn.Click += EscolherEntidade;
+                }
             }
         }
 
@@ -100,7 +104,7 @@ namespace TestesDonaMaria.WinForms
             btn_editar.ToolTipText = controlador.ToolTipEditar;
             btn_excluir.ToolTipText = controlador.ToolTipExcluir;
 
-            //btn_filtrar.ToolTipText = controlador.ToolTipFiltrar;
+            btn_filtrar.ToolTipText = controlador.ToolTipFiltrar;
             //btn_addItem.ToolTipText = controlador.ToolTipAdd;
             //btn_list.ToolTipText = controlador.ToolTipListar;
         }
@@ -114,20 +118,32 @@ namespace TestesDonaMaria.WinForms
         {
             ToolStripButton btnClicado = (ToolStripButton)sender;
 
-            switch (btnClicado.Name)
+            if (controlador == null)
             {
-                case "btn_inserir":
-                    controlador.Inserir();
-                    break;
+                MessageBox.Show("Selecione alguma categoria antes de realizar uma ação",
+                    "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                switch (btnClicado.Name)
+                {
+                    case "btn_inserir":
+                        controlador.Inserir();
+                        break;
 
-                case "btn_editar":
-                    controlador.Editar();
-                    break;
+                    case "btn_editar":
+                        controlador.Editar();
+                        break;
 
-                case "btn_excluir":
-                    controlador.Excluir();
-                    break;
+                    case "btn_excluir":
+                        controlador.Excluir();
+                        break;
 
+                    case "btn_filtrar":
+                        controlador.Filtrar();
+                        break;
+
+                }
             }
         }
 

@@ -35,24 +35,25 @@
             btn_questao = new Button();
             btn_disciplina = new Button();
             painel_principal = new Panel();
-            toolStrip1 = new ToolStrip();
+            ts_ferramentas = new ToolStrip();
             btn_inserir = new ToolStripButton();
             btn_editar = new ToolStripButton();
             btn_excluir = new ToolStripButton();
             toolStripSeparator1 = new ToolStripSeparator();
-            toolStripButton4 = new ToolStripButton();
-            toolStripButton5 = new ToolStripButton();
+            btn_filtrar = new ToolStripButton();
+            btn_listar = new ToolStripButton();
             toolStripSeparator2 = new ToolStripSeparator();
             toolStripButton6 = new ToolStripButton();
             toolStripSeparator3 = new ToolStripSeparator();
             lbl_tipoCad = new ToolStripLabel();
             panel1 = new Panel();
+            label3 = new Label();
             label1 = new Label();
             label2 = new Label();
             statusStrip1 = new StatusStrip();
             lbl_status = new ToolStripStatusLabel();
             painel_botoesEntidades.SuspendLayout();
-            toolStrip1.SuspendLayout();
+            ts_ferramentas.SuspendLayout();
             panel1.SuspendLayout();
             statusStrip1.SuspendLayout();
             SuspendLayout();
@@ -60,6 +61,7 @@
             // painel_botoesEntidades
             // 
             painel_botoesEntidades.BackColor = Color.CornflowerBlue;
+            painel_botoesEntidades.Controls.Add(label3);
             painel_botoesEntidades.Controls.Add(btn_teste);
             painel_botoesEntidades.Controls.Add(btn_materia);
             painel_botoesEntidades.Controls.Add(btn_questao);
@@ -79,7 +81,7 @@
             btn_teste.ForeColor = Color.Black;
             btn_teste.Image = Properties.Resources.task_FILL0_wght400_GRAD200_opsz24;
             btn_teste.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_teste.Location = new Point(3, 240);
+            btn_teste.Location = new Point(3, 297);
             btn_teste.Name = "btn_teste";
             btn_teste.Size = new Size(186, 47);
             btn_teste.TabIndex = 4;
@@ -96,7 +98,7 @@
             btn_materia.ForeColor = Color.Black;
             btn_materia.Image = Properties.Resources.menu_book_FILL0_wght400_GRAD200_opsz24;
             btn_materia.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_materia.Location = new Point(3, 134);
+            btn_materia.Location = new Point(3, 191);
             btn_materia.Name = "btn_materia";
             btn_materia.Size = new Size(186, 47);
             btn_materia.TabIndex = 3;
@@ -113,7 +115,7 @@
             btn_questao.ForeColor = Color.Black;
             btn_questao.Image = Properties.Resources.format_list_numbered_FILL0_wght400_GRAD200_opsz24;
             btn_questao.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_questao.Location = new Point(3, 187);
+            btn_questao.Location = new Point(3, 244);
             btn_questao.Name = "btn_questao";
             btn_questao.Size = new Size(186, 47);
             btn_questao.TabIndex = 2;
@@ -130,7 +132,7 @@
             btn_disciplina.ForeColor = Color.Black;
             btn_disciplina.Image = Properties.Resources.collections_bookmark_FILL0_wght400_GRAD200_opsz24;
             btn_disciplina.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_disciplina.Location = new Point(3, 81);
+            btn_disciplina.Location = new Point(3, 138);
             btn_disciplina.Name = "btn_disciplina";
             btn_disciplina.Size = new Size(186, 47);
             btn_disciplina.TabIndex = 1;
@@ -145,16 +147,16 @@
             painel_principal.Size = new Size(644, 320);
             painel_principal.TabIndex = 1;
             // 
-            // toolStrip1
+            // ts_ferramentas
             // 
-            toolStrip1.BackColor = Color.Transparent;
-            toolStrip1.Dock = DockStyle.None;
-            toolStrip1.Items.AddRange(new ToolStripItem[] { btn_inserir, btn_editar, btn_excluir, toolStripSeparator1, toolStripButton4, toolStripButton5, toolStripSeparator2, toolStripButton6, toolStripSeparator3, lbl_tipoCad });
-            toolStrip1.Location = new Point(195, 78);
-            toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(295, 31);
-            toolStrip1.TabIndex = 1;
-            toolStrip1.Text = "toolStrip1";
+            ts_ferramentas.BackColor = Color.Transparent;
+            ts_ferramentas.Dock = DockStyle.None;
+            ts_ferramentas.Items.AddRange(new ToolStripItem[] { btn_inserir, btn_editar, btn_excluir, toolStripSeparator1, btn_filtrar, btn_listar, toolStripSeparator2, toolStripButton6, toolStripSeparator3, lbl_tipoCad });
+            ts_ferramentas.Location = new Point(195, 78);
+            ts_ferramentas.Name = "ts_ferramentas";
+            ts_ferramentas.Size = new Size(295, 31);
+            ts_ferramentas.TabIndex = 1;
+            ts_ferramentas.Text = "toolStrip1";
             // 
             // btn_inserir
             // 
@@ -194,25 +196,25 @@
             toolStripSeparator1.Name = "toolStripSeparator1";
             toolStripSeparator1.Size = new Size(6, 31);
             // 
-            // toolStripButton4
+            // btn_filtrar
             // 
-            toolStripButton4.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            toolStripButton4.Image = (Image)resources.GetObject("toolStripButton4.Image");
-            toolStripButton4.ImageTransparentColor = Color.Magenta;
-            toolStripButton4.Name = "toolStripButton4";
-            toolStripButton4.Padding = new Padding(4);
-            toolStripButton4.Size = new Size(28, 28);
-            toolStripButton4.Text = "toolStripButton4";
+            btn_filtrar.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            btn_filtrar.Image = Properties.Resources.filter_alt_FILL0_wght400_GRAD0_opsz24;
+            btn_filtrar.ImageTransparentColor = Color.Magenta;
+            btn_filtrar.Name = "btn_filtrar";
+            btn_filtrar.Padding = new Padding(4);
+            btn_filtrar.Size = new Size(28, 28);
+            btn_filtrar.Text = "Filtrar";
             // 
-            // toolStripButton5
+            // btn_listar
             // 
-            toolStripButton5.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            toolStripButton5.Image = (Image)resources.GetObject("toolStripButton5.Image");
-            toolStripButton5.ImageTransparentColor = Color.Magenta;
-            toolStripButton5.Name = "toolStripButton5";
-            toolStripButton5.Padding = new Padding(4);
-            toolStripButton5.Size = new Size(28, 28);
-            toolStripButton5.Text = "toolStripButton5";
+            btn_listar.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            btn_listar.Image = Properties.Resources.outline_view_list_black_24dp;
+            btn_listar.ImageTransparentColor = Color.Magenta;
+            btn_listar.Name = "btn_listar";
+            btn_listar.Padding = new Padding(4);
+            btn_listar.Size = new Size(28, 28);
+            btn_listar.Text = "Listagem";
             // 
             // toolStripSeparator2
             // 
@@ -248,6 +250,17 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(906, 75);
             panel1.TabIndex = 2;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe Print", 18F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label3.ForeColor = Color.Black;
+            label3.Location = new Point(21, 81);
+            label3.Name = "label3";
+            label3.Size = new Size(144, 43);
+            label3.TabIndex = 1;
+            label3.Text = "Categorias";
             // 
             // label1
             // 
@@ -295,14 +308,15 @@
             Controls.Add(statusStrip1);
             Controls.Add(label2);
             Controls.Add(panel1);
-            Controls.Add(toolStrip1);
+            Controls.Add(ts_ferramentas);
             Controls.Add(painel_principal);
             Controls.Add(painel_botoesEntidades);
             Name = "TelaPrincipal";
             Text = "Tela Principal";
             painel_botoesEntidades.ResumeLayout(false);
-            toolStrip1.ResumeLayout(false);
-            toolStrip1.PerformLayout();
+            painel_botoesEntidades.PerformLayout();
+            ts_ferramentas.ResumeLayout(false);
+            ts_ferramentas.PerformLayout();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             statusStrip1.ResumeLayout(false);
@@ -321,13 +335,13 @@
         private Button btn_questao;
         private Panel panel1;
         private Label label1;
-        private ToolStrip toolStrip1;
+        private ToolStrip ts_ferramentas;
         private ToolStripButton btn_inserir;
         private ToolStripButton btn_editar;
         private ToolStripButton btn_excluir;
         private ToolStripSeparator toolStripSeparator1;
-        private ToolStripButton toolStripButton4;
-        private ToolStripButton toolStripButton5;
+        private ToolStripButton btn_filtrar;
+        private ToolStripButton btn_listar;
         private ToolStripSeparator toolStripSeparator2;
         private ToolStripButton toolStripButton6;
         private ToolStripSeparator toolStripSeparator3;
@@ -335,5 +349,6 @@
         private Label label2;
         private StatusStrip statusStrip1;
         private ToolStripStatusLabel lbl_status;
+        private Label label3;
     }
 }
