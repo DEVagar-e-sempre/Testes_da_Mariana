@@ -77,7 +77,7 @@ namespace TestesDonaMaria.WinForms
 
         private void ConfigurarTelaPrincipal(ControladorBase controladorBase)
         {
-            lbl_tipoCad.Text = controladorBase.ObterTipoCadastro;
+            lbl_tipoCad.Text = controladorBase.ObterTipo;
 
             ConfigurarToolTips(controlador);
 

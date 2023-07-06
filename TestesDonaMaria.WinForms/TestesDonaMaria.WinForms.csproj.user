@@ -16,7 +16,7 @@
     <Compile Update="ModuloQuestao\TabelaQuestao.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="ModuloQuestao\TelaCadQuestao.cs">
+    <Compile Update="ModuloQuestao\TelaQuestao.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="ModuloTeste\TabelaTeste.cs">

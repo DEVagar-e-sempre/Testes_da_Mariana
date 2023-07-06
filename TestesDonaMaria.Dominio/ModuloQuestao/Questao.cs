@@ -54,5 +54,10 @@ namespace TestesDonaMaria.Dominio.ModuloQuestao
             }
             return erros.ToArray();
         }
+
+        public Alternativa ObterAlternativaCorreta()
+        {
+            return alternativas.Find(x => x.correta == true);
+        }
     }
 }

@@ -39,7 +39,7 @@ namespace TestesDonaMaria.Infra.ModuloQuestao
 
             String alternativa = leitorRegistros["alternativa"].ToString();
 
-            bool correta = Convert.ToBoolean(leitorRegistros["correta"]);
+            bool correta = Convert.ToBoolean(leitorRegistros["alternativa_correta"]);
 
             int questao_id = Convert.ToInt32(leitorRegistros["questao_id"]);
 

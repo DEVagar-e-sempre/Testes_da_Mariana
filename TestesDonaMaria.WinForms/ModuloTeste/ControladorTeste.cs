@@ -4,7 +4,7 @@ namespace TestesDonaMaria.WinForms.ModuloTeste
 {
     public class ControladorTeste : ControladorBase
     {
-        public override string ObterTipoCadastro => "Cadastro de Testes";
+        public override string ObterTipo => "Cadastro de Testes";
         
         private RepositorioSQLTeste repTeste;
         private TabelaTeste tabelaTeste;

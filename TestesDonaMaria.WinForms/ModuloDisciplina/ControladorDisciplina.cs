@@ -5,7 +5,7 @@ namespace TestesDonaMaria.WinForms.ModuloDisciplina
 {
     public class ControladorDisciplina : ControladorBase
     {
-        public override string ObterTipoCadastro => "Cadastro de Disciplina";
+        public override string ObterTipo => "Cadastro de Disciplina";
 
         private RepositorioSQLDisciplina repDisciplina;
         private TabelaDisciplina tabelaDisc;
