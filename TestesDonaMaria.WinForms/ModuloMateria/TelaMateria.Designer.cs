@@ -1,6 +1,6 @@
 ﻿namespace TestesDonaMaria.WinForms.ModuloMateria
 {
-    partial class TelaCadMateria
+    partial class TelaMateria
     {
         /// <summary>
         /// Required designer variable.
