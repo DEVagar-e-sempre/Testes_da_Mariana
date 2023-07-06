@@ -2,20 +2,20 @@
 {
     public abstract class ControladorBase
     {
-        public virtual string ToolTipInserir => $"Inserir novo {ObterTipoCadastro}";
+        public virtual string ToolTipInserir => $"Inserir novo {ObterTipo}";
 
-        public virtual string ToolTipEditar => $"Editar um {ObterTipoCadastro}";
+        public virtual string ToolTipEditar => $"Editar um {ObterTipo}";
 
-        public virtual string ToolTipExcluir => $"Excluir um {ObterTipoCadastro}";
+        public virtual string ToolTipExcluir => $"Excluir um {ObterTipo}";
 
-        public virtual string ToolTipFiltrar => $"Filtrar {ObterTipoCadastro}s";
+        public virtual string ToolTipFiltrar => $"Filtrar {ObterTipo}s";
 
         public virtual string ToolTipAdd => $"Adicionar Itens dos Temas";
 
-        public virtual string ToolTipListar => $"Listar Itens do {ObterTipoCadastro}";
+        public virtual string ToolTipListar => $"Listar Itens do {ObterTipo}";
 
 
-        public abstract string ObterTipoCadastro { get; }
+        public abstract string ObterTipo { get; }
         public virtual bool InserirHabilitado => true;
         public virtual bool EditarHabilitado => true;
         public virtual bool ExcluirHabilitado => true;
