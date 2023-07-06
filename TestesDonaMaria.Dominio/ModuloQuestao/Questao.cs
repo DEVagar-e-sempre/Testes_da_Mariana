@@ -59,5 +59,9 @@ namespace TestesDonaMaria.Dominio.ModuloQuestao
         {
             return alternativas.Find(x => x.correta == true);
         }
+        public override string ToString()
+        {
+            return titulo;
+        }
     }
 }

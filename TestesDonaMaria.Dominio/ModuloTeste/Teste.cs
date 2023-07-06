@@ -52,5 +52,9 @@ namespace TestesDonaMaria.Dominio.ModuloTeste
         {
             throw new NotImplementedException();
         }
+        public override string ToString()
+        {
+            return titulo;
+        }
     }
 }

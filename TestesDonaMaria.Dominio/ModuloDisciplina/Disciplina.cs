@@ -35,5 +35,9 @@ namespace TestesDonaMaria.Dominio.ModuloDisciplina
             }
             return erros.ToArray();
         }
+        public override string ToString()
+        {
+            return nome;
+        }
     }
 }
