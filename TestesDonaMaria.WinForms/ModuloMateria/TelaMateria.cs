@@ -57,9 +57,7 @@ namespace TestesDonaMaria.WinForms.ModuloMateria
 
             Disciplina disciplina = (Disciplina)cbox_disciplina.SelectedItem;
 
-            materia = new Materia(nome, disciplina);
-
-            materia.id = id;
+            materia = new Materia(id, nome, disciplina);
 
             if (repMateria.EhRepetido(materia))
             {

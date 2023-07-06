@@ -17,13 +17,14 @@ namespace TestesDonaMaria.WinForms.ModuloQuestao
         {
 
             DataGridViewColumn[] colunas = new DataGridViewColumn[]
-                        {
+            {
                 new DataGridViewTextBoxColumn() { Name  = "id", HeaderText = "ID" },
                 new DataGridViewTextBoxColumn() { Name  = "questao", HeaderText = "Questão" },
                 new DataGridViewTextBoxColumn() { Name  = "alternativaCorreta", HeaderText = "Alternativa Correta" },
                 new DataGridViewTextBoxColumn() { Name  = "materia", HeaderText = "Matéria" },
                 new DataGridViewTextBoxColumn() { Name  = "disciplina", HeaderText = "Disciplina" },
-                        };
+            };
+
             grid.Columns.AddRange(colunas);
         }
 
