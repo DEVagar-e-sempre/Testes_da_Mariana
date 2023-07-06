@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using TestesDonaMaria.Dominio.Compartilhado;
+using TestesDonaMaria.Dominio.ModuloDisciplina;
 
 namespace TestesDonaMaria.Infra.Compartilhado
 {
@@ -56,9 +57,9 @@ namespace TestesDonaMaria.Infra.Compartilhado
 
             mapeador.ConfigurarParametros(comando, registroAtualizado);
 
-            comando.Parameters.AddWithValue("@id", id);
+            comando.Parameters.AddWithValue("id", id);
 
-            comando.ExecuteScalar();
+            comando.ExecuteNonQuery();
 
             conexao.Close();
         }
@@ -69,7 +70,9 @@ namespace TestesDonaMaria.Infra.Compartilhado
 
             SqlCommand comando = new SqlCommand(excluirSQL, conexao);
 
-            comando.ExecuteScalar();
+            comando.Parameters.AddWithValue("id", registroSelecionado.id);
+
+            comando.ExecuteNonQuery();
 
             conexao.Close();
         }
@@ -79,12 +82,20 @@ namespace TestesDonaMaria.Infra.Compartilhado
 
             SqlCommand comando = new SqlCommand(selecionarPorIdSQL, conexao);
 
-            comando.Parameters.AddWithValue("@id", id);
+            TEntidade registro = null;
+
+            comando.Parameters.AddWithValue("id", id);
 
             SqlDataReader leitor = comando.ExecuteReader();
 
+            if (leitor.Read())
+            {
+                registro = mapeador.ConverterRegistro(leitor);
+            }
+
             conexao.Close();
-            return mapeador.ConverterRegistro(leitor);
+
+            return registro;
         }
 
         public virtual List<TEntidade> SelecionarTodos()
