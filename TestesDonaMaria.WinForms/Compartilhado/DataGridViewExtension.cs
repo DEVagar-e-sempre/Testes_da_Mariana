@@ -8,10 +8,10 @@
 
             DataGridViewCellStyle linhaEscura = new DataGridViewCellStyle
             {
-                BackColor = Color.LightGray,
+                BackColor = Color.LightBlue,
                 Font = font,
                 ForeColor = Color.Black,
-                SelectionBackColor = Color.LightYellow,
+                SelectionBackColor = Color.CornflowerBlue,
                 SelectionForeColor = Color.Black
             };
 
@@ -21,7 +21,7 @@
             {
                 BackColor = Color.White,
                 Font = font,
-                SelectionBackColor = Color.LightYellow,
+                SelectionBackColor = Color.CornflowerBlue,
                 SelectionForeColor = Color.Black
             };
 

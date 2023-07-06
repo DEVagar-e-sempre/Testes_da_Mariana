@@ -38,9 +38,9 @@
             // panel1
             // 
             panel1.Controls.Add(grid);
-            panel1.Location = new Point(61, 70);
+            panel1.Location = new Point(62, 50);
             panel1.Name = "panel1";
-            panel1.Size = new Size(535, 276);
+            panel1.Size = new Size(535, 239);
             panel1.TabIndex = 0;
             // 
             // grid
@@ -50,14 +50,14 @@
             grid.Location = new Point(0, 0);
             grid.Name = "grid";
             grid.RowTemplate.Height = 25;
-            grid.Size = new Size(535, 276);
+            grid.Size = new Size(535, 239);
             grid.TabIndex = 0;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe Print", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(0, 20);
+            label1.Location = new Point(0, 0);
             label1.Name = "label1";
             label1.Size = new Size(302, 47);
             label1.TabIndex = 1;

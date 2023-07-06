@@ -1,4 +1,5 @@
-﻿using TestesDonaMaria.Dominio.ModuloMateria;
+﻿using TestesDonaMaria.Dominio.ModuloDisciplina;
+using TestesDonaMaria.Dominio.ModuloMateria;
 using TestesDonaMaria.Infra.ModuloMateria;
 
 namespace TestesDonaMaria.WinForms.ModuloMateria
@@ -20,9 +21,9 @@ namespace TestesDonaMaria.WinForms.ModuloMateria
         {
             telaCadMateria = new TelaCadMateria(repMateria);
 
-            DialogResult opcao = telaCadMateria.ShowDialog();
+            DialogResult opcaoEscolhida = telaCadMateria.ShowDialog();
 
-            if(opcao == DialogResult.OK)
+            if(opcaoEscolhida == DialogResult.OK)
             {
                 repMateria.Inserir(telaCadMateria.MateriaP);
                 MessageBox.Show("Matéria gravado com Sucesso!");
@@ -32,12 +33,62 @@ namespace TestesDonaMaria.WinForms.ModuloMateria
 
         public override void Editar()
         {
-            throw new NotImplementedException();
+            Materia materiaSelec = ObterMateriaSelecionada();
+
+            if(materiaSelec == null)
+            {
+                MessageBox.Show($"Selecione uma Materia primeiro!", 
+                    "Edição de Materia",
+                    MessageBoxButtons.OKCancel,
+                    MessageBoxIcon.Exclamation);
+            }
+            else
+            {
+                telaCadMateria = new TelaCadMateria(repMateria);
+                telaCadMateria.MateriaP = materiaSelec;
+
+                DialogResult opcaoEscolhida = telaCadMateria.ShowDialog();
+
+                if (opcaoEscolhida == DialogResult.OK)
+                {
+                    repMateria.Editar(telaCadMateria.MateriaP.id, telaCadMateria.MateriaP);
+                    CarregarMateria();
+                }
+            }
         }
 
         public override void Excluir()
         {
-            throw new NotImplementedException();
+            Materia materiaSelec = ObterMateriaSelecionada();
+
+            if (materiaSelec == null)
+            {
+                MessageBox.Show($"Selecione uma Materia primeiro!",
+                    "Exclusão de Materia",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation);
+            }
+            else
+            {
+                DialogResult opcaoEscolhida = MessageBox.Show($"Deseja excluir a Materia {materiaSelec.nome}?",
+                    "Exclusão de Materia",
+                    MessageBoxButtons.OKCancel,
+                    MessageBoxIcon.Question);
+
+                if (opcaoEscolhida == DialogResult.OK)
+                {
+                    repMateria.Excluir(materiaSelec);
+
+                    CarregarMateria();
+                }
+            }
+        }
+
+        private Materia ObterMateriaSelecionada()
+        {
+            int id = tabelaMateria.ObterIdSelecionado();
+
+            return repMateria.SelecionarPorId(id);
         }
 
         public override UserControl ObterListagem()

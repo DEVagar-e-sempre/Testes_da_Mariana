@@ -49,9 +49,9 @@ namespace TestesDonaMaria.Infra.ModuloQuestao
         }
         public void ConfigurarParamentrosAlternativa(SqlCommand comando, Alternativa alternativa)
         {
-            comando.Parameters.AddWithValue("alternativa", alternativa.alternativa);
-            comando.Parameters.AddWithValue("questao_id", alternativa.questaoId);
-            comando.Parameters.AddWithValue("correta", alternativa.correta);
+            comando.Parameters.AddWithValue("@alternativa", alternativa.alternativa);
+            comando.Parameters.AddWithValue("@questao_id", alternativa.questaoId);
+            comando.Parameters.AddWithValue("@correta", alternativa.correta);
         }
     }
 }

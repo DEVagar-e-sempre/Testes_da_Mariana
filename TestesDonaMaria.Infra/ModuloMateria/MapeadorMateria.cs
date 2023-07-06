@@ -15,9 +15,9 @@ namespace TestesDonaMaria.Infra.ModuloMateria
         public override Materia ConverterRegistro(SqlDataReader leitorRegistros)
         {
             int materia_id = Convert.ToInt32(leitorRegistros["materia_id"]);
-            string nome_materia = Convert.ToString(leitorRegistros["nome_materia"]);
+            string nome_materia = Convert.ToString(leitorRegistros["materia_nome"]);
             int disciplina_id = Convert.ToInt32(leitorRegistros["disciplina_id"]);
-            string nome_disciplina = Convert.ToString(leitorRegistros["nome_disciplina"]);
+            string nome_disciplina = Convert.ToString(leitorRegistros["disciplina_nome"]);
 
             Disciplina disciplina = new Disciplina(disciplina_id, nome_disciplina);
 
