@@ -5,6 +5,13 @@
         public TelaTeste()
         {
             InitializeComponent();
+
+            this.ConfigurarTelas();
+        }
+
+        public void DefinirID(int id)
+        {
+            //txb_id.Text = id.ToString();
         }
     }
 }

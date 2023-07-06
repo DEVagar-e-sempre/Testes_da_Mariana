@@ -14,18 +14,24 @@ namespace TestesDonaMaria.WinForms.ModuloMateria
         public TelaMateria(RepositorioSQLMateria repMateria, RepositorioSQLDisciplina repDisciplina)
         {
             InitializeComponent();
+            this.ConfigurarTelas();
 
             this.repMateria = repMateria;
             this.repDisciplina = repDisciplina;
 
             CarregarDisciplinaCbox(repDisciplina);
         }
+        public void DefinirID(int id)
+        {
+            txb_id.Text = id.ToString();
+        }
+
 
         private void CarregarDisciplinaCbox(RepositorioSQLDisciplina repDisciplina)
         {
             foreach (Disciplina disc in repDisciplina.SelecionarTodos())
             {
-                cbox_disciplina.Items.Add(disc.nome);
+                cbox_disciplina.Items.Add(disc);
             }
         }
 
@@ -49,11 +55,9 @@ namespace TestesDonaMaria.WinForms.ModuloMateria
 
             string nome = txb_nome.Text;
 
-            string nomeDisc = cbox_disciplina.SelectedText;
+            Disciplina disciplina = (Disciplina)cbox_disciplina.SelectedItem;
 
-            Disciplina disc = ProcuradorDeDisciplina(nomeDisc);
-
-            materia = new Materia(nome, disc);
+            materia = new Materia(nome, disciplina);
 
             materia.id = id;
 
@@ -78,20 +82,6 @@ namespace TestesDonaMaria.WinForms.ModuloMateria
 
                 }
             }
-        }
-
-        private Disciplina ProcuradorDeDisciplina(string nomeDisc)
-        {
-            foreach (Disciplina disc in repDisciplina.SelecionarTodos())
-            {
-                if (disc.nome.Equals(nomeDisc))
-                {
-                    return disc;
-                }
-
-            }
-
-            return null;
         }
     }
 }

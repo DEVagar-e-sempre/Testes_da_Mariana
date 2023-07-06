@@ -2,6 +2,7 @@
 using TestesDonaMaria.Dominio.ModuloMateria;
 using TestesDonaMaria.Infra.ModuloDisciplina;
 using TestesDonaMaria.Infra.ModuloMateria;
+using TestesDonaMaria.WinForms.ModuloQuestao;
 
 namespace TestesDonaMaria.WinForms.ModuloMateria
 {
@@ -12,7 +13,7 @@ namespace TestesDonaMaria.WinForms.ModuloMateria
         private RepositorioSQLDisciplina repDisciplina;
         private RepositorioSQLMateria repMateria;
         private TabelaMateria tabelaMateria;
-        private TelaMateria telaCadMateria;
+        private TelaMateria telaMateria;
 
         public ControladorMateria(RepositorioSQLMateria repMateria, RepositorioSQLDisciplina repDisciplina)
         {
@@ -22,13 +23,15 @@ namespace TestesDonaMaria.WinForms.ModuloMateria
 
         public override void Inserir()
         {
-            telaCadMateria = new TelaMateria(repMateria, repDisciplina);
+            telaMateria = new TelaMateria(repMateria, repDisciplina);
 
-            DialogResult opcaoEscolhida = telaCadMateria.ShowDialog();
+            telaMateria.DefinirID(repMateria.ObterProximoID());
+
+            DialogResult opcaoEscolhida = telaMateria.ShowDialog();
 
             if(opcaoEscolhida == DialogResult.OK)
             {
-                repMateria.Inserir(telaCadMateria.MateriaP);
+                repMateria.Inserir(telaMateria.MateriaP);
                 MessageBox.Show("Matéria gravado com Sucesso!");
                 CarregarMateria();
             }
@@ -47,14 +50,14 @@ namespace TestesDonaMaria.WinForms.ModuloMateria
             }
             else
             {
-                telaCadMateria = new TelaMateria(repMateria, repDisciplina);
-                telaCadMateria.MateriaP = materiaSelec;
+                telaMateria = new TelaMateria(repMateria, repDisciplina);
+                telaMateria.MateriaP = materiaSelec;
 
-                DialogResult opcaoEscolhida = telaCadMateria.ShowDialog();
+                DialogResult opcaoEscolhida = telaMateria.ShowDialog();
 
                 if (opcaoEscolhida == DialogResult.OK)
                 {
-                    repMateria.Editar(telaCadMateria.MateriaP.id, telaCadMateria.MateriaP);
+                    repMateria.Editar(telaMateria.MateriaP.id, telaMateria.MateriaP);
                     CarregarMateria();
                 }
             }
