@@ -7,7 +7,6 @@ namespace TestesDonaMaria.Infra.ModuloDisciplina
     {
         public override void ConfigurarParametros(SqlCommand comando, Disciplina registro)
         {
-            comando.Parameters.AddWithValue("id", registro.id);
             comando.Parameters.AddWithValue("nome", registro.nome);
         }
 
