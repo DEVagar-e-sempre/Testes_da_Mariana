@@ -40,7 +40,6 @@ namespace TestesDonaMaria.Infra.ModuloQuestao
         {
         }
 
-
         public override void Inserir(Questao questao)
         {
             base.Inserir(questao);
@@ -56,6 +55,7 @@ namespace TestesDonaMaria.Infra.ModuloQuestao
             base.Excluir(questao);
             ExcluirAlternativas(questao);
         }
+
         public override Questao SelecionarPorId(int id)
         {
             Questao questao = base.SelecionarPorId(id);
@@ -84,7 +84,7 @@ namespace TestesDonaMaria.Infra.ModuloQuestao
             Conexao();
             SqlCommand comando = new SqlCommand(excluirAlternativasSQL, conexao);
             comando.Parameters.AddWithValue("questao_id", questao.id);
-            comando.ExecuteScalar();
+            comando.ExecuteNonQuery();
             conexao.Close();
         }
 
@@ -97,8 +97,7 @@ namespace TestesDonaMaria.Infra.ModuloQuestao
                 SqlCommand comando = new SqlCommand(inserirAlternativaSQL, conexao);
                 alternativa.questaoId = questao.id;
                 mapeador.ConfigurarParamentrosAlternativa(comando, alternativa);
-                var alternativa_id = comando.ExecuteScalar();
-                alternativa.id = Convert.ToInt32(alternativa_id);
+                alternativa.id = Convert.ToInt32(comando.ExecuteScalar());
             }
             conexao.Close();
         }
@@ -107,7 +106,7 @@ namespace TestesDonaMaria.Infra.ModuloQuestao
             Conexao();
 
             SqlCommand comando = new SqlCommand(carregarAlternativasSQL, conexao);
-            comando.Parameters.AddWithValue("questao_id", questao.id);
+            comando.Parameters.AddWithValue("@questao_id", questao.id);
 
             SqlDataReader leitorRegistros = comando.ExecuteReader();
 

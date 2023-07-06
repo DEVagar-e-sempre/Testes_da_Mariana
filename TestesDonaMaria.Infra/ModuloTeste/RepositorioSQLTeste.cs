@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using TestesDonaMaria.Dominio.ModuloQuestao;
 using TestesDonaMaria.Dominio.ModuloTeste;
 
 namespace TestesDonaMaria.Infra.ModuloTeste
@@ -51,8 +52,103 @@ namespace TestesDonaMaria.Infra.ModuloTeste
 	                                                           M.[DISCIPLINA_ID] = D.[ID] ";
 
         protected override string selecionarPorIdSQL => selecionarTodosSQL + " WHERE id = @id";
+
+        protected string inserirRelacaoQuestaoSQL => @"INSERT INTO TBTESTE_TBQUESTAO (TESTE_ID, QUESTAO_ID) VALUES (@teste_id, @questao_id)";
+
+        protected string carregarQuestaoSQL => @"SELECT 
+	                                                TBTESTE_TBQUESTAO.questao_id 
+                                                FROM 
+	                                                TBTeste_TBQuestao INNER JOIN 
+	                                                TBQuestao ON TBQuestao.id = TBTeste_TBQuestao.questao_id 
+                                                WHERE 
+	                                                TBTeste_TBQuestao.teste_id = @teste_id";
+
+        protected string excluirQuestaoSQL => @"DELETE FROM TBTESTE_TBQUESTAO WHERE TESTE_ID = @teste_id";
+
         public RepositorioSQLTeste() : base()
         {
+        }
+
+        public override void Inserir(Teste teste)
+        {
+            base.Inserir(teste);
+            InserirRelacaoQuestao(teste);
+        }
+
+        public override void Editar(int id, Teste testeAtualizado)
+        {
+            base.Editar(id, testeAtualizado);
+            EditarQuestao(testeAtualizado);
+        }
+
+        public override void Excluir(Teste teste)
+        {
+            base.Excluir(teste);
+            ExcluirQuestao(teste);
+        }
+        private void InserirRelacaoQuestao(Teste teste)
+        {
+            Conexao();
+
+            foreach(Questao questao in teste.listaQuestoes)
+            {
+                SqlCommand comando = new SqlCommand(inserirRelacaoQuestaoSQL, conexao);
+                mapeador.ConfigurarParametrosRelacaoQuestao(comando, questao.id, teste.id);
+            }
+
+            conexao.Close();
+        }
+
+        public override Teste SelecionarPorId(int id)
+        {
+            Teste teste = base.SelecionarPorId(id);
+            CarregarQuestao(teste);
+            return teste;
+        }
+        public override List<Teste> SelecionarTodos()
+        {
+            List<Teste> listaTestes = base.SelecionarTodos();
+
+            foreach (Teste teste in listaTestes)
+            {
+                CarregarQuestao(teste);
+            }
+            return listaTestes;
+        }
+
+        private void EditarQuestao(Teste teste)
+        {
+            base.Editar(teste.id, teste);
+            ExcluirQuestao(teste);
+            InserirRelacaoQuestao(teste);
+        }
+
+        private void ExcluirQuestao(Teste teste)
+        {
+            Conexao();
+            SqlCommand comando = new SqlCommand(excluirQuestaoSQL, conexao);
+            comando.Parameters.AddWithValue("teste_id", teste.id);
+            comando.ExecuteNonQuery();
+            conexao.Close();
+        }
+
+        protected void CarregarQuestao(Teste teste)
+        {
+            Conexao();
+
+            SqlCommand comando = new SqlCommand(carregarQuestaoSQL, conexao);
+            comando.Parameters.AddWithValue("@teste_id", teste.id);
+
+            SqlDataReader leitorRegistros = comando.ExecuteReader();
+
+            teste.listaQuestoes.Clear();
+
+            while (leitorRegistros.Read())
+            {
+                Questao questao = mapeador.ConverterRegistroQuestao(leitorRegistros);
+                teste.listaQuestoes.Add(questao);
+            }
+            conexao.Close();
         }
 
         public override bool EhRepetido(Teste registro)
