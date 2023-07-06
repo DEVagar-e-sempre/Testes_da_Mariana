@@ -89,5 +89,10 @@ namespace TestesDonaMaria.Infra.ModuloMateria
 
             return materias;
         }
+
+        public override int ObterProximoID()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

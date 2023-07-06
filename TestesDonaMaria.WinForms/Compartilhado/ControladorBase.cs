@@ -34,6 +34,8 @@
 
         public virtual void Listar() { }
 
+        public virtual void GerarPDF() { }
+
         public virtual void Adicionar() { }
 
         public virtual void ConcluirItens() { }
