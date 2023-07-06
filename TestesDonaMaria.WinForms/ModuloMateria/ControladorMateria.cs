@@ -6,7 +6,7 @@ namespace TestesDonaMaria.WinForms.ModuloMateria
 {
     public class ControladorMateria : ControladorBase
     {
-        public override string ObterTipoCadastro => "Cadastro de Materia";
+        public override string ObterTipo => "Cadastro de Materia";
         
         private RepositorioSQLMateria repMateria;
         private TabelaMateria tabelaMateria;

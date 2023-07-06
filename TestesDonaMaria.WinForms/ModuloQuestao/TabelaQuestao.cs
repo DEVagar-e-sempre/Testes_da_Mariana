@@ -15,27 +15,16 @@ namespace TestesDonaMaria.WinForms.ModuloQuestao
 
         private void ConfigurarColunas()
         {
-            //    public string titulo;
-            //    public string questaoCorreta;
-            //    public int serie;
-            //    public Disciplina disciplina;
-            //    public Materia materia;
 
-            DataGridViewTextBoxColumn id = new DataGridViewTextBoxColumn();
-            id.Name = "ID";
-            id.HeaderText = "ID";
-
-            DataGridViewTextBoxColumn disciplina = new DataGridViewTextBoxColumn();
-            disciplina.Name = "disciplina";
-            disciplina.HeaderText = "Disciplina";
-
-            DataGridViewTextBoxColumn materia = new DataGridViewTextBoxColumn();
-            materia.Name = "materia";
-            materia.HeaderText = "Matéria";
-
-            grid.Columns.AddRange(id);
-            grid.Columns.AddRange(disciplina);
-            grid.Columns.AddRange(materia);
+            DataGridViewColumn[] colunas = new DataGridViewColumn[]
+                        {
+                new DataGridViewTextBoxColumn() { Name  = "id", HeaderText = "ID" },
+                new DataGridViewTextBoxColumn() { Name  = "questao", HeaderText = "Questão" },
+                new DataGridViewTextBoxColumn() { Name  = "alternativaCorreta", HeaderText = "Alternativa Correta" },
+                new DataGridViewTextBoxColumn() { Name  = "materia", HeaderText = "Matéria" },
+                new DataGridViewTextBoxColumn() { Name  = "disciplina", HeaderText = "Disciplina" },
+                        };
+            grid.Columns.AddRange(colunas);
         }
 
         public void AtualizarRegistros(List<Questao> listaQuestoes)
@@ -44,7 +33,12 @@ namespace TestesDonaMaria.WinForms.ModuloQuestao
 
             foreach (Questao questao in listaQuestoes)
             {
-                grid.Rows.Add(questao.id, questao.materia.disciplina.nome, questao.materia.nome);
+                Alternativa tempAlternativa = questao.ObterAlternativaCorreta();
+                if(tempAlternativa == null)
+                {
+                    continue;
+                }
+                grid.Rows.Add(questao.id, questao.titulo, tempAlternativa.alternativa, questao.materia.nome, questao.materia.disciplina.nome);
             }
         }
         public int ObterIdSelecionado()
