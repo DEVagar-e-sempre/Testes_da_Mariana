@@ -18,6 +18,7 @@ namespace TestesDonaMaria.WinForms.ModuloQuestao
         private RepositorioSQLDisciplina repDisciplina;
         private int disciplina_id;
         private int serie;
+        private bool ehEdicao;
 
         public TelaQuestao(RepositorioSQLQuestao repQuestao, RepositorioSQLMateria repMateria, RepositorioSQLDisciplina repDisciplina)
         {
@@ -28,6 +29,7 @@ namespace TestesDonaMaria.WinForms.ModuloQuestao
             CarregarDisciplina();
             CarregarMateria();
             this.Text = "Cadastro de Questão";
+            this.ehEdicao = false;
         }
 
         private void TelaQuestao_Load(object sender, EventArgs e)

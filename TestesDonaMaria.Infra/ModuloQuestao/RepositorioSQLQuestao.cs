@@ -162,15 +162,5 @@ namespace TestesDonaMaria.Infra.ModuloQuestao
 
             return quantidade > 0;
         }
-
-        public int ObterProximoID()
-        {
-            String proximoIdSQL = @"SELECT IDENT_CURRENT('TBQuestao')";
-            Conexao();
-            SqlCommand comando = new SqlCommand(proximoIdSQL, conexao);
-            int proximoId = Convert.ToInt32(comando.ExecuteScalar());
-            conexao.Close();
-            return proximoId;
-        }
     }
 }
