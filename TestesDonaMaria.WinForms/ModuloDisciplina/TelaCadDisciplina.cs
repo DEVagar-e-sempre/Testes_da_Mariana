@@ -30,9 +30,12 @@ namespace TestesDonaMaria.WinForms.ModuloDisciplina
         {
             TelaPrincipal telaPrincipal = TelaPrincipal.InstanciaAtual;
 
+            int id = Convert.ToInt32(txb_id.Text);
             string nome = txb_nome.Text;
 
             disciplina = new Disciplina(nome);
+
+            disciplina.id = id;
 
             if (repDisc.EhRepetido(disciplina))
             {
