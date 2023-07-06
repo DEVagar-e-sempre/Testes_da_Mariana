@@ -13,7 +13,6 @@ namespace TestesDonaMaria.Infra.ModuloTeste
         private Teste teste;
         public override void ConfigurarParametros(SqlCommand comando, Teste teste)
         {
-            comando.Parameters.AddWithValue("@id", teste.id);
             comando.Parameters.AddWithValue("@titulo", teste.titulo);
             comando.Parameters.AddWithValue("@materia_id", teste.materia.id);
             comando.Parameters.AddWithValue("@quantQuestoes", teste.quantQuestoes);
