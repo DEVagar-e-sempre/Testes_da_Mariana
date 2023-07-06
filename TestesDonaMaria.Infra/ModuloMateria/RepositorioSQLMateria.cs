@@ -68,5 +68,26 @@ namespace TestesDonaMaria.Infra.ModuloMateria
 
             return quantidade > 0;
         }
+        public List<Materia> SelecionarTodosPorDisciplina(int disciplinaId)
+        {
+            Conexao();
+
+            SqlCommand comando = new SqlCommand(selecionarTodosSQL + " WHERE disciplina_id = @disciplina_id", conexao);
+
+            comando.Parameters.AddWithValue("@disciplina_id", disciplinaId);
+
+            SqlDataReader leitor = comando.ExecuteReader();
+
+            List<Materia> materias = new List<Materia>();
+
+            while (leitor.Read())
+            {
+                materias.Add(mapeador.ConverterRegistro(leitor));
+            }
+
+            conexao.Close();
+
+            return materias;
+        }
     }
 }

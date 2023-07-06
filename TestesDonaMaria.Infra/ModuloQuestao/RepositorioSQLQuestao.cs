@@ -132,7 +132,7 @@ namespace TestesDonaMaria.Infra.ModuloQuestao
 
             SqlCommand comando = new SqlCommand(verificarDepedenteSQL, conexao);
 
-            comando.Parameters.AddWithValue("@titulo", registro.titulo);
+            comando.Parameters.AddWithValue("@titulo", registro.enunciado);
 
             int quantidade = Convert.ToInt32(comando.ExecuteScalar());
 
