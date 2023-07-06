@@ -5,7 +5,9 @@ namespace TestesDonaMaria.Infra.ModuloQuestao
 {
     public class RepositorioSQLQuestao : RepositorioSQLBase<Questao, MapeadorQuestao>
     {
-        protected override string inserirSQL => @"INSERT INTO TBQuestao (titulo, materia_id, serie) VALUES (@titulo, @materia_id, @serie) SELECT SCOPE_IDENTITY();";
+        protected override string inserirSQL => @"INSERT INTO TBQuestao (titulo, materia_id, serie) 
+                                                  VALUES (@titulo, @materia_id, @serie); 
+                                                  SELECT SCOPE_IDENTITY();";
 
         protected override string editarSQL => @"UPDATE TBQuestao SET titulo = @titulo, materia_id = @materia_id, serie = @serie WHERE id = @id";
 
@@ -163,7 +165,7 @@ namespace TestesDonaMaria.Infra.ModuloQuestao
 
         public int ObterProximoID()
         {
-            String proximoIdSQL = @"SELECT IDENT_CURRENT('TBQuestao') + IDENT_INCR('TBQuestao')";
+            String proximoIdSQL = @"SELECT IDENT_CURRENT('TBQuestao')";
             Conexao();
             SqlCommand comando = new SqlCommand(proximoIdSQL, conexao);
             int proximoId = Convert.ToInt32(comando.ExecuteScalar());

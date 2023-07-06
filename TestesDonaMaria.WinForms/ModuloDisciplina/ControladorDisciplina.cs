@@ -9,7 +9,7 @@ namespace TestesDonaMaria.WinForms.ModuloDisciplina
 
         private RepositorioSQLDisciplina repDisciplina;
         private TabelaDisciplina tabelaDisc;
-        private TelaDisciplina telaCadDisciplina;
+        private TelaDisciplina telaDisciplina;
 
         public ControladorDisciplina(RepositorioSQLDisciplina repDisciplina)
         {
@@ -18,13 +18,16 @@ namespace TestesDonaMaria.WinForms.ModuloDisciplina
 
         public override void Inserir()
         {
-            telaCadDisciplina = new TelaDisciplina(repDisciplina);
+            telaDisciplina = new TelaDisciplina(repDisciplina);
 
-            DialogResult opcaoEscolhida = telaCadDisciplina.ShowDialog();
+            telaDisciplina.DefinirID(repDisciplina.ObterProximoID());
+            
+
+            DialogResult opcaoEscolhida = telaDisciplina.ShowDialog();
 
             if (opcaoEscolhida == DialogResult.OK)
             {
-                repDisciplina.Inserir(telaCadDisciplina.Disciplina);
+                repDisciplina.Inserir(telaDisciplina.Disciplina);
                 MessageBox.Show("Matéria gravado com Sucesso!");
                 CarregarDisciplina();
             }
@@ -43,14 +46,14 @@ namespace TestesDonaMaria.WinForms.ModuloDisciplina
             }
             else
             {
-                telaCadDisciplina = new TelaDisciplina(repDisciplina);
-                telaCadDisciplina.Disciplina = disciplinaSelec;
+                telaDisciplina = new TelaDisciplina(repDisciplina);
+                telaDisciplina.Disciplina = disciplinaSelec;
                 
-                DialogResult opcaoEscolhida = telaCadDisciplina.ShowDialog();
+                DialogResult opcaoEscolhida = telaDisciplina.ShowDialog();
 
                 if (opcaoEscolhida == DialogResult.OK)
                 {
-                    repDisciplina.Editar(telaCadDisciplina.Disciplina.id, telaCadDisciplina.Disciplina);
+                    repDisciplina.Editar(telaDisciplina.Disciplina.id, telaDisciplina.Disciplina);
 
                     CarregarDisciplina();
                 }

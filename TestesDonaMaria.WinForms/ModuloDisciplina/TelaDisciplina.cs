@@ -26,6 +26,11 @@ namespace TestesDonaMaria.WinForms.ModuloDisciplina
             get => disciplina;
         }
 
+        public void DefinirID(int id)
+        {
+            txb_id.Text = id.ToString();
+        }
+
         private void btn_gravar_Click(object sender, EventArgs e)
         {
             TelaPrincipal telaPrincipal = TelaPrincipal.InstanciaAtual;

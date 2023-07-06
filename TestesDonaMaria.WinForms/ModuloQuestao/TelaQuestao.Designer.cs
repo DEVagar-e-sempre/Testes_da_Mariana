@@ -250,7 +250,7 @@
             Controls.Add(label2);
             Controls.Add(label1);
             Name = "TelaQuestao";
-            Text = "TelaCadQuestao";
+            Text = "Tela Questao";
             gpbAlternativas.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
