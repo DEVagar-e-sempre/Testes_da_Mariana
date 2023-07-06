@@ -38,7 +38,7 @@ namespace TestesDonaMaria.WinForms.ModuloQuestao
                 {
                     continue;
                 }
-                grid.Rows.Add(questao.id, questao.titulo, tempAlternativa.alternativa, questao.materia.nome, questao.materia.disciplina.nome);
+                grid.Rows.Add(questao.id, questao.enunciado, tempAlternativa.alternativa, questao.materia.nome, questao.materia.disciplina.nome);
             }
         }
         public int ObterIdSelecionado()

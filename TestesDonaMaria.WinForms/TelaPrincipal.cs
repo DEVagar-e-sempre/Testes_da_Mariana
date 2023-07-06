@@ -28,13 +28,7 @@ namespace TestesDonaMaria.WinForms
             telaPrincipal = this;
         }
 
-        public static TelaPrincipal TelaPrincipalP
-        {
-            get
-            {
-                return telaPrincipal;
-            }
-        }
+        public static TelaPrincipal InstanciaAtual => telaPrincipal;
         private void ObterEntidade()
         {
             foreach (Control ctrl in painel_botoesEntidades.Controls)
@@ -62,7 +56,7 @@ namespace TestesDonaMaria.WinForms
                     break;
 
                 case "btn_questao":
-                    controlador = new ControladorQuestao(repQuestao);
+                    controlador = new ControladorQuestao(repQuestao, repMateria, repDisciplina);
                     break;
 
                 case "btn_teste":

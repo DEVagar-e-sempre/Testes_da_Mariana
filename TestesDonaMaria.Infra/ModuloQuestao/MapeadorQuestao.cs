@@ -9,7 +9,7 @@ namespace TestesDonaMaria.Infra.ModuloQuestao
     {
         public override void ConfigurarParametros(SqlCommand comando, Questao registro)
         {
-            comando.Parameters.AddWithValue("@titulo", registro.titulo);
+            comando.Parameters.AddWithValue("@titulo", registro.enunciado);
             comando.Parameters.AddWithValue("@serie", registro.serie);
             comando.Parameters.AddWithValue("@materia_id", registro.materia.id);
 

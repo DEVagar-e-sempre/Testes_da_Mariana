@@ -79,7 +79,9 @@
             // 
             // cbxSerie
             // 
+            cbxSerie.Enabled = false;
             cbxSerie.FormattingEnabled = true;
+            cbxSerie.Items.AddRange(new object[] { "1", "2" });
             cbxSerie.Location = new Point(118, 61);
             cbxSerie.Name = "cbxSerie";
             cbxSerie.Size = new Size(121, 23);
@@ -92,6 +94,7 @@
             cbxDisciplina.Name = "cbxDisciplina";
             cbxDisciplina.Size = new Size(121, 23);
             cbxDisciplina.TabIndex = 11;
+            cbxDisciplina.SelectedValueChanged += cbxDisciplina_SelectedValueChanged;
             // 
             // label3
             // 
@@ -105,6 +108,7 @@
             // 
             // cbxMateria
             // 
+            cbxMateria.Enabled = false;
             cbxMateria.FormattingEnabled = true;
             cbxMateria.Location = new Point(348, 61);
             cbxMateria.Name = "cbxMateria";
@@ -165,6 +169,7 @@
             btnAdicionarAlternativa.TabIndex = 18;
             btnAdicionarAlternativa.Text = "Adicionar";
             btnAdicionarAlternativa.UseVisualStyleBackColor = true;
+            btnAdicionarAlternativa.Click += btnAdicionarAlternativa_Click;
             // 
             // gpbAlternativas
             // 
@@ -187,12 +192,12 @@
             btnRemoverAlternativa.TabIndex = 1;
             btnRemoverAlternativa.Text = "Remover";
             btnRemoverAlternativa.UseVisualStyleBackColor = true;
+            btnRemoverAlternativa.Click += btnRemoverAlternativa_Click;
             // 
             // clbAlternativas
             // 
             clbAlternativas.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             clbAlternativas.FormattingEnabled = true;
-            clbAlternativas.Items.AddRange(new object[] { "Teste1", "Teste2", "Teste3", "Teste4", "Teste5" });
             clbAlternativas.Location = new Point(6, 53);
             clbAlternativas.Name = "clbAlternativas";
             clbAlternativas.Size = new Size(411, 94);
@@ -221,6 +226,7 @@
             btn_gravar.TabIndex = 20;
             btn_gravar.Text = "Gravar";
             btn_gravar.UseVisualStyleBackColor = true;
+            btn_gravar.Click += btn_gravar_Click;
             // 
             // TelaQuestao
             // 

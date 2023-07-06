@@ -17,14 +17,48 @@ namespace TestesDonaMaria.WinForms.ModuloQuestao
 
         private TabelaQuestao tabelaQuestao;
 
-        public ControladorQuestao(RepositorioSQLQuestao repQuestao)
+        public ControladorQuestao(RepositorioSQLQuestao repQuestao, RepositorioSQLMateria repMateria, RepositorioSQLDisciplina repDisciplina)
         {
             this.repQuestao = repQuestao;
+            this.repMateria = repMateria;
+            this.repDisciplina = repDisciplina;
         }
 
         public override void Editar()
         {
-            throw new NotImplementedException();
+            Questao questaoSelecionada = ObterIdSelecionado();
+            if (questaoSelecionada == null)
+            {
+                MessageBox.Show($"Selecione uma {ObterTipo} primeiro!",
+                                $"Edição de {ObterTipo}",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Exclamation);
+
+                return;
+            }
+            if(repQuestao.TemDependente(questaoSelecionada))
+            {
+                MessageBox.Show($"Não é possível editar uma {ObterTipo} que esteja relacionada a um Teste!",
+                                $"Edição de {ObterTipo}",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Exclamation);
+
+                return;
+            }
+            TelaQuestao telaQuestao = new TelaQuestao(repMateria, repDisciplina);
+
+            telaQuestao.ConfigurarTela(questaoSelecionada);
+
+            DialogResult opcaoEscolhida = telaQuestao.ShowDialog();
+
+            if (opcaoEscolhida == DialogResult.OK)
+            {
+                Questao auxQuestao = telaQuestao.ObterQuestao();
+
+                repQuestao.Editar(auxQuestao.id, auxQuestao);
+
+                CarregarQuestao();
+            }
         }
 
         public override void Excluir()
@@ -32,7 +66,7 @@ namespace TestesDonaMaria.WinForms.ModuloQuestao
             Questao questaoSelecionada = ObterIdSelecionado();
             if (questaoSelecionada == null)
             {
-                MessageBox.Show($"Selecione um {ObterTipo} primeiro!",
+                MessageBox.Show($"Selecione uma {ObterTipo} primeiro!",
                     $"Exclusão de {ObterTipo}",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Exclamation);
@@ -64,6 +98,7 @@ namespace TestesDonaMaria.WinForms.ModuloQuestao
         public override void Inserir()
         {
             TelaQuestao telaQuestao = new TelaQuestao(repMateria, repDisciplina);
+
             telaQuestao.DefinirID(repQuestao.ObterProximoID());
 
             DialogResult opcaoEscolhida = telaQuestao.ShowDialog();

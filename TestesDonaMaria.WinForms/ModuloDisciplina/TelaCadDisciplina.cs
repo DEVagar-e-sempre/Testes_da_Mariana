@@ -28,7 +28,7 @@ namespace TestesDonaMaria.WinForms.ModuloDisciplina
 
         private void btn_gravar_Click(object sender, EventArgs e)
         {
-            TelaPrincipal telaPrincipal = TelaPrincipal.TelaPrincipalP;
+            TelaPrincipal telaPrincipal = TelaPrincipal.InstanciaAtual;
 
             int id = Convert.ToInt32(txb_id.Text);
             string nome = txb_nome.Text;

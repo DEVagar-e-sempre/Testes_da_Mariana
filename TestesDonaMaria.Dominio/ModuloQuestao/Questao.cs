@@ -7,21 +7,21 @@ namespace TestesDonaMaria.Dominio.ModuloQuestao
 {
     public class Questao : EntidadeBase<Questao>
     {
-        public string titulo;
+        public string enunciado;
         public int serie;
         public Materia materia;
         public List<Alternativa> alternativas;
 
-        public Questao(int id, string titulo, int serie, Materia materia) : this()
+        public Questao(int id, string enunciado, int serie, Materia materia) : this()
         {
             this.id = id;
-            this.titulo = titulo;
+            this.enunciado = enunciado;
             this.serie = serie;
             this.materia = materia;
         }
-        public Questao(string titulo, int serie, Materia materia) : this()
+        public Questao(string enunciado, int serie, Materia materia) : this()
         {
-            this.titulo = titulo;
+            this.enunciado = enunciado;
             this.serie = serie;
             this.materia = materia;
         }
@@ -31,7 +31,7 @@ namespace TestesDonaMaria.Dominio.ModuloQuestao
         }
         public override void AtualizarInformacoes(Questao entidade)
         {
-            this.titulo = entidade.titulo;
+            this.enunciado = entidade.enunciado;
             this.serie = entidade.serie;
             this.materia = entidade.materia;
             this.alternativas = entidade.alternativas;
@@ -40,17 +40,17 @@ namespace TestesDonaMaria.Dominio.ModuloQuestao
         public override string[] Validar()
         {
             List<String> erros = new();
-            if (string.IsNullOrEmpty(titulo))
+            if (string.IsNullOrEmpty(enunciado))
             {
-                erros.Add("O título não pode ser vazio");
-            }
-            if (titulo.Length < 5)
-            {
-                erros.Add("O título deve ter mais de 5 caracteres");
+                erros.Add("O enunciado não pode ser vazio");
             }
             if (alternativas.Count < 2)
             {
                 erros.Add("A questão deve ter pelo menos 2 alternativas");
+            }
+            if(materia == null)
+            {
+                erros.Add("A questão deve estar associada a uma matéria");
             }
             return erros.ToArray();
         }
@@ -61,7 +61,7 @@ namespace TestesDonaMaria.Dominio.ModuloQuestao
         }
         public override string ToString()
         {
-            return titulo;
+            return enunciado;
         }
     }
 }
