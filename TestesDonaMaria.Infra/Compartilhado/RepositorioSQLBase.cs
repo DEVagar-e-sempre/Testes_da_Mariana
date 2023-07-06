@@ -119,5 +119,15 @@ namespace TestesDonaMaria.Infra.Compartilhado
 
         public abstract bool EhRepetido(TEntidade registro);
         public abstract bool TemDependente(TEntidade registro);
+        public virtual int ObterProximoID()
+        {
+            String tipo = typeof(TEntidade).Name;
+            String proximoIdSQL = $"SELECT IDENT_CURRENT('TB{tipo}')";
+            Conexao();
+            SqlCommand comando = new SqlCommand(proximoIdSQL, conexao);
+            int proximoId = Convert.ToInt32(comando.ExecuteScalar());
+            conexao.Close();
+            return proximoId;
+        }
     }
 }

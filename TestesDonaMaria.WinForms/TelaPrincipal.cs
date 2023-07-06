@@ -140,10 +140,11 @@ namespace TestesDonaMaria.WinForms
                     case "btn_listar":
                         controlador.Listar();
                         break;
-
+/*
                     case "btn_pdf":
                         controlador.GerarPDF();
                         break;
+*/
 
                 }
             }
