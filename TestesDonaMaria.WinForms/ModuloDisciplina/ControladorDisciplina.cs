@@ -9,7 +9,7 @@ namespace TestesDonaMaria.WinForms.ModuloDisciplina
 
         private RepositorioSQLDisciplina repDisciplina;
         private TabelaDisciplina tabelaDisc;
-        private TelaCadDisciplina telaCadDisciplina;
+        private TelaDisciplina telaCadDisciplina;
 
         public ControladorDisciplina(RepositorioSQLDisciplina repDisciplina)
         {
@@ -18,7 +18,7 @@ namespace TestesDonaMaria.WinForms.ModuloDisciplina
 
         public override void Inserir()
         {
-            telaCadDisciplina = new TelaCadDisciplina(repDisciplina);
+            telaCadDisciplina = new TelaDisciplina(repDisciplina);
 
             DialogResult opcaoEscolhida = telaCadDisciplina.ShowDialog();
 
@@ -43,7 +43,7 @@ namespace TestesDonaMaria.WinForms.ModuloDisciplina
             }
             else
             {
-                telaCadDisciplina = new TelaCadDisciplina(repDisciplina);
+                telaCadDisciplina = new TelaDisciplina(repDisciplina);
                 telaCadDisciplina.Disciplina = disciplinaSelec;
                 
                 DialogResult opcaoEscolhida = telaCadDisciplina.ShowDialog();

@@ -3,12 +3,12 @@ using TestesDonaMaria.Infra.ModuloDisciplina;
 
 namespace TestesDonaMaria.WinForms.ModuloDisciplina
 {
-    public partial class TelaCadDisciplina : Form
+    public partial class TelaDisciplina : Form
     {
         private Disciplina disciplina;
         private RepositorioSQLDisciplina repDisc;
 
-        public TelaCadDisciplina(RepositorioSQLDisciplina repDisc)//o repositorio é para compara e ver se é repetido
+        public TelaDisciplina(RepositorioSQLDisciplina repDisc)//o repositorio é para compara e ver se é repetido
         {
             InitializeComponent();
 
@@ -39,7 +39,7 @@ namespace TestesDonaMaria.WinForms.ModuloDisciplina
 
             if (repDisc.EhRepetido(disciplina))
             {
-                telaPrincipal.AtualizarRodape("Nome de cliente já existente, por favor insira um novo nome!");
+                telaPrincipal.AtualizarRodape("Nome de disciplina já existente, por favor insira um novo nome!");
 
                 DialogResult = DialogResult.None;
             }

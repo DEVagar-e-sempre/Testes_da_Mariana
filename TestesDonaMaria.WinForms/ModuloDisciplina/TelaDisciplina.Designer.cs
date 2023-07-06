@@ -1,6 +1,6 @@
 ﻿namespace TestesDonaMaria.WinForms.ModuloDisciplina
 {
-    partial class TelaCadDisciplina
+    partial class TelaDisciplina
     {
         /// <summary>
         /// Required designer variable.

@@ -1,8 +1,8 @@
 ﻿namespace TestesDonaMaria.WinForms.ModuloTeste
 {
-    public partial class TelaCadTeste : Form
+    public partial class TelaTeste : Form
     {
-        public TelaCadTeste()
+        public TelaTeste()
         {
             InitializeComponent();
         }
