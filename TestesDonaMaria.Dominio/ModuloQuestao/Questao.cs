@@ -44,7 +44,7 @@ namespace TestesDonaMaria.Dominio.ModuloQuestao
             {
                 erros.Add("O título não pode ser vazio");
             }
-            if (titulo.Length > 5)
+            if (titulo.Length < 5)
             {
                 erros.Add("O título deve ter mais de 5 caracteres");
             }

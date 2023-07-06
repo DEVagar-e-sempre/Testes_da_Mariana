@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TelaPrincipal));
             painel_botoesEntidades = new Panel();
+            label3 = new Label();
             btn_teste = new Button();
             btn_materia = new Button();
             btn_questao = new Button();
@@ -47,7 +47,6 @@
             toolStripSeparator3 = new ToolStripSeparator();
             lbl_tipoCad = new ToolStripLabel();
             panel1 = new Panel();
-            label3 = new Label();
             label1 = new Label();
             label2 = new Label();
             statusStrip1 = new StatusStrip();
@@ -71,6 +70,17 @@
             painel_botoesEntidades.Name = "painel_botoesEntidades";
             painel_botoesEntidades.Size = new Size(192, 457);
             painel_botoesEntidades.TabIndex = 0;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe Print", 18F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label3.ForeColor = Color.Black;
+            label3.Location = new Point(21, 81);
+            label3.Name = "label3";
+            label3.Size = new Size(144, 43);
+            label3.TabIndex = 1;
+            label3.Text = "Categorias";
             // 
             // btn_teste
             // 
@@ -154,7 +164,7 @@
             ts_ferramentas.Items.AddRange(new ToolStripItem[] { btn_inserir, btn_editar, btn_excluir, toolStripSeparator1, btn_filtrar, btn_listar, toolStripSeparator2, toolStripButton6, toolStripSeparator3, lbl_tipoCad });
             ts_ferramentas.Location = new Point(195, 78);
             ts_ferramentas.Name = "ts_ferramentas";
-            ts_ferramentas.Size = new Size(295, 31);
+            ts_ferramentas.Size = new Size(354, 31);
             ts_ferramentas.TabIndex = 1;
             ts_ferramentas.Text = "toolStrip1";
             // 
@@ -223,13 +233,12 @@
             // 
             // toolStripButton6
             // 
-            toolStripButton6.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            toolStripButton6.Image = (Image)resources.GetObject("toolStripButton6.Image");
+            toolStripButton6.Image = Properties.Resources.picture_as_pdf_FILL0_wght400_GRAD0_opsz24;
             toolStripButton6.ImageTransparentColor = Color.Magenta;
             toolStripButton6.Name = "toolStripButton6";
             toolStripButton6.Padding = new Padding(4);
-            toolStripButton6.Size = new Size(28, 28);
-            toolStripButton6.Text = "toolStripButton6";
+            toolStripButton6.Size = new Size(87, 28);
+            toolStripButton6.Text = "Gerar PDF";
             // 
             // toolStripSeparator3
             // 
@@ -250,17 +259,6 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(906, 75);
             panel1.TabIndex = 2;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe Print", 18F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            label3.ForeColor = Color.Black;
-            label3.Location = new Point(21, 81);
-            label3.Name = "label3";
-            label3.Size = new Size(144, 43);
-            label3.TabIndex = 1;
-            label3.Text = "Categorias";
             // 
             // label1
             // 
