@@ -42,5 +42,9 @@ namespace TestesDonaMaria.Dominio.ModuloMateria
             this.nome = entidade.nome;
             this.disciplina = entidade.disciplina;
         }
+        public override string ToString()
+        {
+            return nome;
+        }
     }
 }
