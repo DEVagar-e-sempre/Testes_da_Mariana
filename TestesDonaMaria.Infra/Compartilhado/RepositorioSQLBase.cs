@@ -70,7 +70,7 @@ namespace TestesDonaMaria.Infra.Compartilhado
 
             SqlCommand comando = new SqlCommand(excluirSQL, conexao);
 
-            comando.Parameters.AddWithValue("id", registroSelecionado.id);
+            comando.Parameters.AddWithValue("@id", registroSelecionado.id);
 
             comando.ExecuteNonQuery();
 
@@ -84,7 +84,7 @@ namespace TestesDonaMaria.Infra.Compartilhado
 
             TEntidade registro = null;
 
-            comando.Parameters.AddWithValue("id", id);
+            comando.Parameters.AddWithValue("@id", id);
 
             SqlDataReader leitor = comando.ExecuteReader();
 
