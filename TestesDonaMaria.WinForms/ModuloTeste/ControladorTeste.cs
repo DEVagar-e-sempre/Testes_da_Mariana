@@ -1,4 +1,5 @@
-﻿using TestesDonaMaria.Dominio.ModuloTeste;
+﻿using TestesDonaMaria.Dominio.ModuloDisciplina;
+using TestesDonaMaria.Dominio.ModuloTeste;
 using TestesDonaMaria.Infra.ModuloDisciplina;
 using TestesDonaMaria.Infra.ModuloMateria;
 using TestesDonaMaria.Infra.ModuloQuestao;
@@ -29,12 +30,63 @@ namespace TestesDonaMaria.WinForms.ModuloTeste
 
         public override void Editar()
         {
-            throw new NotImplementedException();
+            Teste testeSelec = ObterTesteSelecionado();
+
+            if (testeSelec == null)
+            {
+                MessageBox.Show($"Selecione um Teste primeiro!",
+                    "Exclusão de Teste",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation);
+            }
+            else
+            {
+                telaTeste = new TelaTeste(repTeste, repQuestao, repMateria, repDisciplina);
+                telaTeste.Teste = testeSelec;
+
+                DialogResult opcaoEscolhida = telaTeste.ShowDialog();
+
+                if (opcaoEscolhida == DialogResult.OK)
+                {
+                    repTeste.Editar(telaTeste.Teste.id, telaTeste.Teste);
+
+                    CarregarTeste();
+                }
+            }
         }
 
         public override void Excluir()
         {
-            throw new NotImplementedException();
+            Teste TesteSelec = ObterTesteSelecionado();
+
+            if (TesteSelec == null)
+            {
+                MessageBox.Show($"Selecione um Teste primeiro!",
+                    "Exclusão de Teste",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation);
+            }
+            else
+            {
+                DialogResult opcaoEscolhida = MessageBox.Show($"Deseja excluir o Teste {TesteSelec.titulo}?",
+                    "Exclusão de Teste",
+                    MessageBoxButtons.OKCancel,
+                    MessageBoxIcon.Question);
+
+                if (opcaoEscolhida == DialogResult.OK)
+                {
+                    repTeste.Excluir(TesteSelec);
+
+                    CarregarTeste();
+                }
+            }
+        }
+
+        private Teste ObterTesteSelecionado()
+        {
+            int id = tabelaTeste.ObterIdSelecionado();
+
+            return repTeste.SelecionarPorId(id);
         }
 
         public override void Inserir()
@@ -48,7 +100,7 @@ namespace TestesDonaMaria.WinForms.ModuloTeste
             if(opcaoEscolhida == DialogResult.OK)
             {
                 repTeste.Inserir(telaTeste.Teste);
-                MessageBox.Show("Matéria gravado com Sucesso!");
+                MessageBox.Show("Teste gravado com Sucesso!");
                 CarregarTeste();
             }
         }
