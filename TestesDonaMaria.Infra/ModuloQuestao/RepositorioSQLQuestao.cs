@@ -31,7 +31,7 @@ namespace TestesDonaMaria.Infra.ModuloQuestao
 
         protected override string selecionarPorIdSQL => selecionarTodosSQL + " WHERE Q.id = @id";
 
-        protected string inserirAlternativaSQL => "INSERT INTO TBAlternativa (alternativa,correta, questao_id) VALUES (@alternativa,@correta, @questao_id) SELECT SCOPE_IDENTITY();";
+        protected string inserirAlternativaSQL => "INSERT INTO TBAlternativa (alternativa,alternativa_correta, questao_id) VALUES (@alternativa,@alternativa_correta, @questao_id) SELECT SCOPE_IDENTITY();";
 
         protected string carregarAlternativasSQL => "SELECT * FROM TBAlternativa WHERE questao_id = @questao_id";
         protected string excluirAlternativasSQL => "DELETE FROM TBAlternativa WHERE questao_id = @questao_id";
@@ -52,8 +52,8 @@ namespace TestesDonaMaria.Infra.ModuloQuestao
         }
         public override void Excluir(Questao questao)
         {
-            base.Excluir(questao);
             ExcluirAlternativas(questao);
+            base.Excluir(questao);
         }
 
         public override Questao SelecionarPorId(int id)
