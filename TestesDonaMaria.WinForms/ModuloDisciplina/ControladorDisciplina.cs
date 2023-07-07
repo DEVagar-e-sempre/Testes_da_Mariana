@@ -28,7 +28,7 @@ namespace TestesDonaMaria.WinForms.ModuloDisciplina
             if (opcaoEscolhida == DialogResult.OK)
             {
                 repDisciplina.Inserir(telaDisciplina.Disciplina);
-                MessageBox.Show("Matéria gravado com Sucesso!");
+                MessageBox.Show("Disciplina gravado com Sucesso!");
                 CarregarDisciplina();
             }
         }

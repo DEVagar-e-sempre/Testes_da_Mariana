@@ -1,8 +1,10 @@
 ﻿using TestesDonaMaria.Dominio.ModuloDisciplina;
+using TestesDonaMaria.Dominio.ModuloQuestao;
 using TestesDonaMaria.Dominio.ModuloTeste;
 using TestesDonaMaria.Infra.ModuloDisciplina;
 using TestesDonaMaria.Infra.ModuloMateria;
 using TestesDonaMaria.Infra.ModuloQuestao;
+using TestesDonaMaria.Infra.ModuloTeste;
 
 namespace TestesDonaMaria.WinForms.ModuloTeste
 {
@@ -14,7 +16,7 @@ namespace TestesDonaMaria.WinForms.ModuloTeste
         private int disciplina_id;
         private Teste teste;
 
-        public TelaTeste(RepositorioSQLQuestao repQuestao, RepositorioSQLMateria repMateria, RepositorioSQLDisciplina repDisciplina)
+        public TelaTeste(RepositorioSQLTeste repTeste, RepositorioSQLQuestao repQuestao, RepositorioSQLMateria repMateria, RepositorioSQLDisciplina repDisciplina)
         {
             InitializeComponent();
             this.ConfigurarTelas();
@@ -57,7 +59,7 @@ namespace TestesDonaMaria.WinForms.ModuloTeste
 
         public void DefinirID(int id)
         {
-            //txb_id.Text = id.ToString();
+            txtID.Text = id.ToString();
         }
 
         private void btn_gravar_Click(object sender, EventArgs e)
@@ -72,6 +74,28 @@ namespace TestesDonaMaria.WinForms.ModuloTeste
             cbxMateria.Enabled = true;
 
             CarregarMateria();
+        }
+
+        private void btn_sortear_Click(object sender, EventArgs e)
+        {
+            Random rand = new Random();
+
+            if(teste.listaQuestoes.Count == 0)
+            {
+                MessageBox.Show($"Não há Questões cadastradas!",
+                    "ERRO",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation);
+            }
+            else
+            {
+                for (int i = 0; i < qtdQuestao.Value; i++)
+                {
+                    int sorteio = rand.Next(1, teste.listaQuestoes.Count);
+                    lb_questoesSorteadas.Items.Add(teste.listaQuestoes[i]);
+                }
+            }
+
         }
     }
 }

@@ -39,13 +39,13 @@
             label5 = new Label();
             txb_titulo = new TextBox();
             label6 = new Label();
-            numericUpDown1 = new NumericUpDown();
+            qtdQuestao = new NumericUpDown();
             lb_questoesSorteadas = new ListBox();
             cb_provaRec = new CheckBox();
             btn_cancelar = new Button();
             btn_gravar = new Button();
             btn_sortear = new Button();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)qtdQuestao).BeginInit();
             SuspendLayout();
             // 
             // cbxMateria
@@ -151,12 +151,12 @@
             label6.TabIndex = 24;
             label6.Text = "Qtd. Questões:";
             // 
-            // numericUpDown1
+            // qtdQuestao
             // 
-            numericUpDown1.Location = new Point(379, 129);
-            numericUpDown1.Name = "numericUpDown1";
-            numericUpDown1.Size = new Size(48, 23);
-            numericUpDown1.TabIndex = 25;
+            qtdQuestao.Location = new Point(379, 129);
+            qtdQuestao.Name = "qtdQuestao";
+            qtdQuestao.Size = new Size(48, 23);
+            qtdQuestao.TabIndex = 25;
             // 
             // lb_questoesSorteadas
             // 
@@ -213,6 +213,7 @@
             btn_sortear.TabIndex = 30;
             btn_sortear.Text = "Sortear";
             btn_sortear.UseVisualStyleBackColor = true;
+            btn_sortear.Click += btn_sortear_Click;
             // 
             // TelaTeste
             // 
@@ -225,7 +226,7 @@
             Controls.Add(btn_gravar);
             Controls.Add(cb_provaRec);
             Controls.Add(lb_questoesSorteadas);
-            Controls.Add(numericUpDown1);
+            Controls.Add(qtdQuestao);
             Controls.Add(label6);
             Controls.Add(txb_titulo);
             Controls.Add(label5);
@@ -239,7 +240,7 @@
             Controls.Add(label1);
             Name = "TelaTeste";
             Text = "TelaCadTeste";
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)qtdQuestao).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -257,7 +258,7 @@
         private Label label5;
         private TextBox txb_titulo;
         private Label label6;
-        private NumericUpDown numericUpDown1;
+        private NumericUpDown qtdQuestao;
         private ListBox lb_questoesSorteadas;
         private CheckBox cb_provaRec;
         private Button btn_cancelar;
