@@ -38,9 +38,7 @@ namespace TestesDonaMaria.WinForms.ModuloDisciplina
             int id = Convert.ToInt32(txb_id.Text);
             string nome = txb_nome.Text;
 
-            disciplina = new Disciplina(nome);
-
-            disciplina.id = id;
+            disciplina = new Disciplina(id, nome);
 
             if (repDisc.EhRepetido(disciplina))
             {

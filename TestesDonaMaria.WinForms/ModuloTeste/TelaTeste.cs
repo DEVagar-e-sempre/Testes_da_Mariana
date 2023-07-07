@@ -1,4 +1,5 @@
 ﻿using TestesDonaMaria.Dominio.ModuloDisciplina;
+using TestesDonaMaria.Dominio.ModuloMateria;
 using TestesDonaMaria.Dominio.ModuloQuestao;
 using TestesDonaMaria.Dominio.ModuloTeste;
 using TestesDonaMaria.Infra.ModuloDisciplina;
@@ -10,6 +11,7 @@ namespace TestesDonaMaria.WinForms.ModuloTeste
 {
     public partial class TelaTeste : Form
     {
+        private RepositorioSQLTeste repTeste;
         private RepositorioSQLQuestao repQuestao;
         private RepositorioSQLMateria repMateria;
         private RepositorioSQLDisciplina repDisciplina;
@@ -21,6 +23,7 @@ namespace TestesDonaMaria.WinForms.ModuloTeste
             InitializeComponent();
             this.ConfigurarTelas();
 
+            this.repTeste = repTeste;
             this.repQuestao = repQuestao;
             this.repMateria = repMateria;
             this.repDisciplina = repDisciplina;
@@ -35,8 +38,16 @@ namespace TestesDonaMaria.WinForms.ModuloTeste
             {
                 txtID.Text = value.id.ToString();
                 txb_titulo.Text = value.titulo;
-                cbxMateria.SelectedItem = value.materia;
+                cbxSerie.SelectedIndex = value.serie;
+                qtdQuestao.Value = value.quantQuestoes;
+                CarregarDisciplina();
                 cbxDisciplina.SelectedItem = value.materia.disciplina;
+                CarregarMateria();
+                cbxMateria.SelectedItem = value.materia;
+                foreach (Questao questao in teste.listaQuestoes)
+                {
+                    lb_questoesSorteadas.Items.Add(questao);
+                }
             }
 
             get => teste;
@@ -64,7 +75,43 @@ namespace TestesDonaMaria.WinForms.ModuloTeste
 
         private void btn_gravar_Click(object sender, EventArgs e)
         {
+            TelaPrincipal telaPrincipal = TelaPrincipal.InstanciaAtual;
 
+            string titulo = txb_titulo.Text;
+
+            int id = Convert.ToInt32(txtID.Text);
+
+            int numQtdQuestao = (int)qtdQuestao.Value;
+
+            //Disciplina disc = (Disciplina)cbxDisciplina.SelectedItem;
+
+            Materia materia = (Materia)cbxMateria.SelectedItem;
+
+            int serie = (int)cbxSerie.SelectedItem;
+
+            teste = new Teste(id, titulo, materia, numQtdQuestao, serie);
+
+            if (repTeste.EhRepetido(teste))
+            {
+                telaPrincipal.AtualizarRodape("Teste com essas caracteristicas já existente, por favor insira um novo Teste!");
+
+                DialogResult = DialogResult.None;
+            }
+            else
+            {
+                string[] erros = teste.Validar();
+
+                if (erros.Length > 0)
+                {
+                    telaPrincipal.AtualizarRodape(erros[0]);
+                    DialogResult = DialogResult.None;
+                }
+                else
+                {
+                    telaPrincipal.AtualizarRodape("Status");
+
+                }
+            }
         }
 
         private void cbxDisciplina_SelectedIndexChanged(object sender, EventArgs e)
@@ -79,22 +126,23 @@ namespace TestesDonaMaria.WinForms.ModuloTeste
         private void btn_sortear_Click(object sender, EventArgs e)
         {
             Random rand = new Random();
+            int numQtdQuestao = (int)qtdQuestao.Value;
 
-            if(teste.listaQuestoes.Count == 0)
-            {
-                MessageBox.Show($"Não há Questões cadastradas!",
-                    "ERRO",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Exclamation);
-            }
-            else
-            {
-                for (int i = 0; i < qtdQuestao.Value; i++)
-                {
-                    int sorteio = rand.Next(1, teste.listaQuestoes.Count);
-                    lb_questoesSorteadas.Items.Add(teste.listaQuestoes[i]);
-                }
-            }
+            //if(teste.listaQuestoes.Count == 0)
+            //{
+            //    MessageBox.Show($"Não há Questões cadastradas!",
+            //        "ERRO",
+            //        MessageBoxButtons.OK,
+            //        MessageBoxIcon.Exclamation);
+            //}
+            //else
+            //{
+            //    for (int i = 0; i < qtdQuestao.Value; i++)
+            //    {
+            //        int sorteio = rand.Next(1, repQuestao.SelecionarTodos().Count);
+            //        lb_questoesSorteadas.Items.Add(repQuestao.SelecionarPorId(sorteio));
+            //    }
+            //}
 
         }
     }
