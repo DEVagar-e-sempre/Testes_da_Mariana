@@ -1,4 +1,6 @@
-﻿using TestesDonaMaria.Dominio.ModuloDisciplina;
+﻿using System.Drawing.Text;
+using System.Globalization;
+using TestesDonaMaria.Dominio.ModuloDisciplina;
 using TestesDonaMaria.Dominio.ModuloMateria;
 using TestesDonaMaria.Dominio.ModuloQuestao;
 using TestesDonaMaria.Dominio.ModuloTeste;
@@ -128,21 +130,29 @@ namespace TestesDonaMaria.WinForms.ModuloTeste
             Random rand = new Random();
             int numQtdQuestao = (int)qtdQuestao.Value;
 
-            //if(teste.listaQuestoes.Count == 0)
-            //{
-            //    MessageBox.Show($"Não há Questões cadastradas!",
-            //        "ERRO",
-            //        MessageBoxButtons.OK,
-            //        MessageBoxIcon.Exclamation);
-            //}
-            //else
-            //{
-            //    for (int i = 0; i < qtdQuestao.Value; i++)
-            //    {
-            //        int sorteio = rand.Next(1, repQuestao.SelecionarTodos().Count);
-            //        lb_questoesSorteadas.Items.Add(repQuestao.SelecionarPorId(sorteio));
-            //    }
-            //}
+            if(repQuestao.SelecionarTodos().Count == 0)
+            {
+                MessageBox.Show($"Não há Questões cadastradas!",
+                    "ERRO",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation);
+            }
+            else
+            {
+                int j = 0;
+                lb_questoesSorteadas.Items.Clear();
+                int auxSorteio = 0;
+                for (int i = 0; i < qtdQuestao.Value; i++)
+                {
+                    int sorteio = rand.Next(0, repQuestao.SelecionarTodos().Count - 1);
+
+                    if (sorteio != auxSorteio) {
+                        lb_questoesSorteadas.Items.Add($"{j} - {repQuestao.SelecionarPorId(sorteio)}");
+                        j++;
+                        auxSorteio = sorteio;
+                    }
+                }
+            }
 
         }
     }
