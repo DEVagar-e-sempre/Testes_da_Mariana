@@ -18,9 +18,8 @@ namespace TestesDonaMaria.Infra.ModuloMateria
 	                                                        D.id AS disciplina_id, 
 	                                                        D.nome AS disciplina_nome 
                                                         FROM TBMateria AS M
-                                                        INNER JOIN TBDisciplina AS D ON D.id = M.disciplina_id 
-";
-        protected override string selecionarPorIdSQL => selecionarTodosSQL + " WHERE TBMateria.id = @id";
+                                                        INNER JOIN TBDisciplina AS D ON D.id = M.disciplina_id ";
+        protected override string selecionarPorIdSQL => selecionarTodosSQL + " WHERE M.id = @id";
         public RepositorioSQLMateria() : base()
         {
         }

@@ -23,7 +23,6 @@ namespace TestesDonaMaria.WinForms.ModuloQuestao
         public TelaQuestao(RepositorioSQLQuestao repQuestao, RepositorioSQLMateria repMateria, RepositorioSQLDisciplina repDisciplina)
         {
             InitializeComponent();
-            this.ConfigurarTelas();
             this.repQuestao = repQuestao;
             this.repMateria = repMateria;
             this.repDisciplina = repDisciplina;
@@ -42,9 +41,6 @@ namespace TestesDonaMaria.WinForms.ModuloQuestao
         private void CarregarMateria()
         {
             cbxMateria.Items.Clear();
-            cbxMateria.SelectedIndex = -1;
-            cbxMateria.Text = "";
-            cbxMateria.SelectedItem = null;
             cbxMateria.Items.AddRange(repMateria.SelecionarTodosPorDisciplina(disciplina_id).ToArray());
         }
 
@@ -87,10 +83,10 @@ namespace TestesDonaMaria.WinForms.ModuloQuestao
         }
         private void btn_gravar_Click(object sender, EventArgs e)
         {
-            Questao questao = ObterQuestao();
-            string[] erros = questao.Validar();
+            Questao aluguel = ObterQuestao();
+            string[] erros = aluguel.Validar();
 
-            if (repQuestao.EhRepetido(questao))
+            if (repQuestao.EhRepetido(aluguel))
             {
                 TelaPrincipal.InstanciaAtual.AtualizarRodape("Questão repetida");
                 return;
