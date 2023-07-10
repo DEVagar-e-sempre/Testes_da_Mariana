@@ -21,7 +21,7 @@ namespace TestesDonaMaria.Infra.ModuloTeste
                                                         ,@quantquestoes
                                                         ,@serie
                                                         ,@recuperacao
-                                                    )";
+                                                    ); SELECT SCOPE_IDENTITY();";
 
         protected override string editarSQL => @"UPDATE [TBTESTE] 
                                                     SET 

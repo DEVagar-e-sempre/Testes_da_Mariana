@@ -27,11 +27,11 @@ namespace TestesDonaMaria.Dominio.ModuloDisciplina
             List<string> erros = new List<string>();
             if (string.IsNullOrEmpty(nome))
             {
-                erros.Add("O nome não pode ser vazio");
+                erros.Add("O campo Nome é obrigatório!");
             }
             if (nome.Length < 5)
             {
-                erros.Add("O nome deve ter mais de 5 caracteres");
+                erros.Add("O nome da Disciplina deve ter no mínimo 5 caracteres!");
             }
             return erros.ToArray();
         }

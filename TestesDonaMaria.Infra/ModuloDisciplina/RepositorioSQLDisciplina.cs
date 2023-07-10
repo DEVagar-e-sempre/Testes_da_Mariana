@@ -24,13 +24,15 @@ namespace TestesDonaMaria.Infra.ModuloDisciplina
             String verificarDepedenteSQL = @"
                             SELECT COUNT(*)
                             FROM TBDisciplina
-                            WHERE TBDisciplina.nome LIKE '%@nome%';
+                            WHERE TBDisciplina.nome = @nome 
+                            AND TBDisciplina.id != @id;
 
 ";
 
             SqlCommand comando = new SqlCommand(verificarDepedenteSQL, conexao);
 
             comando.Parameters.AddWithValue("@nome", registro.nome);
+            comando.Parameters.AddWithValue("@id", registro.id);
 
             int quantidade = Convert.ToInt32(comando.ExecuteScalar());
 
@@ -57,15 +59,6 @@ namespace TestesDonaMaria.Infra.ModuloDisciplina
             conexao.Close();
 
             return quantidade > 0;
-        }
-        public int ObterProximoID()
-        {
-            String proximoIdSQL = @"SELECT IDENT_CURRENT('TBDisciplina')";
-            Conexao();
-            SqlCommand comando = new SqlCommand(proximoIdSQL, conexao);
-            int proximoId = Convert.ToInt32(comando.ExecuteScalar());
-            conexao.Close();
-            return proximoId;
         }
     }
 }

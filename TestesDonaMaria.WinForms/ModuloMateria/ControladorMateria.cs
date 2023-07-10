@@ -29,7 +29,7 @@ namespace TestesDonaMaria.WinForms.ModuloMateria
 
             DialogResult opcaoEscolhida = telaMateria.ShowDialog();
 
-            if(opcaoEscolhida == DialogResult.OK)
+            if (opcaoEscolhida == DialogResult.OK)
             {
                 repMateria.Inserir(telaMateria.MateriaP);
                 MessageBox.Show("Matéria gravado com Sucesso!");
@@ -41,9 +41,9 @@ namespace TestesDonaMaria.WinForms.ModuloMateria
         {
             Materia materiaSelec = ObterMateriaSelecionada();
 
-            if(materiaSelec == null)
+            if (materiaSelec == null)
             {
-                MessageBox.Show($"Selecione uma Materia primeiro!", 
+                MessageBox.Show($"Selecione uma Materia primeiro!",
                     "Edição de Materia",
                     MessageBoxButtons.OKCancel,
                     MessageBoxIcon.Exclamation);
@@ -73,20 +73,27 @@ namespace TestesDonaMaria.WinForms.ModuloMateria
                     "Exclusão de Materia",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Exclamation);
+                return;
             }
-            else
+            if (repMateria.TemDependente(materiaSelec))
             {
-                DialogResult opcaoEscolhida = MessageBox.Show($"Deseja excluir a Materia {materiaSelec.nome}?",
-                    "Exclusão de Materia",
-                    MessageBoxButtons.OKCancel,
-                    MessageBoxIcon.Question);
+                MessageBox.Show($"Não é possível excluir uma {ObterTipo} que esteja relacionada a uma Questao ou Teste",
+                    $"Exclusão de {ObterTipo}",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation);
 
-                if (opcaoEscolhida == DialogResult.OK)
-                {
-                    repMateria.Excluir(materiaSelec);
+                return;
+            }
+            DialogResult opcaoEscolhida = MessageBox.Show($"Deseja excluir a Materia {materiaSelec.nome}?",
+                "Exclusão de Materia",
+                MessageBoxButtons.OKCancel,
+                MessageBoxIcon.Question);
 
-                    CarregarMateria();
-                }
+            if (opcaoEscolhida == DialogResult.OK)
+            {
+                repMateria.Excluir(materiaSelec);
+
+                CarregarMateria();
             }
         }
 
@@ -99,7 +106,7 @@ namespace TestesDonaMaria.WinForms.ModuloMateria
 
         public override UserControl ObterListagem()
         {
-            if(tabelaMateria == null)
+            if (tabelaMateria == null)
             {
                 tabelaMateria = new TabelaMateria();
             }

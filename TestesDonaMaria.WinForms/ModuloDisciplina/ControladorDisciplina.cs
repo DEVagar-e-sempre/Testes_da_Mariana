@@ -21,7 +21,7 @@ namespace TestesDonaMaria.WinForms.ModuloDisciplina
             telaDisciplina = new TelaDisciplina(repDisciplina);
 
             telaDisciplina.DefinirID(repDisciplina.ObterProximoID());
-            
+
 
             DialogResult opcaoEscolhida = telaDisciplina.ShowDialog();
 
@@ -48,7 +48,7 @@ namespace TestesDonaMaria.WinForms.ModuloDisciplina
             {
                 telaDisciplina = new TelaDisciplina(repDisciplina);
                 telaDisciplina.Disciplina = disciplinaSelec;
-                
+
                 DialogResult opcaoEscolhida = telaDisciplina.ShowDialog();
 
                 if (opcaoEscolhida == DialogResult.OK)
@@ -70,20 +70,29 @@ namespace TestesDonaMaria.WinForms.ModuloDisciplina
                     "Exclusão de Disciplinas",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Exclamation);
+                return;
             }
-            else
+
+            if (repDisciplina.TemDependente(disciplinaSelec))
             {
-                DialogResult opcaoEscolhida = MessageBox.Show($"Deseja excluir a Disciplina {disciplinaSelec.nome}?",
-                    "Exclusão de Disciplinas",
-                    MessageBoxButtons.OKCancel,
-                    MessageBoxIcon.Question);
+                MessageBox.Show($"Não é possível excluir uma {ObterTipo} que esteja relacionada a uma Materia",
+                    $"Exclusão de {ObterTipo}",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation);
 
-                if (opcaoEscolhida == DialogResult.OK)
-                {
-                    repDisciplina.Excluir(disciplinaSelec);
+                return;
+            }
 
-                    CarregarDisciplina();
-                }
+            DialogResult opcaoEscolhida = MessageBox.Show($"Deseja excluir a Disciplina {disciplinaSelec.nome}?",
+                "Exclusão de Disciplinas",
+                MessageBoxButtons.OKCancel,
+                MessageBoxIcon.Question);
+
+            if (opcaoEscolhida == DialogResult.OK)
+            {
+                repDisciplina.Excluir(disciplinaSelec);
+
+                CarregarDisciplina();
             }
         }
 
@@ -96,7 +105,7 @@ namespace TestesDonaMaria.WinForms.ModuloDisciplina
 
         public override UserControl ObterListagem()
         {
-            if(tabelaDisc == null)
+            if (tabelaDisc == null)
             {
                 tabelaDisc = new TabelaDisciplina();
             }
