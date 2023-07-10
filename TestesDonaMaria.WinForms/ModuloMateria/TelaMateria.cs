@@ -11,15 +11,10 @@ namespace TestesDonaMaria.WinForms.ModuloMateria
         private RepositorioSQLMateria repMateria;
         private RepositorioSQLDisciplina repDisciplina;
 
-        public TelaMateria(RepositorioSQLMateria repMateria, RepositorioSQLDisciplina repDisciplina, bool ehEdicao)
+        public TelaMateria(RepositorioSQLMateria repMateria, RepositorioSQLDisciplina repDisciplina)
         {
             InitializeComponent();
             this.ConfigurarTelas();
-
-            if (ehEdicao)
-            {
-                this.Text = "Edição de Materia";
-            }
 
             this.repMateria = repMateria;
             this.repDisciplina = repDisciplina;
