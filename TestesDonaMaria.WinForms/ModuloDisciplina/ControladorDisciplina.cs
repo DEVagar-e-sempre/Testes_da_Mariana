@@ -5,9 +5,7 @@ namespace TestesDonaMaria.WinForms.ModuloDisciplina
 {
     public class ControladorDisciplina : ControladorBase
     {
-        public override string ObterTipo => "Disciplina";
-        public override bool FiltrarHabilitado => false;
-        public override bool ListarHabilitado => false;
+        public override string ObterTipo => "Cadastro de Disciplina";
 
         private RepositorioSQLDisciplina repDisciplina;
         private TabelaDisciplina tabelaDisc;
@@ -20,7 +18,7 @@ namespace TestesDonaMaria.WinForms.ModuloDisciplina
 
         public override void Inserir()
         {
-            telaDisciplina = new TelaDisciplina(repDisciplina, false);
+            telaDisciplina = new TelaDisciplina(repDisciplina);
 
             telaDisciplina.DefinirID(repDisciplina.ObterProximoID());
 
@@ -48,7 +46,7 @@ namespace TestesDonaMaria.WinForms.ModuloDisciplina
             }
             else
             {
-                telaDisciplina = new TelaDisciplina(repDisciplina, true);
+                telaDisciplina = new TelaDisciplina(repDisciplina);
                 telaDisciplina.Disciplina = disciplinaSelec;
 
                 DialogResult opcaoEscolhida = telaDisciplina.ShowDialog();

@@ -6,8 +6,7 @@ namespace TestesDonaMaria.WinForms.ModuloMateria
 {
     public class ControladorMateria : ControladorBase
     {
-        public override string ObterTipo => "Materia";
-        public override bool FiltrarHabilitado => true;
+        public override string ObterTipo => "Cadastro de Materia";
 
         private RepositorioSQLDisciplina repDisciplina;
         private RepositorioSQLMateria repMateria;
@@ -22,7 +21,7 @@ namespace TestesDonaMaria.WinForms.ModuloMateria
 
         public override void Inserir()
         {
-            telaMateria = new TelaMateria(repMateria, repDisciplina, false);
+            telaMateria = new TelaMateria(repMateria, repDisciplina);
 
             telaMateria.DefinirID(repMateria.ObterProximoID());
 
@@ -49,7 +48,7 @@ namespace TestesDonaMaria.WinForms.ModuloMateria
             }
             else
             {
-                telaMateria = new TelaMateria(repMateria, repDisciplina, true);
+                telaMateria = new TelaMateria(repMateria, repDisciplina);
                 telaMateria.MateriaP = materiaSelec;
 
                 DialogResult opcaoEscolhida = telaMateria.ShowDialog();
