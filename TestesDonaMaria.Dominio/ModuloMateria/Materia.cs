@@ -27,11 +27,15 @@ namespace TestesDonaMaria.Dominio.ModuloMateria
 
             if (string.IsNullOrEmpty(nome))
             {
-                erros.Add("O campo do Nome é obrigatório!");
+                erros.Add("O campo Nome é obrigatório!");
             }
-            else if (disciplina == null)
+            if (disciplina == null)
             {
                 erros.Add("É obrigatório a seleção da disciplina!");
+            }
+            if(nome.Length < 5)
+            {
+                erros.Add("O nome da materia deve ter no mínimo 5 caracteres!");
             }
             return erros.ToArray();
         }

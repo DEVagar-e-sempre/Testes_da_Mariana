@@ -56,6 +56,7 @@ namespace TestesDonaMaria.WinForms.ModuloTeste
                 CarregarDisciplina();
                 cbxDisciplina.SelectedItem = value.materia.disciplina;
                 cbxMateria.SelectedItem = value.materia;
+                cb_provaRec.Checked= value.recuperacao;
 
                 lb_questoesSorteadas.Items.AddRange(value.listaQuestoes.ToArray());
             }

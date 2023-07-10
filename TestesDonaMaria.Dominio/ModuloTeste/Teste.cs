@@ -65,7 +65,7 @@ namespace TestesDonaMaria.Dominio.ModuloTeste
             {
                 erros.Add("O teste deve estar associado a uma matéria");
             }
-            if (quantQuestoes < 2)
+            if (quantQuestoes < 2 || listaQuestoes.Count < 2)
             {
                 erros.Add("O teste deve ter pelo menos 2 questão");
             }
