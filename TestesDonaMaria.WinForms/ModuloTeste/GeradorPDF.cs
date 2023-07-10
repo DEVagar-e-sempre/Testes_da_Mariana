@@ -1,69 +1,108 @@
-﻿using iTextSharp.text;
+﻿using System;
+using System.IO;
+using iText.Kernel.Font;
+using iTextSharp.text;
 using iTextSharp.text.pdf;
 using TestesDonaMaria.Dominio.ModuloQuestao;
 using TestesDonaMaria.Dominio.ModuloTeste;
+using Font = System.Drawing.Font;
 
 namespace TestesDonaMaria.WinForms.ModuloTeste
 {
     public class GeradorPDF
     {
         private Chunk chunk;
-        private string caminho = "C:\\Users\\Usuario\\Documents\\GitHub\\Testes_da_Mariana";
         private Document documento;
         private FileStream arquivo;
+        private String pastaTesteMariana;
 
         public GeradorPDF()
         {
-            documento = new Document();
-            arquivo = new FileStream(caminho, FileMode.Create);
+            string documentosPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            this.pastaTesteMariana = Path.Combine(documentosPath, "TestesMariana");
+            if (!Directory.Exists(pastaTesteMariana))
+            {
+                Directory.CreateDirectory(pastaTesteMariana);
+            }
+            
         }
 
         public void GerarPDF(Teste teste, bool ehGabarito = false)
         {
+            documento = new Document();
+
+            string nomeArquivo = teste.titulo + " - " + teste.materia.nome + " - " + teste.serie + "º ano";
+            if (ehGabarito)
+            {
+                nomeArquivo = nomeArquivo + " - Gabarito";
+            }
+
+            arquivo = new FileStream(Path.Combine(pastaTesteMariana, nomeArquivo + ".pdf"), FileMode.Create);
+
             Paragraph paragrafo;
             PdfWriter escritor = PdfWriter.GetInstance(documento, arquivo);
+            documento.Open();
 
-            string tituloTeste = teste.titulo;
-            chunk = new Chunk(tituloTeste, FontFactory.GetFont(FontFactory.HELVETICA_BOLD));
-            paragrafo = new Paragraph();
-            paragrafo.Add(chunk);
+           
 
-            string materiaTeste = teste.materia.nome;
-            chunk = new Chunk(materiaTeste, FontFactory.GetFont(FontFactory.HELVETICA_BOLD));
-            paragrafo = new Paragraph();
-            paragrafo.Add(chunk);
 
-            string serieTeste = teste.serie.ToString();
-            chunk = new Chunk(serieTeste, FontFactory.GetFont(FontFactory.HELVETICA_BOLD));
-            paragrafo = new Paragraph();
-            paragrafo.Add(chunk);
+            var fonteNegritoHelvetica = FontFactory.GetFont(FontFactory.HELVETICA_BOLD);
 
+            string escola = "Escola: _________________________________________________________";
+            paragrafo = new Paragraph(escola, fonteNegritoHelvetica);
+            documento.Add(paragrafo);
+
+            string disciplina = "Disciplina: " + teste.materia.disciplina.nome;
+            paragrafo = new Paragraph(disciplina, fonteNegritoHelvetica);
+            documento.Add(paragrafo);
+
+            string professor = "Professor(a): __________________________________________________";
+            paragrafo = new Paragraph(professor, fonteNegritoHelvetica);
+            documento.Add(paragrafo);
+
+            string aluno = "Aluno(a): ________________________________________________________";
+            paragrafo = new Paragraph(aluno, fonteNegritoHelvetica);
+
+            string data = "Data: __/__/20__";
+            paragrafo = new Paragraph(data, fonteNegritoHelvetica);
+            documento.Add(paragrafo);
+
+            string tituloTeste = teste.titulo + " - " + teste.materia.nome + " - " + teste.serie + "º ano";
+            paragrafo = new Paragraph(tituloTeste, fonteNegritoHelvetica);
+            paragrafo.Alignment = Element.ALIGN_CENTER;
+            documento.Add(paragrafo);
+
+            var fonteNormalHelvetica = FontFactory.GetFont(FontFactory.HELVETICA);
+
+            int numeroQuestao = 1;
+            char letra;
             foreach (Questao q in teste.listaQuestoes)
             {
 
-                string enunciado = q.enunciado;
-                chunk = new Chunk(enunciado, FontFactory.GetFont(FontFactory.HELVETICA));
-                paragrafo = new Paragraph();
-                paragrafo.Add(chunk);
-
-                foreach (Alternativa alternativas in q.alternativas)
+                string enunciado = numeroQuestao + ") " + q.enunciado;
+                paragrafo = new Paragraph(enunciado, fonteNegritoHelvetica);
+                documento.Add(paragrafo);
+                letra = 'A';
+                string correta = "";
+                numeroQuestao++;
+                foreach (Alternativa alternativa in q.alternativas)
                 {
-                    string enunciadoAlt = alternativas.alternativa;
-                    chunk = new Chunk(enunciadoAlt, FontFactory.GetFont(FontFactory.HELVETICA));
-                    paragrafo = new Paragraph();
-                    paragrafo.Add(chunk);
+                    string enunciadoAlt = "     (" + letra + ") " + alternativa.alternativa;
+                    paragrafo = new Paragraph(enunciadoAlt, fonteNormalHelvetica);
+                    documento.Add(paragrafo);
+                    if (alternativa.correta == true)
+                    {
+                        correta = letra.ToString();
+                    }
+                    letra++;
                 }
 
                 if(ehGabarito == true)
                 {
-                    Alternativa alt = q.alternativas.Find(x => x.correta == true);
-                    chunk = new Chunk("Resposta: " + alt.alternativa, FontFactory.GetFont(FontFactory.HELVETICA));
-                    paragrafo = new Paragraph();
-                    paragrafo.Add(chunk);
+                    paragrafo = new Paragraph("Resposta: " + correta, fonteNegritoHelvetica);
+                    documento.Add(paragrafo);
                 }
             }
-
-            documento.Add(paragrafo);
             documento.Close();
             arquivo.Close();
         }
