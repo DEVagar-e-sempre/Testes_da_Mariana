@@ -8,9 +8,7 @@ namespace TestesDonaMaria.WinForms.ModuloTeste
 {
     public class ControladorTeste : ControladorBase
     {
-        public override string ObterTipo => "Testes";
-        public override bool FiltrarHabilitado => true;
-        public override bool ListarHabilitado => true;
+        public override string ObterTipo => "Cadastro de Testes";
 
         private RepositorioSQLTeste repTeste;
         private RepositorioSQLQuestao repQuestao;
@@ -32,28 +30,28 @@ namespace TestesDonaMaria.WinForms.ModuloTeste
         {
             Teste testeSelec = ObterTesteSelecionado();
 
-            testeSelec.listaQuestoes.AddRange(repQuestao.SelecionarPorTesteId(testeSelec.id));
-
             if (testeSelec == null)
             {
                 MessageBox.Show($"Selecione um Teste primeiro!",
                     "Exclusão de Teste",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Exclamation);
+                return;
             }
-            else
+
+            testeSelec.listaQuestoes.AddRange(repQuestao.SelecionarPorTesteId(testeSelec.id));
+
+
+            telaTeste = new TelaTeste(repTeste, repQuestao, repMateria, repDisciplina);
+            telaTeste.Teste = testeSelec;
+
+            DialogResult opcaoEscolhida = telaTeste.ShowDialog();
+
+            if (opcaoEscolhida == DialogResult.OK)
             {
-                telaTeste = new TelaTeste(repTeste, repQuestao, repMateria, repDisciplina, true);
-                telaTeste.Teste = testeSelec;
+                repTeste.Editar(telaTeste.Teste.id, telaTeste.Teste);
 
-                DialogResult opcaoEscolhida = telaTeste.ShowDialog();
-
-                if (opcaoEscolhida == DialogResult.OK)
-                {
-                    repTeste.Editar(telaTeste.Teste.id, telaTeste.Teste);
-
-                    CarregarTeste();
-                }
+                CarregarTeste();
             }
         }
 
@@ -93,13 +91,13 @@ namespace TestesDonaMaria.WinForms.ModuloTeste
 
         public override void Inserir()
         {
-            telaTeste = new TelaTeste(repTeste, repQuestao, repMateria, repDisciplina, false);
+            telaTeste = new TelaTeste(repTeste, repQuestao, repMateria, repDisciplina);
 
             telaTeste.DefinirID(repTeste.ObterProximoID());
 
             DialogResult opcaoEscolhida = telaTeste.ShowDialog();
 
-            if(opcaoEscolhida == DialogResult.OK)
+            if (opcaoEscolhida == DialogResult.OK)
             {
                 repTeste.Inserir(telaTeste.Teste);
                 MessageBox.Show("Teste gravado com Sucesso!");
@@ -109,7 +107,7 @@ namespace TestesDonaMaria.WinForms.ModuloTeste
 
         public override UserControl ObterListagem()
         {
-            if(tabelaTeste == null)
+            if (tabelaTeste == null)
             {
                 tabelaTeste = new TabelaTeste();
             }
@@ -133,12 +131,15 @@ namespace TestesDonaMaria.WinForms.ModuloTeste
             }
             else
             {
+
+                testeSelec.listaQuestoes.AddRange(repQuestao.SelecionarPorTesteId(testeSelec.id));
+
                 DialogResult op = MessageBox.Show($"Deseja gerar o pdf do gabarito?!",
                     "Gerar PDF do Teste",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question);
 
-                if(op == DialogResult.Yes)
+                if (op == DialogResult.Yes)
                 {
                     gerador.GerarPDF(testeSelec, true);
 
