@@ -31,11 +31,13 @@ namespace TestesDonaMaria.Infra.ModuloMateria
                                                 FROM 
                                                     TBMATERIA
                                                 WHERE 
-                                                    TBMATERIA.NOME = @nome";
+                                                    TBMATERIA.NOME = @nome
+                                                AND TBMATERIA.ID != @id";
 
             SqlCommand comando = new SqlCommand(verificarDepedenteSQL, conexao);
 
             comando.Parameters.AddWithValue("@nome", registro.nome);
+            comando.Parameters.AddWithValue("@id", registro.id);
 
             int quantidade = Convert.ToInt32(comando.ExecuteScalar());
 
@@ -46,6 +48,7 @@ namespace TestesDonaMaria.Infra.ModuloMateria
 
         public override bool TemDependente(Materia registro)
         {
+            Conexao();
             SqlCommand comando;
             int quantidade = 0;
 

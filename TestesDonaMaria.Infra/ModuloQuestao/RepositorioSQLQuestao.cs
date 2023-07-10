@@ -199,13 +199,15 @@ namespace TestesDonaMaria.Infra.ModuloQuestao
             String verificarDepedenteSQL = @"
                             SELECT COUNT(*)
                             FROM TBQuestao
-                            WHERE TBQuestao.titulo LIKE '%@titulo%';
+                            WHERE TBQuestao.titulo = titulo
+                            AND TBQuestao.id != @id;
 
 ";
 
             SqlCommand comando = new SqlCommand(verificarDepedenteSQL, conexao);
 
             comando.Parameters.AddWithValue("@titulo", registro.enunciado);
+            comando.Parameters.AddWithValue("@id", registro.id);
 
             int quantidade = Convert.ToInt32(comando.ExecuteScalar());
 
