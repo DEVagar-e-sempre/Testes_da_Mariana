@@ -8,7 +8,9 @@ namespace TestesDonaMaria.WinForms.ModuloQuestao
     public class ControladorQuestao : ControladorBase
     {
         public override string ObterTipo => "Questão";
-        
+        public override bool FiltrarHabilitado => true;
+        public override bool ListarHabilitado => true;
+
         private RepositorioSQLQuestao repQuestao;
 
         private RepositorioSQLMateria repMateria;

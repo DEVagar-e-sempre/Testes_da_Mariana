@@ -96,7 +96,7 @@
             txb_nome.Size = new Size(134, 23);
             txb_nome.TabIndex = 5;
             // 
-            // TelaCadDisciplina
+            // TelaDisciplina
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -107,9 +107,9 @@
             Controls.Add(label1);
             Controls.Add(btn_cancelar);
             Controls.Add(btn_gravar);
-            Name = "TelaCadDisciplina";
+            Name = "TelaDisciplina";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "TelaCadDisciplina";
+            Text = "Cadastro de Disciplina";
             ResumeLayout(false);
             PerformLayout();
         }

@@ -20,7 +20,6 @@
         public virtual bool EditarHabilitado => true;
         public virtual bool ExcluirHabilitado => true;
         public virtual bool FiltrarHabilitado => false;
-        public virtual bool AddItemHabilitado => false;
         public virtual bool ListarHabilitado => false;
 
         public abstract void Inserir();
@@ -28,17 +27,11 @@
 
         public abstract void Excluir();
 
-        public virtual void AddItem() { }
-
         public virtual void Filtrar() { }
 
         public virtual void Listar() { }
 
         public virtual void GerarPDF() { }
-
-        public virtual void Adicionar() { }
-
-        public virtual void ConcluirItens() { }
 
         public abstract UserControl ObterListagem();
     }

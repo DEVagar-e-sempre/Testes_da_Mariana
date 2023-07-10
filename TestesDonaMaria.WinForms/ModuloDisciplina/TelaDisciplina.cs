@@ -8,9 +8,16 @@ namespace TestesDonaMaria.WinForms.ModuloDisciplina
         private Disciplina disciplina;
         private RepositorioSQLDisciplina repDisc;
 
-        public TelaDisciplina(RepositorioSQLDisciplina repDisc)//o repositorio é para compara e ver se é repetido
+        public TelaDisciplina(RepositorioSQLDisciplina repDisc, bool ehEdicao) //o repositorio é para compara e ver se é repetido
         {
             InitializeComponent();
+
+            if(ehEdicao)
+            {
+               this.Text = "Edição de Disciplina";
+            }
+
+            this.ConfigurarTelas();
 
             this.repDisc = repDisc;
         }

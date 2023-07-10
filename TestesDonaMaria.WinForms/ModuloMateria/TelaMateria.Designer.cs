@@ -116,7 +116,7 @@
             cbox_disciplina.Size = new Size(134, 23);
             cbox_disciplina.TabIndex = 11;
             // 
-            // TelaCadMateria
+            // TelaMateria
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -129,8 +129,8 @@
             Controls.Add(label1);
             Controls.Add(btn_cancelar);
             Controls.Add(btn_gravar);
-            Name = "TelaCadMateria";
-            Text = "TelaCadMateria";
+            Name = "TelaMateria";
+            Text = "Cadastro de Materia";
             ResumeLayout(false);
             PerformLayout();
         }
