@@ -131,6 +131,9 @@ namespace TestesDonaMaria.WinForms.ModuloTeste
             }
             else
             {
+
+                testeSelec.listaQuestoes.AddRange(repQuestao.SelecionarPorTesteId(testeSelec.id));
+
                 DialogResult op = MessageBox.Show($"Deseja gerar o pdf do gabarito?!",
                     "Gerar PDF do Teste",
                     MessageBoxButtons.YesNo,
