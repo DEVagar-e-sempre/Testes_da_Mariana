@@ -23,6 +23,7 @@ namespace TestesDonaMaria.WinForms.ModuloQuestao
         public TelaQuestao(RepositorioSQLQuestao repQuestao, RepositorioSQLMateria repMateria, RepositorioSQLDisciplina repDisciplina)
         {
             InitializeComponent();
+            this.ConfigurarTelas();
             this.repQuestao = repQuestao;
             this.repMateria = repMateria;
             this.repDisciplina = repDisciplina;
@@ -143,10 +144,11 @@ namespace TestesDonaMaria.WinForms.ModuloQuestao
 
             cbxSerie.SelectedIndex = questaoSelecionada.serie - 1;
             cbxDisciplina.SelectedItem = questaoSelecionada.materia.disciplina;
+            cbxDisciplina.Text = questaoSelecionada.materia.disciplina.nome;
 
             this.disciplina_id = questaoSelecionada.materia.disciplina.id;
-            CarregarMateria();
             cbxMateria.SelectedItem = questaoSelecionada.materia;
+            cbxMateria.Text = questaoSelecionada.materia.nome;
 
             foreach (Alternativa alternativa in questaoSelecionada.alternativas)
             {

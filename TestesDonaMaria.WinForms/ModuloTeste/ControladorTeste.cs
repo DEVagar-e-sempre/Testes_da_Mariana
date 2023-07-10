@@ -32,6 +32,8 @@ namespace TestesDonaMaria.WinForms.ModuloTeste
         {
             Teste testeSelec = ObterTesteSelecionado();
 
+            testeSelec.listaQuestoes.AddRange(repQuestao.SelecionarPorTesteId(testeSelec.id));
+
             if (testeSelec == null)
             {
                 MessageBox.Show($"Selecione um Teste primeiro!",

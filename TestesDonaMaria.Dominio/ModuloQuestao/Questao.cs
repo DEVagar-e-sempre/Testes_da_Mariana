@@ -44,13 +44,21 @@ namespace TestesDonaMaria.Dominio.ModuloQuestao
             {
                 erros.Add("O enunciado não pode ser vazio");
             }
+            if (materia == null)
+            {
+                erros.Add("A questão deve estar associada a uma matéria");
+            }
             if (alternativas.Count < 2)
             {
                 erros.Add("A questão deve ter pelo menos 2 alternativas");
             }
-            if(materia == null)
+            if(alternativas.Count(x => x.correta == true) == 0)
             {
-                erros.Add("A questão deve estar associada a uma matéria");
+                erros.Add("A questão deve ter pelo menos uma alternativa correta");
+            }
+            if (alternativas.Count(x => x.correta == true) > 1)
+            {
+                erros.Add("A questão não pode ter mais de uma alternativa correta");
             }
             return erros.ToArray();
         }
@@ -62,6 +70,11 @@ namespace TestesDonaMaria.Dominio.ModuloQuestao
         public override string ToString()
         {
             return enunciado;
+        }
+        public override bool Equals(object obj)
+        {
+            return obj is Questao questao &&
+                   id == questao.id;
         }
     }
 }

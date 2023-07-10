@@ -17,8 +17,14 @@ namespace TestesDonaMaria.WinForms.ModuloTeste
         private RepositorioSQLQuestao repQuestao;
         private RepositorioSQLMateria repMateria;
         private RepositorioSQLDisciplina repDisciplina;
+
         private int disciplina_id;
+        private int materia_id;
+        private int serie;
+        private int qtdQuestao;
+
         private Teste teste;
+
 
         public TelaTeste(RepositorioSQLTeste repTeste, RepositorioSQLQuestao repQuestao, RepositorioSQLMateria repMateria, RepositorioSQLDisciplina repDisciplina)
         {
@@ -30,6 +36,10 @@ namespace TestesDonaMaria.WinForms.ModuloTeste
             this.repMateria = repMateria;
             this.repDisciplina = repDisciplina;
 
+            this.materia_id = 0;
+            this.serie = 0;
+            this.qtdQuestao = 2;
+
             CarregarDisciplina();
             CarregarMateria();
         }
@@ -40,16 +50,14 @@ namespace TestesDonaMaria.WinForms.ModuloTeste
             {
                 txtID.Text = value.id.ToString();
                 txb_titulo.Text = value.titulo;
-                cbxSerie.SelectedIndex = value.serie;
-                qtdQuestao.Value = value.quantQuestoes;
+
+                cbxSerie.SelectedIndex = value.serie-1;
+                txtQtdQuestao.Value = value.quantQuestoes;
                 CarregarDisciplina();
                 cbxDisciplina.SelectedItem = value.materia.disciplina;
-                CarregarMateria();
                 cbxMateria.SelectedItem = value.materia;
-                foreach (Questao questao in teste.listaQuestoes)
-                {
-                    lb_questoesSorteadas.Items.Add(questao);
-                }
+
+                lb_questoesSorteadas.Items.AddRange(value.listaQuestoes.ToArray());
             }
 
             get => teste;
@@ -75,6 +83,13 @@ namespace TestesDonaMaria.WinForms.ModuloTeste
             txtID.Text = id.ToString();
         }
 
+        public void ObterQuestoes(Teste teste)
+        {
+            for(int i = 0; i < lb_questoesSorteadas.Items.Count; i++)
+            {
+                teste.listaQuestoes.Add((Questao)lb_questoesSorteadas.Items[i]);
+            }
+        }
         private void btn_gravar_Click(object sender, EventArgs e)
         {
             TelaPrincipal telaPrincipal = TelaPrincipal.InstanciaAtual;
@@ -83,37 +98,36 @@ namespace TestesDonaMaria.WinForms.ModuloTeste
 
             int id = Convert.ToInt32(txtID.Text);
 
-            int numQtdQuestao = (int)qtdQuestao.Value;
+            int numQtdQuestao = (int)txtQtdQuestao.Value;
 
-            //Disciplina disc = (Disciplina)cbxDisciplina.SelectedItem;
+            bool recuperacao = cb_provaRec.Checked;
 
             Materia materia = (Materia)cbxMateria.SelectedItem;
 
-            int serie = (int)cbxSerie.SelectedItem;
 
-            teste = new Teste(id, titulo, materia, numQtdQuestao, serie);
+
+            teste = new Teste(id, titulo, materia, numQtdQuestao, this.serie, recuperacao);
+            ObterQuestoes(teste);
 
             if (repTeste.EhRepetido(teste))
             {
                 telaPrincipal.AtualizarRodape("Teste com essas caracteristicas já existente, por favor insira um novo Teste!");
 
                 DialogResult = DialogResult.None;
+
+                return;
             }
-            else
+
+            string[] erros = teste.Validar();
+
+            if (erros.Length > 0)
             {
-                string[] erros = teste.Validar();
-
-                if (erros.Length > 0)
-                {
-                    telaPrincipal.AtualizarRodape(erros[0]);
-                    DialogResult = DialogResult.None;
-                }
-                else
-                {
-                    telaPrincipal.AtualizarRodape("Status");
-
-                }
+                telaPrincipal.AtualizarRodape(erros[0]);
+                DialogResult = DialogResult.None;
+                return;
             }
+            telaPrincipal.AtualizarRodape("Status");
+
         }
 
         private void cbxDisciplina_SelectedIndexChanged(object sender, EventArgs e)
@@ -127,33 +141,37 @@ namespace TestesDonaMaria.WinForms.ModuloTeste
 
         private void btn_sortear_Click(object sender, EventArgs e)
         {
-            Random rand = new Random();
-            int numQtdQuestao = (int)qtdQuestao.Value;
+            int numQtdQuestao = (int)txtQtdQuestao.Value;
 
-            if(repQuestao.SelecionarTodos().Count == 0)
+            if (materia_id == 0 && serie == 0)
             {
-                MessageBox.Show($"Não há Questões cadastradas!",
-                    "ERRO",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Exclamation);
+                MessageBox.Show($"Selecione uma matéria e uma série!",
+                                 "ERRO",
+                                 MessageBoxButtons.OK,
+                                 MessageBoxIcon.Exclamation);
+                return;
             }
-            else
-            {
-                int j = 0;
-                lb_questoesSorteadas.Items.Clear();
-                int auxSorteio = 0;
-                for (int i = 0; i < qtdQuestao.Value; i++)
-                {
-                    int sorteio = rand.Next(0, repQuestao.SelecionarTodos().Count - 1);
+            lb_questoesSorteadas.Items.Clear();
+            lb_questoesSorteadas.Items.AddRange(repQuestao.SelecionarAleatoriamente(numQtdQuestao, materia_id, serie).ToArray());
 
-                    if (sorteio != auxSorteio) {
-                        lb_questoesSorteadas.Items.Add($"{j} - {repQuestao.SelecionarPorId(sorteio)}");
-                        j++;
-                        auxSorteio = sorteio;
-                    }
-                }
-            }
+        }
 
+        private void cbxMateria_SelectedValueChanged(object sender, EventArgs e)
+        {
+            this.materia_id = ((Materia)cbxMateria.SelectedItem).id;
+            lb_questoesSorteadas.Items.Clear();
+        }
+
+        private void cbxSerie_SelectedValueChanged(object sender, EventArgs e)
+        {
+            this.serie = cbxSerie.SelectedIndex + 1;
+            lb_questoesSorteadas.Items.Clear();
+        }
+
+        private void qtdQuestao_ValueChanged(object sender, EventArgs e)
+        {
+            this.qtdQuestao = (int)txtQtdQuestao.Value;
+            lb_questoesSorteadas.Items.Clear();
         }
     }
 }
