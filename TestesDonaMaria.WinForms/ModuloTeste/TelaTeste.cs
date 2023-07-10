@@ -24,10 +24,15 @@ namespace TestesDonaMaria.WinForms.ModuloTeste
         private Teste teste;
 
 
-        public TelaTeste(RepositorioSQLTeste repTeste, RepositorioSQLQuestao repQuestao, RepositorioSQLMateria repMateria, RepositorioSQLDisciplina repDisciplina)
+        public TelaTeste(RepositorioSQLTeste repTeste, RepositorioSQLQuestao repQuestao, RepositorioSQLMateria repMateria, RepositorioSQLDisciplina repDisciplina, bool ehEdicao)
         {
             InitializeComponent();
             this.ConfigurarTelas();
+
+            if (ehEdicao)
+            {
+                this.Text = "Edição de Teste";
+            }
 
             this.repTeste = repTeste;
             this.repQuestao = repQuestao;
@@ -49,12 +54,12 @@ namespace TestesDonaMaria.WinForms.ModuloTeste
                 txtID.Text = value.id.ToString();
                 txb_titulo.Text = value.titulo;
 
-                cbxSerie.SelectedIndex = value.serie-1;
+                cbxSerie.SelectedIndex = value.serie - 1;
                 txtQtdQuestao.Value = value.quantQuestoes;
                 CarregarDisciplina();
                 cbxDisciplina.SelectedItem = value.materia.disciplina;
                 cbxMateria.SelectedItem = value.materia;
-                cb_provaRec.Checked= value.recuperacao;
+                cb_provaRec.Checked = value.recuperacao;
 
                 lb_questoesSorteadas.Items.AddRange(value.listaQuestoes.ToArray());
             }
@@ -84,7 +89,7 @@ namespace TestesDonaMaria.WinForms.ModuloTeste
 
         public void ObterQuestoes(Teste teste)
         {
-            for(int i = 0; i < lb_questoesSorteadas.Items.Count; i++)
+            for (int i = 0; i < lb_questoesSorteadas.Items.Count; i++)
             {
                 teste.listaQuestoes.Add((Questao)lb_questoesSorteadas.Items[i]);
             }

@@ -244,7 +244,7 @@
             Controls.Add(label2);
             Controls.Add(label1);
             Name = "TelaTeste";
-            Text = "TelaCadTeste";
+            Text = "Cadastro de Teste";
             ((System.ComponentModel.ISupportInitialize)txtQtdQuestao).EndInit();
             ResumeLayout(false);
             PerformLayout();

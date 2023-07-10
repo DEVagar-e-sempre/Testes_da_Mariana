@@ -8,8 +8,10 @@ namespace TestesDonaMaria.WinForms.ModuloTeste
 {
     public class ControladorTeste : ControladorBase
     {
-        public override string ObterTipo => "Cadastro de Testes";
-        
+        public override string ObterTipo => "Testes";
+        public override bool FiltrarHabilitado => true;
+        public override bool ListarHabilitado => true;
+
         private RepositorioSQLTeste repTeste;
         private RepositorioSQLQuestao repQuestao;
         private RepositorioSQLMateria repMateria;
@@ -41,7 +43,7 @@ namespace TestesDonaMaria.WinForms.ModuloTeste
             }
             else
             {
-                telaTeste = new TelaTeste(repTeste, repQuestao, repMateria, repDisciplina);
+                telaTeste = new TelaTeste(repTeste, repQuestao, repMateria, repDisciplina, true);
                 telaTeste.Teste = testeSelec;
 
                 DialogResult opcaoEscolhida = telaTeste.ShowDialog();
@@ -91,7 +93,7 @@ namespace TestesDonaMaria.WinForms.ModuloTeste
 
         public override void Inserir()
         {
-            telaTeste = new TelaTeste(repTeste, repQuestao, repMateria, repDisciplina);
+            telaTeste = new TelaTeste(repTeste, repQuestao, repMateria, repDisciplina, false);
 
             telaTeste.DefinirID(repTeste.ObterProximoID());
 
