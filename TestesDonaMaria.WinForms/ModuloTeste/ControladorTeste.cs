@@ -1,10 +1,8 @@
-﻿using TestesDonaMaria.Dominio.ModuloDisciplina;
-using TestesDonaMaria.Dominio.ModuloTeste;
+﻿using TestesDonaMaria.Dominio.ModuloTeste;
 using TestesDonaMaria.Infra.ModuloDisciplina;
 using TestesDonaMaria.Infra.ModuloMateria;
 using TestesDonaMaria.Infra.ModuloQuestao;
 using TestesDonaMaria.Infra.ModuloTeste;
-using TestesDonaMaria.WinForms.ModuloDisciplina;
 
 namespace TestesDonaMaria.WinForms.ModuloTeste
 {
@@ -117,6 +115,37 @@ namespace TestesDonaMaria.WinForms.ModuloTeste
             CarregarTeste();
 
             return tabelaTeste;
+        }
+
+        public override void GerarPDF()
+        {
+            Teste testeSelec = ObterTesteSelecionado();
+            GeradorPDF gerador = new GeradorPDF();
+
+            if (testeSelec == null)
+            {
+                MessageBox.Show($"Selecione um Teste primeiro!",
+                    "Gerar PDF do Teste",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation);
+            }
+            else
+            {
+                DialogResult op = MessageBox.Show($"Deseja gerar o pdf do gabarito?!",
+                    "Gerar PDF do Teste",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+
+                if(op == DialogResult.Yes)
+                {
+                    gerador.GerarPDF(testeSelec, true);
+
+                }
+                else
+                {
+                    gerador.GerarPDF(testeSelec, false);
+                }
+            }
         }
 
         private void CarregarTeste()

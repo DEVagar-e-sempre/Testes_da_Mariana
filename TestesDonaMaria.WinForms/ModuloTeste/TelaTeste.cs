@@ -1,6 +1,4 @@
-﻿using System.Drawing.Text;
-using System.Globalization;
-using TestesDonaMaria.Dominio.ModuloDisciplina;
+﻿using TestesDonaMaria.Dominio.ModuloDisciplina;
 using TestesDonaMaria.Dominio.ModuloMateria;
 using TestesDonaMaria.Dominio.ModuloQuestao;
 using TestesDonaMaria.Dominio.ModuloTeste;
