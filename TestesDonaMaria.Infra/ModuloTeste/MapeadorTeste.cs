@@ -17,14 +17,13 @@ namespace TestesDonaMaria.Infra.ModuloTeste
             comando.Parameters.AddWithValue("@materia_id", teste.materia.id);
             comando.Parameters.AddWithValue("@quantQuestoes", teste.quantQuestoes);
             comando.Parameters.AddWithValue("@serie", teste.serie);
+            comando.Parameters.AddWithValue("@recuperacao", teste.recuperacao);
         }
 
         public void ConfigurarParametrosRelacaoQuestao(SqlCommand comando, int questao_id, int teste_id)
         {
             comando.Parameters.AddWithValue("@teste_id", teste_id);
             comando.Parameters.AddWithValue("@questao_id", questao_id);
-
-            comando.ExecuteNonQuery();
         }
 
         public void ConfigurarParamentrosAlternativa(SqlCommand comando, Alternativa alternativa)
@@ -40,8 +39,9 @@ namespace TestesDonaMaria.Infra.ModuloTeste
             string titulo = leitorRegistros["TESTE_TITULO"].ToString();
             int qtdQuestao = Convert.ToInt32(leitorRegistros["TESTE_QTD_QUESTOES"]);
             int serie = Convert.ToInt32(leitorRegistros["TESTE_SERIE"]);
+            bool recuperacao = Convert.ToBoolean(leitorRegistros["TESTE_RECUPERACAO"]);
 
-            int disciplina_id = Convert.ToInt32(leitorRegistros["MATERIA_DISCIPLINA_ID"]);
+            int disciplina_id = Convert.ToInt32(leitorRegistros["DISCIPLINA_ID"]);
             string nomeDisci = leitorRegistros["DISCIPLINA_NOME"].ToString();
 
             int materia_id = Convert.ToInt32(leitorRegistros["MATERIA_ID"]);
@@ -49,7 +49,7 @@ namespace TestesDonaMaria.Infra.ModuloTeste
 
             this.disciplina = new Disciplina(disciplina_id, nomeDisci);
             this.materia = new Materia(materia_id, materiaNome, this.disciplina);
-            this.teste = new Teste(id, titulo, this.materia, qtdQuestao, serie);
+            this.teste = new Teste(id, titulo, this.materia, qtdQuestao, serie, recuperacao);
 
             return teste;
         }

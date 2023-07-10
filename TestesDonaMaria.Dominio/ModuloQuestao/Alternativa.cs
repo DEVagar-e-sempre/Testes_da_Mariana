@@ -50,5 +50,10 @@ namespace TestesDonaMaria.Dominio.ModuloQuestao
         {
             return alternativa;
         }
+        public override bool Equals(object obj)
+        {
+            return obj is Alternativa alternativa &&
+                   id == alternativa.id;
+        }
     }
 }

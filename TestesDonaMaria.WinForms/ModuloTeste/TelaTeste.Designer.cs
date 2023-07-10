@@ -39,13 +39,13 @@
             label5 = new Label();
             txb_titulo = new TextBox();
             label6 = new Label();
-            qtdQuestao = new NumericUpDown();
+            txtQtdQuestao = new NumericUpDown();
             lb_questoesSorteadas = new ListBox();
             cb_provaRec = new CheckBox();
             btn_cancelar = new Button();
             btn_gravar = new Button();
             btn_sortear = new Button();
-            ((System.ComponentModel.ISupportInitialize)qtdQuestao).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtQtdQuestao).BeginInit();
             SuspendLayout();
             // 
             // cbxMateria
@@ -56,6 +56,7 @@
             cbxMateria.Name = "cbxMateria";
             cbxMateria.Size = new Size(121, 23);
             cbxMateria.TabIndex = 21;
+            cbxMateria.SelectedValueChanged += cbxMateria_SelectedValueChanged;
             // 
             // label4
             // 
@@ -95,6 +96,7 @@
             cbxSerie.Name = "cbxSerie";
             cbxSerie.Size = new Size(121, 23);
             cbxSerie.TabIndex = 17;
+            cbxSerie.SelectedValueChanged += cbxSerie_SelectedValueChanged;
             // 
             // txtID
             // 
@@ -151,12 +153,15 @@
             label6.TabIndex = 24;
             label6.Text = "Qtd. Questões:";
             // 
-            // qtdQuestao
+            // txtQtdQuestao
             // 
-            qtdQuestao.Location = new Point(379, 129);
-            qtdQuestao.Name = "qtdQuestao";
-            qtdQuestao.Size = new Size(48, 23);
-            qtdQuestao.TabIndex = 25;
+            txtQtdQuestao.Location = new Point(379, 129);
+            txtQtdQuestao.Minimum = new decimal(new int[] { 2, 0, 0, 0 });
+            txtQtdQuestao.Name = "txtQtdQuestao";
+            txtQtdQuestao.Size = new Size(48, 23);
+            txtQtdQuestao.TabIndex = 25;
+            txtQtdQuestao.Value = new decimal(new int[] { 2, 0, 0, 0 });
+            txtQtdQuestao.ValueChanged += qtdQuestao_ValueChanged;
             // 
             // lb_questoesSorteadas
             // 
@@ -226,7 +231,7 @@
             Controls.Add(btn_gravar);
             Controls.Add(cb_provaRec);
             Controls.Add(lb_questoesSorteadas);
-            Controls.Add(qtdQuestao);
+            Controls.Add(txtQtdQuestao);
             Controls.Add(label6);
             Controls.Add(txb_titulo);
             Controls.Add(label5);
@@ -240,7 +245,7 @@
             Controls.Add(label1);
             Name = "TelaTeste";
             Text = "TelaCadTeste";
-            ((System.ComponentModel.ISupportInitialize)qtdQuestao).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtQtdQuestao).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -258,7 +263,7 @@
         private Label label5;
         private TextBox txb_titulo;
         private Label label6;
-        private NumericUpDown qtdQuestao;
+        private NumericUpDown txtQtdQuestao;
         private ListBox lb_questoesSorteadas;
         private CheckBox cb_provaRec;
         private Button btn_cancelar;

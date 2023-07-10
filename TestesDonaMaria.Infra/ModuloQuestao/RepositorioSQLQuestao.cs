@@ -1,5 +1,6 @@
 using Microsoft.Data.SqlClient;
 using TestesDonaMaria.Dominio.ModuloQuestao;
+using TestesDonaMaria.Dominio.ModuloTeste;
 
 namespace TestesDonaMaria.Infra.ModuloQuestao
 {
@@ -23,7 +24,7 @@ namespace TestesDonaMaria.Infra.ModuloQuestao
                                                             FROM 
                                                                 TBQuestao AS Q
                                                             INNER JOIN 
-                                                                TBMateria AS M ON M.id = Q.id
+                                                                TBMateria AS M ON M.id = Q.materia_id
                                                             INNER JOIN 
                                                                 TBDisciplina AS D ON D.id = M.disciplina_id
 
@@ -35,6 +36,26 @@ namespace TestesDonaMaria.Infra.ModuloQuestao
 
         protected string carregarAlternativasSQL => "SELECT * FROM TBAlternativa WHERE questao_id = @questao_id";
         protected string excluirAlternativasSQL => "DELETE FROM TBAlternativa WHERE questao_id = @questao_id";
+
+        protected string selecionarAleatoriamenteSQL => @"
+                                                        SELECT TOP (@quantidade)
+	                                                        Q.id AS QUESTAO_ID,
+	                                                        Q.titulo AS QUESTAO_TITULO,
+	                                                        Q.serie AS QUESTAO_SERIE,
+	                                                        M.id AS MATERIA_ID,
+	                                                        M.nome AS MATERIA_NOME,
+	                                                        D.id AS DISCIPLINA_ID,
+	                                                        D.nome AS DISCIPLINA_NOME
+                                                        FROM 
+                                                            TBQuestao AS Q
+                                                        INNER JOIN 
+                                                            TBMateria AS M ON M.id = Q.materia_id
+                                                        INNER JOIN 
+                                                            TBDisciplina AS D ON D.id = M.disciplina_id
+                                                        WHERE Q.serie = @serie AND M.id = @materia_id
+                                                        ORDER BY NEWID()
+";
+        protected string selecionarPorTesteIdSQL => selecionarTodosSQL + " INNER JOIN TBTeste_TBQuestao AS TQ ON TQ.questao_id = Q.id WHERE TQ.teste_id = @teste_id";
 
         public RepositorioSQLQuestao() : base()
         {
@@ -70,6 +91,58 @@ namespace TestesDonaMaria.Infra.ModuloQuestao
                 CarregarAlternativas(questao);
             }
             return questoes;
+        }
+
+        public List<Questao> SelecionarPorTesteId(int teste_id) { 
+            List<Questao> questoes = new List<Questao>();
+            Conexao();
+            SqlCommand comando = new SqlCommand(selecionarPorTesteIdSQL, conexao);
+            comando.Parameters.AddWithValue("@teste_id", teste_id);
+            SqlDataReader leitorRegistros = comando.ExecuteReader();
+            while (leitorRegistros.Read())
+            {
+                Questao questao = mapeador.ConverterRegistro(leitorRegistros);
+                questoes.Add(questao);
+            }
+
+            conexao.Close();
+
+            foreach (Questao questao in questoes)
+            {
+                CarregarAlternativas(questao);
+            }
+            
+            return questoes;
+        }
+
+        public List<Questao> SelecionarAleatoriamente(int quantidade, int materia_id, int serie)
+        {
+            Conexao();
+
+            SqlCommand comando = new SqlCommand(selecionarAleatoriamenteSQL, conexao);
+
+            comando.Parameters.AddWithValue("@quantidade", quantidade);
+            comando.Parameters.AddWithValue("@materia_id", materia_id);
+            comando.Parameters.AddWithValue("@serie", serie);
+
+            SqlDataReader leitorRegistros = comando.ExecuteReader();
+
+            List<Questao> listaQuestoes = new List<Questao>();
+
+            while (leitorRegistros.Read())
+            {
+                Questao questao = mapeador.ConverterRegistro(leitorRegistros);
+                listaQuestoes.Add(questao);
+            }
+
+            conexao.Close();
+
+            foreach (Questao questao in listaQuestoes)
+            {
+                CarregarAlternativas(questao);
+            }
+
+            return listaQuestoes;
         }
 
         public void EditarAlternativas(Questao questao)

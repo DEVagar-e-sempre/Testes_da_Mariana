@@ -127,7 +127,7 @@ namespace TestesDonaMaria.Infra.Compartilhado
             SqlCommand comando = new SqlCommand(proximoIdSQL, conexao);
             int proximoId = Convert.ToInt32(comando.ExecuteScalar());
             conexao.Close();
-            return proximoId;
+            return proximoId+1;
         }
     }
 }
