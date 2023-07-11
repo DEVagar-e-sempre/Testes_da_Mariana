@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TelaPrincipal));
             painel_botoesEntidades = new Panel();
             label3 = new Label();
             btn_teste = new Button();
@@ -164,7 +165,7 @@
             ts_ferramentas.Items.AddRange(new ToolStripItem[] { btn_inserir, btn_editar, btn_excluir, toolStripSeparator1, btn_filtrar, btn_listar, toolStripSeparator2, btn_pdf, toolStripSeparator3, lbl_tipoCad });
             ts_ferramentas.Location = new Point(195, 78);
             ts_ferramentas.Name = "ts_ferramentas";
-            ts_ferramentas.Size = new Size(385, 31);
+            ts_ferramentas.Size = new Size(354, 31);
             ts_ferramentas.TabIndex = 1;
             ts_ferramentas.Text = "toolStrip1";
             // 
@@ -312,8 +313,9 @@
             Controls.Add(ts_ferramentas);
             Controls.Add(painel_principal);
             Controls.Add(painel_botoesEntidades);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "TelaPrincipal";
-            Text = "Tela Principal";
+            Text = "Testes Mariana";
             painel_botoesEntidades.ResumeLayout(false);
             painel_botoesEntidades.PerformLayout();
             ts_ferramentas.ResumeLayout(false);
