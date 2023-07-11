@@ -113,7 +113,7 @@ namespace TestesDonaMaria.WinForms
 
             if (controlador == null)
             {
-                MessageBox.Show("Selecione alguma categoria antes de realizar uma ação",
+                MessageBox.Show("Selecione alguma categoria antes de realizar uma a��o",
                     "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
@@ -154,8 +154,9 @@ namespace TestesDonaMaria.WinForms
             btn_inserir.Enabled = controlador.InserirHabilitado;
             btn_editar.Enabled = controlador.EditarHabilitado;
             btn_excluir.Enabled = controlador.ExcluirHabilitado;
-            btn_filtrar.Enabled = controlador.FiltrarHabilitado;
-            btn_listar.Enabled = controlador.ListarHabilitado;
+            //btn_addItem.Enabled = controlador.AddItemHabilitado;
+            //btn_filtrar.Enabled = controlador.FiltrarHabilitado;
+            //btn_list.Enabled = controlador.ListarHabilitado;
         }
     }
 }
