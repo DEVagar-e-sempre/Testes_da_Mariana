@@ -1,11 +1,7 @@
-﻿using System;
-using System.IO;
-using iText.Kernel.Font;
-using iTextSharp.text;
+﻿using iTextSharp.text;
 using iTextSharp.text.pdf;
 using TestesDonaMaria.Dominio.ModuloQuestao;
 using TestesDonaMaria.Dominio.ModuloTeste;
-using Font = System.Drawing.Font;
 
 namespace TestesDonaMaria.WinForms.ModuloTeste
 {
@@ -14,7 +10,7 @@ namespace TestesDonaMaria.WinForms.ModuloTeste
         private Chunk chunk;
         private Document documento;
         private FileStream arquivo;
-        private String pastaTesteMariana;
+        private string pastaTesteMariana;
 
         public GeradorPDF()
         {

@@ -42,7 +42,7 @@ namespace TestesDonaMaria.WinForms.ModuloTeste
             testeSelec.listaQuestoes.AddRange(repQuestao.SelecionarPorTesteId(testeSelec.id));
 
 
-            telaTeste = new TelaTeste(repTeste, repQuestao, repMateria, repDisciplina);
+            telaTeste = new TelaTeste(repTeste, repQuestao, repMateria, repDisciplina, true);
             telaTeste.Teste = testeSelec;
 
             DialogResult opcaoEscolhida = telaTeste.ShowDialog();
@@ -91,7 +91,7 @@ namespace TestesDonaMaria.WinForms.ModuloTeste
 
         public override void Inserir()
         {
-            telaTeste = new TelaTeste(repTeste, repQuestao, repMateria, repDisciplina);
+            telaTeste = new TelaTeste(repTeste, repQuestao, repMateria, repDisciplina, false);
 
             telaTeste.DefinirID(repTeste.ObterProximoID());
 

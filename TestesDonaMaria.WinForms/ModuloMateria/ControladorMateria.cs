@@ -21,7 +21,7 @@ namespace TestesDonaMaria.WinForms.ModuloMateria
 
         public override void Inserir()
         {
-            telaMateria = new TelaMateria(repMateria, repDisciplina);
+            telaMateria = new TelaMateria(repMateria, repDisciplina, false);
 
             telaMateria.DefinirID(repMateria.ObterProximoID());
 
@@ -48,7 +48,7 @@ namespace TestesDonaMaria.WinForms.ModuloMateria
             }
             else
             {
-                telaMateria = new TelaMateria(repMateria, repDisciplina);
+                telaMateria = new TelaMateria(repMateria, repDisciplina, true);
                 telaMateria.MateriaP = materiaSelec;
 
                 DialogResult opcaoEscolhida = telaMateria.ShowDialog();

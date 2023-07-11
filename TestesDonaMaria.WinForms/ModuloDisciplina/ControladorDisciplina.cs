@@ -18,7 +18,7 @@ namespace TestesDonaMaria.WinForms.ModuloDisciplina
 
         public override void Inserir()
         {
-            telaDisciplina = new TelaDisciplina(repDisciplina);
+            telaDisciplina = new TelaDisciplina(repDisciplina, false);
 
             telaDisciplina.DefinirID(repDisciplina.ObterProximoID());
 
@@ -46,7 +46,7 @@ namespace TestesDonaMaria.WinForms.ModuloDisciplina
             }
             else
             {
-                telaDisciplina = new TelaDisciplina(repDisciplina);
+                telaDisciplina = new TelaDisciplina(repDisciplina, true);
                 telaDisciplina.Disciplina = disciplinaSelec;
 
                 DialogResult opcaoEscolhida = telaDisciplina.ShowDialog();
