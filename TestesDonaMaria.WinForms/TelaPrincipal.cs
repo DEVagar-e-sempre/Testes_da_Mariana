@@ -113,7 +113,7 @@ namespace TestesDonaMaria.WinForms
 
             if (controlador == null)
             {
-                MessageBox.Show("Selecione alguma categoria antes de realizar uma a��o",
+                MessageBox.Show("Selecione alguma categoria antes de realizar uma ação",
                     "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
