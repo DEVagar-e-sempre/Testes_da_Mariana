@@ -154,9 +154,9 @@ namespace TestesDonaMaria.WinForms
             btn_inserir.Enabled = controlador.InserirHabilitado;
             btn_editar.Enabled = controlador.EditarHabilitado;
             btn_excluir.Enabled = controlador.ExcluirHabilitado;
-            //btn_addItem.Enabled = controlador.AddItemHabilitado;
-            //btn_filtrar.Enabled = controlador.FiltrarHabilitado;
-            //btn_list.Enabled = controlador.ListarHabilitado;
+            btn_filtrar.Enabled = controlador.FiltrarHabilitado;
+            btn_listar.Enabled = controlador.ListarHabilitado;
+            btn_pdf.Enabled = controlador.GerarPDFHabilitado;
         }
     }
 }

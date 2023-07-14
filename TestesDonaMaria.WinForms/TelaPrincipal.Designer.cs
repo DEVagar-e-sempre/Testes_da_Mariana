@@ -210,6 +210,7 @@
             // btn_filtrar
             // 
             btn_filtrar.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            btn_filtrar.Enabled = false;
             btn_filtrar.Image = Properties.Resources.filter_alt_FILL0_wght400_GRAD0_opsz24;
             btn_filtrar.ImageTransparentColor = Color.Magenta;
             btn_filtrar.Name = "btn_filtrar";
@@ -221,6 +222,7 @@
             // btn_listar
             // 
             btn_listar.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            btn_listar.Enabled = false;
             btn_listar.Image = Properties.Resources.outline_view_list_black_24dp;
             btn_listar.ImageTransparentColor = Color.Magenta;
             btn_listar.Name = "btn_listar";
@@ -236,6 +238,7 @@
             // 
             // btn_pdf
             // 
+            btn_pdf.Enabled = false;
             btn_pdf.Image = Properties.Resources.picture_as_pdf_FILL0_wght400_GRAD0_opsz24;
             btn_pdf.ImageTransparentColor = Color.Magenta;
             btn_pdf.Name = "btn_pdf";
