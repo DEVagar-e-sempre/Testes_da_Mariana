@@ -12,13 +12,17 @@ namespace TestesDonaMaria.Infra.ModuloMateria
         protected override string excluirSQL => "DELETE FROM TBMateria WHERE id = @id";
 
         protected override string selecionarTodosSQL => @"
-                                                         SELECT 
+                                                        SELECT 
 	                                                        M.id AS materia_id, 
 	                                                        M.nome AS materia_nome, 
+                                                            
 	                                                        D.id AS disciplina_id, 
 	                                                        D.nome AS disciplina_nome 
-                                                        FROM TBMateria AS M
-                                                        INNER JOIN TBDisciplina AS D ON D.id = M.disciplina_id ";
+                                                        FROM 
+                                                            TBMateria AS M
+                                                            INNER JOIN TBDisciplina AS D 
+                                                        ON 
+                                                            D.id = M.disciplina_id ";
         protected override string selecionarPorIdSQL => selecionarTodosSQL + " WHERE M.id = @id";
         public RepositorioSQLMateria() : base()
         {
@@ -73,14 +77,13 @@ namespace TestesDonaMaria.Infra.ModuloMateria
         public List<Materia> SelecionarTodosPorDisciplina(int disciplinaId)
         {
             Conexao();
+            List<Materia> materias = new List<Materia>();
 
             SqlCommand comando = new SqlCommand(selecionarTodosSQL + " WHERE disciplina_id = @disciplina_id", conexao);
 
             comando.Parameters.AddWithValue("@disciplina_id", disciplinaId);
 
             SqlDataReader leitor = comando.ExecuteReader();
-
-            List<Materia> materias = new List<Materia>();
 
             while (leitor.Read())
             {
