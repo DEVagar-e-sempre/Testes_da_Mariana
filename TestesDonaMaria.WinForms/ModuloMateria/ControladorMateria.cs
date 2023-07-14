@@ -1,4 +1,5 @@
-﻿using TestesDonaMaria.Dominio.ModuloMateria;
+﻿using TestesDonaMaria.Dominio.ModuloDisciplina;
+using TestesDonaMaria.Dominio.ModuloMateria;
 using TestesDonaMaria.Infra.ModuloDisciplina;
 using TestesDonaMaria.Infra.ModuloMateria;
 
@@ -73,6 +74,7 @@ namespace TestesDonaMaria.WinForms.ModuloMateria
                     MessageBoxIcon.Exclamation);
                 return;
             }
+
             if (repMateria.TemDependente(materiaSelec))
             {
                 MessageBox.Show($"Não é possível excluir uma {ObterTipo} que esteja relacionada a uma Questao ou Teste",
@@ -82,6 +84,7 @@ namespace TestesDonaMaria.WinForms.ModuloMateria
 
                 return;
             }
+
             DialogResult opcaoEscolhida = MessageBox.Show($"Deseja excluir a Materia {materiaSelec.nome}?",
                 "Exclusão de Materia",
                 MessageBoxButtons.OKCancel,
@@ -92,6 +95,34 @@ namespace TestesDonaMaria.WinForms.ModuloMateria
                 repMateria.Excluir(materiaSelec);
 
                 CarregarMateria();
+            }
+        }
+
+        public override void Filtrar()
+        {
+            TelaFiltroMateria telaFiltro = new TelaFiltroMateria(repDisciplina);
+
+            DialogResult op = telaFiltro.ShowDialog();
+
+            if(op == DialogResult.OK)
+            {
+                Disciplina discSelecionada = telaFiltro.ObterDisciplinaMateria();
+                StatusFiltroMateriaEnum status = telaFiltro.ObterStatus();
+
+                switch (status)
+                {
+                    case StatusFiltroMateriaEnum.Nenhum:
+                    break;
+
+                    case StatusFiltroMateriaEnum.PorDisciplina:
+                        List<Materia> listaMaterias = repMateria.SelecionarTodosPorDisciplina(discSelecionada.id);
+                        CarregarMateria(listaMaterias);
+                    break;
+
+                    case StatusFiltroMateriaEnum.Todos:
+                        CarregarMateria();
+                    break;
+                }
             }
         }
 
@@ -116,6 +147,10 @@ namespace TestesDonaMaria.WinForms.ModuloMateria
         private void CarregarMateria()
         {
             List<Materia> listaMaterias = repMateria.SelecionarTodos();
+            tabelaMateria.AtualizarRegistros(listaMaterias);
+        }
+        private void CarregarMateria(List<Materia> listaMaterias)
+        {
             tabelaMateria.AtualizarRegistros(listaMaterias);
         }
     }
