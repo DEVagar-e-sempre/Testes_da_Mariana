@@ -26,9 +26,10 @@ namespace TestesDonaMaria.WinForms
             ObterEntidade();
 
             telaPrincipal = this;
-        }
 
+        }
         public static TelaPrincipal InstanciaAtual => telaPrincipal;
+
         private void ObterEntidade()
         {
             foreach (Control ctrl in painel_botoesEntidades.Controls)
