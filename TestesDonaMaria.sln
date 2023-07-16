@@ -19,7 +19,7 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "TesteMariana.Infra.DataBase
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Aplicação", "2 - Aplicação", "{E3DD53D4-450B-493C-9940-1A1B9C69AA14}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestesDonaMaria.Aplicacao", "TestesDonaMaria.Aplicacao\TestesDonaMaria.Aplicacao.csproj", "{034669E2-6121-4CCD-A443-7CC71EC79B54}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestesDonaMaria.Aplicacao", "TestesDonaMaria.Aplicacao\TestesDonaMaria.Aplicacao.csproj", "{034669E2-6121-4CCD-A443-7CC71EC79B54}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
