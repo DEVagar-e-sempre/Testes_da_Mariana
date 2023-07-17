@@ -1,6 +1,9 @@
-﻿namespace TestesDonaMaria.Aplicacao.ModuloMateria
+﻿using TestesDonaMaria.Dominio.ModuloMateria;
+using TestesDonaMaria.Infra.ModuloMateria;
+
+namespace TestesDonaMaria.Aplicacao.ModuloMateria
 {
-    public class ServicoMateria
+    public class ServicoMateria : ServicoBase <Materia, RepositorioSQLMateria>
     {
     }
 }

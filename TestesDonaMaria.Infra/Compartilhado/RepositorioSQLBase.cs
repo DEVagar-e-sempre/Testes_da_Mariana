@@ -4,7 +4,7 @@ using TestesDonaMaria.Dominio.ModuloDisciplina;
 
 namespace TestesDonaMaria.Infra.Compartilhado
 {
-    public abstract class RepositorioSQLBase<TEntidade, TMapeador> 
+    public abstract class RepositorioSQLBase<TEntidade, TMapeador> : IRepositorioBase<TEntidade>
         where TEntidade : EntidadeBase<TEntidade>
         where TMapeador : MapeadorBase<TEntidade>, new()
     {
