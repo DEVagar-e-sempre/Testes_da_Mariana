@@ -8,7 +8,7 @@ namespace TestesDonaMaria.WinForms.ModuloTeste
 {
     public class ControladorTeste : ControladorBase
     {
-        public override string ObterTipo => "Cadastro de Testes";
+        public override string ObterTipo => "Teste";
         public override bool FiltrarHabilitado => true;
         public override bool ListarHabilitado => true;
 

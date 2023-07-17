@@ -7,7 +7,7 @@ namespace TestesDonaMaria.WinForms.ModuloMateria
 {
     public class ControladorMateria : ControladorBase
     {
-        public override string ObterTipo => "Cadastro de Materia";
+        public override string ObterTipo => "Materia";
         public override bool FiltrarHabilitado => true;
         public override bool ListarHabilitado => true;
 
