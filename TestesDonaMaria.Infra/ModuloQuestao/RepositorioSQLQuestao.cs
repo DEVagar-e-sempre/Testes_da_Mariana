@@ -56,6 +56,11 @@ namespace TestesDonaMaria.Infra.ModuloQuestao
                                                         ORDER BY NEWID()
 ";
         protected string selecionarPorTesteIdSQL => selecionarTodosSQL + " INNER JOIN TBTeste_TBQuestao AS TQ ON TQ.questao_id = Q.id WHERE TQ.teste_id = @teste_id";
+        protected override string verificarRepeticaoNome => @"
+                            SELECT COUNT(*)
+                            FROM TBQuestao
+                            WHERE TBQuestao.titulo = titulo
+                            AND TBQuestao.id != @id;";
 
         public RepositorioSQLQuestao() : base()
         {
@@ -196,15 +201,8 @@ namespace TestesDonaMaria.Infra.ModuloQuestao
         public override bool EhRepetido(Questao registro)
         {
             Conexao();
-            String verificarDepedenteSQL = @"
-                            SELECT COUNT(*)
-                            FROM TBQuestao
-                            WHERE TBQuestao.titulo = titulo
-                            AND TBQuestao.id != @id;
 
-";
-
-            SqlCommand comando = new SqlCommand(verificarDepedenteSQL, conexao);
+            SqlCommand comando = new SqlCommand(verificarRepeticaoNome, conexao);
 
             comando.Parameters.AddWithValue("@titulo", registro.enunciado);
             comando.Parameters.AddWithValue("@id", registro.id);

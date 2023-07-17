@@ -1,6 +1,4 @@
-﻿using Microsoft.Data.SqlClient;
-
-namespace TestesDonaMaria.Dominio.Compartilhado
+﻿namespace TestesDonaMaria.Dominio.Compartilhado
 {
     public abstract class EntidadeBase<T>
     {

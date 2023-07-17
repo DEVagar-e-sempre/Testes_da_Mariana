@@ -1,5 +1,4 @@
-﻿using Microsoft.Data.SqlClient;
-using TestesDonaMaria.Dominio.ModuloDisciplina;
+﻿using TestesDonaMaria.Dominio.ModuloDisciplina;
 
 namespace TestesDonaMaria.Dominio.ModuloMateria
 {

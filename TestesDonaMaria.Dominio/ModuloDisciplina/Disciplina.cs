@@ -1,6 +1,4 @@
-﻿using Microsoft.Data.SqlClient;
-
-namespace TestesDonaMaria.Dominio.ModuloDisciplina
+﻿namespace TestesDonaMaria.Dominio.ModuloDisciplina
 {
     public class Disciplina : EntidadeBase<Disciplina>
     {
