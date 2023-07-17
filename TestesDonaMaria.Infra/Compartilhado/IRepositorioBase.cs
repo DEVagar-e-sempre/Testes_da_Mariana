@@ -16,5 +16,6 @@ namespace TestesDonaMaria.Infra.Compartilhado
         public TEntidade SelecionarPorId(int id);
         public List<TEntidade> SelecionarTodos();
         public int ObterProximoID();
+        public bool EhRepetido(TEntidade registro);
     }
 }

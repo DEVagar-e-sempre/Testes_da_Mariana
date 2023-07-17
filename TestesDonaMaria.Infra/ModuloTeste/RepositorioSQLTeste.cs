@@ -68,7 +68,14 @@ namespace TestesDonaMaria.Infra.ModuloTeste
 	                                                TBTeste_TBQuestao.teste_id = @teste_id";
 
         protected string excluirRelacaoQuestaoSQL => @"DELETE FROM TBTESTE_TBQUESTAO WHERE TESTE_ID = @teste_id";
-
+        protected override string verificarRepeticaoNome => @" SELECT COUNT(*)
+                                                FROM 
+                                                    TBTeste
+                                                WHERE 
+                                                    TBTESTE.TITULO = @titulo 
+                                                AND 
+                                                    TBTESTE.MATERIA_ID = @materia_id
+                                                AND TBTESTE.ID != @id";
         public RepositorioSQLTeste() : base()
         {
         }
@@ -130,16 +137,8 @@ namespace TestesDonaMaria.Infra.ModuloTeste
         public override bool EhRepetido(Teste registro)
         {
             Conexao(); // LIKE é comparador de strings
-            string verificarRepetidoSQL = @" SELECT COUNT(*)
-                                                FROM 
-                                                    TBTeste
-                                                WHERE 
-                                                    TBTESTE.TITULO = @titulo 
-                                                AND 
-                                                    TBTESTE.MATERIA_ID = @materia_id
-                                                AND TBTESTE.ID != @id";
 
-            SqlCommand comando = new SqlCommand(verificarRepetidoSQL, conexao);
+            SqlCommand comando = new SqlCommand(verificarRepeticaoNome, conexao);
 
             comando.Parameters.AddWithValue("@titulo", registro.titulo);
             comando.Parameters.AddWithValue("@materia_id", registro.materia.id);

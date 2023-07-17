@@ -24,6 +24,13 @@ namespace TestesDonaMaria.Infra.ModuloMateria
                                                         ON 
                                                             D.id = M.disciplina_id ";
         protected override string selecionarPorIdSQL => selecionarTodosSQL + " WHERE M.id = @id";
+        protected override string verificarRepeticaoNome => @" SELECT COUNT(*)
+                                                FROM 
+                                                    TBMATERIA
+                                                WHERE 
+                                                    TBMATERIA.NOME = @nome
+                                                AND TBMATERIA.ID != @id";
+
         public RepositorioSQLMateria() : base()
         {
         }
@@ -31,14 +38,8 @@ namespace TestesDonaMaria.Infra.ModuloMateria
         public override bool EhRepetido(Materia registro)
         {
             Conexao();
-            string verificarDepedenteSQL = @" SELECT COUNT(*)
-                                                FROM 
-                                                    TBMATERIA
-                                                WHERE 
-                                                    TBMATERIA.NOME = @nome
-                                                AND TBMATERIA.ID != @id";
 
-            SqlCommand comando = new SqlCommand(verificarDepedenteSQL, conexao);
+            SqlCommand comando = new SqlCommand(verificarRepeticaoNome, conexao);
 
             comando.Parameters.AddWithValue("@nome", registro.nome);
             comando.Parameters.AddWithValue("@id", registro.id);

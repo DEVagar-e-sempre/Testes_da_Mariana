@@ -1,7 +1,4 @@
-﻿using Microsoft.Data.SqlClient;
-using Microsoft.IdentityModel.Tokens;
-using TestesDonaMaria.Dominio.ModuloDisciplina;
-using TestesDonaMaria.Dominio.ModuloMateria;
+﻿using TestesDonaMaria.Dominio.ModuloMateria;
 
 namespace TestesDonaMaria.Dominio.ModuloQuestao
 {

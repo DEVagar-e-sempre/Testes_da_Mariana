@@ -1,6 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
 using TestesDonaMaria.Dominio.Compartilhado;
-using TestesDonaMaria.Dominio.ModuloDisciplina;
 
 namespace TestesDonaMaria.Infra.Compartilhado
 {
@@ -21,6 +20,7 @@ namespace TestesDonaMaria.Infra.Compartilhado
         protected virtual string excluirSQL => "";
         protected virtual string selecionarTodosSQL => "";
         protected virtual string selecionarPorIdSQL => selecionarTodosSQL + " WHERE id = @id";
+        protected virtual string verificarRepeticaoNome => "";
         
         public RepositorioSQLBase()
         {
@@ -117,7 +117,7 @@ namespace TestesDonaMaria.Infra.Compartilhado
             return registros;
         }
 
-        public abstract bool EhRepetido(TEntidade registro);
+        public virtual bool EhRepetido(TEntidade registro) { return  false; }
         public abstract bool TemDependente(TEntidade registro);
         public virtual int ObterProximoID()
         {

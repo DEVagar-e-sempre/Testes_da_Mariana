@@ -14,6 +14,12 @@ namespace TestesDonaMaria.Infra.ModuloDisciplina
                                                         FROM 
                                                             [TBDISCIPLINA]";
         protected override string selecionarPorIdSQL => selecionarTodosSQL + " WHERE [ID] = @ID";
+        protected override string verificarRepeticaoNome => @"
+                            SELECT COUNT(*)
+                            FROM TBDisciplina
+                            WHERE TBDisciplina.nome = @nome 
+                            AND TBDisciplina.id != @id";
+
         public RepositorioSQLDisciplina() : base()
         {
         }
@@ -21,15 +27,8 @@ namespace TestesDonaMaria.Infra.ModuloDisciplina
         public override bool EhRepetido(Disciplina registro)
         {
             Conexao();
-            String verificarDepedenteSQL = @"
-                            SELECT COUNT(*)
-                            FROM TBDisciplina
-                            WHERE TBDisciplina.nome = @nome 
-                            AND TBDisciplina.id != @id;
 
-";
-
-            SqlCommand comando = new SqlCommand(verificarDepedenteSQL, conexao);
+            SqlCommand comando = new SqlCommand(verificarRepeticaoNome, conexao);
 
             comando.Parameters.AddWithValue("@nome", registro.nome);
             comando.Parameters.AddWithValue("@id", registro.id);
