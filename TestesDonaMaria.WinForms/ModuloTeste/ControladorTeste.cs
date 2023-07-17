@@ -1,4 +1,6 @@
-﻿using TestesDonaMaria.Dominio.ModuloTeste;
+﻿using FluentResults;
+using TestesDonaMaria.Aplicacao.ModuloTeste;
+using TestesDonaMaria.Dominio.ModuloTeste;
 using TestesDonaMaria.Infra.ModuloDisciplina;
 using TestesDonaMaria.Infra.ModuloMateria;
 using TestesDonaMaria.Infra.ModuloQuestao;
@@ -18,16 +20,18 @@ namespace TestesDonaMaria.WinForms.ModuloTeste
         private RepositorioSQLQuestao repQuestao;
         private RepositorioSQLMateria repMateria;
         private RepositorioSQLDisciplina repDisciplina;
+        private ServicoTeste servicoTeste;
         private TelaTeste telaTeste;
         private TabelaTeste tabelaTeste;
 
 
-        public ControladorTeste(RepositorioSQLTeste repTeste, RepositorioSQLQuestao repQuestao, RepositorioSQLMateria repMateria, RepositorioSQLDisciplina repDisciplina)
+        public ControladorTeste(RepositorioSQLTeste repTeste, RepositorioSQLQuestao repQuestao, RepositorioSQLMateria repMateria, RepositorioSQLDisciplina repDisciplina, ServicoTeste servico)
         {
             this.repTeste = repTeste;
             this.repQuestao = repQuestao;
             this.repMateria = repMateria;
             this.repDisciplina = repDisciplina;
+            this.servicoTeste = servico;
         }
 
         public override void Editar()
@@ -47,23 +51,24 @@ namespace TestesDonaMaria.WinForms.ModuloTeste
 
 
             telaTeste = new TelaTeste(repTeste, repQuestao, repMateria, repDisciplina, true);
+
             telaTeste.Teste = testeSelec;
+
+            telaTeste.onGravarRegistro += servicoTeste.Editar;
 
             DialogResult opcaoEscolhida = telaTeste.ShowDialog();
 
             if (opcaoEscolhida == DialogResult.OK)
             {
-                repTeste.Editar(telaTeste.Teste.id, telaTeste.Teste);
-
                 CarregarTeste();
             }
         }
 
         public override void Excluir()
         {
-            Teste TesteSelec = ObterTesteSelecionado();
+            Teste testeSelec = ObterTesteSelecionado();
 
-            if (TesteSelec == null)
+            if (testeSelec == null)
             {
                 MessageBox.Show($"Selecione um Teste primeiro!",
                     "Exclusão de Teste",
@@ -72,14 +77,22 @@ namespace TestesDonaMaria.WinForms.ModuloTeste
             }
             else
             {
-                DialogResult opcaoEscolhida = MessageBox.Show($"Deseja excluir o Teste {TesteSelec.titulo}?",
+                DialogResult opcaoEscolhida = MessageBox.Show($"Deseja excluir o Teste {testeSelec.titulo}?",
                     "Exclusão de Teste",
                     MessageBoxButtons.OKCancel,
                     MessageBoxIcon.Question);
 
                 if (opcaoEscolhida == DialogResult.OK)
                 {
-                    repTeste.Excluir(TesteSelec);
+                    Result resultado = servicoTeste.Excluir(testeSelec);
+
+                    if (resultado.IsFailed)
+                    {
+                        MessageBox.Show(resultado.Errors[0].Message, "Exclusão de Disciplinas",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                        return;
+                    }
 
                     CarregarTeste();
                 }
@@ -97,13 +110,14 @@ namespace TestesDonaMaria.WinForms.ModuloTeste
         {
             telaTeste = new TelaTeste(repTeste, repQuestao, repMateria, repDisciplina, false);
 
+            telaTeste.onGravarRegistro += servicoTeste.Inserir;
+
             telaTeste.DefinirID(repTeste.ObterProximoID());
 
             DialogResult opcaoEscolhida = telaTeste.ShowDialog();
 
             if (opcaoEscolhida == DialogResult.OK)
             {
-                repTeste.Inserir(telaTeste.Teste);
                 MessageBox.Show("Teste gravado com Sucesso!");
                 CarregarTeste();
             }

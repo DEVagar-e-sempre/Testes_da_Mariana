@@ -1,4 +1,6 @@
-﻿using TestesDonaMaria.Dominio.ModuloDisciplina;
+﻿using FluentResults;
+using TestesDonaMaria.Aplicacao.ModuloDisciplina;
+using TestesDonaMaria.Dominio.ModuloDisciplina;
 using TestesDonaMaria.Infra.ModuloDisciplina;
 
 namespace TestesDonaMaria.WinForms.ModuloDisciplina
@@ -8,28 +10,29 @@ namespace TestesDonaMaria.WinForms.ModuloDisciplina
         public override string ObterTipo => "Disciplina";
 
         private RepositorioSQLDisciplina repDisciplina;
+        private ServicoDisciplina servicoDisc;
         private TabelaDisciplina tabelaDisc;
         private TelaDisciplina telaDisciplina;
 
-        public ControladorDisciplina(RepositorioSQLDisciplina repDisciplina)
+        public ControladorDisciplina(RepositorioSQLDisciplina repDisciplina, ServicoDisciplina servicoDisc)
         {
             this.repDisciplina = repDisciplina;
+            this.servicoDisc = servicoDisc; 
         }
 
         public override void Inserir()
         {
             telaDisciplina = new TelaDisciplina(repDisciplina, false);
 
-            telaDisciplina.DefinirID(repDisciplina.ObterProximoID());
+            telaDisciplina.onGravarRegistro += servicoDisc.Inserir;
 
+            telaDisciplina.DefinirID(repDisciplina.ObterProximoID());
 
             DialogResult opcaoEscolhida = telaDisciplina.ShowDialog();
 
             if (opcaoEscolhida == DialogResult.OK)
             {
-                //chamar a camada de serviço ao inves do repositorio, Ex: servicoDisc.inserir()
-                repDisciplina.Inserir(telaDisciplina.Disciplina);
-                MessageBox.Show("Disciplina gravado com Sucesso!");
+                MessageBox.Show("Disciplina gravada com Sucesso!");
                 CarregarDisciplina();
             }
         }
@@ -48,14 +51,16 @@ namespace TestesDonaMaria.WinForms.ModuloDisciplina
             else
             {
                 telaDisciplina = new TelaDisciplina(repDisciplina, true);
+
                 telaDisciplina.Disciplina = disciplinaSelec;
+
+                telaDisciplina.onGravarRegistro += servicoDisc.Editar;
 
                 DialogResult opcaoEscolhida = telaDisciplina.ShowDialog();
 
                 if (opcaoEscolhida == DialogResult.OK)
                 {
-                    repDisciplina.Editar(telaDisciplina.Disciplina.id, telaDisciplina.Disciplina);
-
+                    MessageBox.Show("Disciplina editada com Sucesso!");
                     CarregarDisciplina();
                 }
             }
@@ -91,7 +96,15 @@ namespace TestesDonaMaria.WinForms.ModuloDisciplina
 
             if (opcaoEscolhida == DialogResult.OK)
             {
-                repDisciplina.Excluir(disciplinaSelec);
+                Result resultado = servicoDisc.Excluir(disciplinaSelec);
+
+                if (resultado.IsFailed)
+                {
+                    MessageBox.Show(resultado.Errors[0].Message, "Exclusão de Disciplinas",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    return;
+                }
 
                 CarregarDisciplina();
             }

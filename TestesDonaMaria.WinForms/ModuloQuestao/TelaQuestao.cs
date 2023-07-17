@@ -1,4 +1,5 @@
-﻿using TestesDonaMaria.Dominio.ModuloDisciplina;
+﻿using FluentResults;
+using TestesDonaMaria.Dominio.ModuloDisciplina;
 using TestesDonaMaria.Dominio.ModuloMateria;
 using TestesDonaMaria.Dominio.ModuloQuestao;
 using TestesDonaMaria.Infra.ModuloDisciplina;
@@ -11,13 +12,14 @@ namespace TestesDonaMaria.WinForms.ModuloQuestao
     {
 
         private RepositorioSQLQuestao repQuestao;
-
         private RepositorioSQLMateria repMateria;
-
         private RepositorioSQLDisciplina repDisciplina;
+
         private int disciplina_id;
         private int serie;
         private bool ehEdicao;
+
+        public event GravarRegistroDelegate<Questao> onGravarRegistro;
 
         public TelaQuestao(RepositorioSQLQuestao repQuestao, RepositorioSQLMateria repMateria, RepositorioSQLDisciplina repDisciplina)
         {
@@ -61,7 +63,7 @@ namespace TestesDonaMaria.WinForms.ModuloQuestao
         public Questao ObterQuestao()
         {
             Materia materia = (Materia)cbxMateria.SelectedItem;
-            String enunciado = txtEnunciado.Text;
+            string enunciado = txtEnunciado.Text;
             int serie = cbxSerie.SelectedIndex + 1;
             int id = Convert.ToInt32(txtID.Text);
 
@@ -75,7 +77,7 @@ namespace TestesDonaMaria.WinForms.ModuloQuestao
         {
             for (int i = 0; i < clbAlternativas.Items.Count; i++)
             {
-                String alternativa = clbAlternativas.Items[i].ToString();
+                string alternativa = clbAlternativas.Items[i].ToString();
                 bool correta = clbAlternativas.GetItemChecked(i);
 
                 questao.alternativas.Add(new(alternativa, correta, questao.id));
@@ -83,20 +85,18 @@ namespace TestesDonaMaria.WinForms.ModuloQuestao
         }
         private void btn_gravar_Click(object sender, EventArgs e)
         {
-            Questao aluguel = ObterQuestao();
-            string[] erros = aluguel.Validar();
+            Questao questao = ObterQuestao();
 
-            if (repQuestao.EhRepetido(aluguel))
+            Result resultado = onGravarRegistro(questao);
+
+            if (resultado.IsFailed)
             {
-                TelaPrincipal.InstanciaAtual.AtualizarRodape("Questão repetida");
+                string msgErro = resultado.Errors[0].Message;
+                TelaPrincipal.InstanciaAtual.AtualizarRodape(msgErro);
+                DialogResult = DialogResult.None;
                 return;
             }
-
-            if (erros.Length > 0)
-            {
-                TelaPrincipal.InstanciaAtual.AtualizarRodape(erros[0]);
-                DialogResult = DialogResult.None;
-            }
+            TelaPrincipal.InstanciaAtual.AtualizarRodape("Status");
         }
 
         private void btnAdicionarAlternativa_Click(object sender, EventArgs e)
@@ -156,6 +156,11 @@ namespace TestesDonaMaria.WinForms.ModuloQuestao
 
             btn_gravar.Text = "Atualizar";
 
+        }
+
+        private void btn_cancelar_Click(object sender, EventArgs e)
+        {
+            TelaPrincipal.InstanciaAtual.AtualizarRodape("Status");
         }
     }
 }

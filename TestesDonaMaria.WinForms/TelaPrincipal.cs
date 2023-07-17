@@ -1,3 +1,7 @@
+using TestesDonaMaria.Aplicacao.ModuloDisciplina;
+using TestesDonaMaria.Aplicacao.ModuloMateria;
+using TestesDonaMaria.Aplicacao.ModuloQuestao;
+using TestesDonaMaria.Aplicacao.ModuloTeste;
 using TestesDonaMaria.Infra.ModuloDisciplina;
 using TestesDonaMaria.Infra.ModuloMateria;
 using TestesDonaMaria.Infra.ModuloQuestao;
@@ -11,10 +15,18 @@ namespace TestesDonaMaria.WinForms
 {
     public partial class TelaPrincipal : Form
     {
-        private RepositorioSQLDisciplina repDisciplina = new RepositorioSQLDisciplina();
-        private RepositorioSQLMateria repMateria = new RepositorioSQLMateria();
-        private RepositorioSQLQuestao repQuestao = new RepositorioSQLQuestao();
-        private RepositorioSQLTeste repTeste = new RepositorioSQLTeste();
+        #region Declaração dos repositorios
+        private RepositorioSQLDisciplina repDisciplina;
+        private RepositorioSQLMateria repMateria;
+        private RepositorioSQLQuestao repQuestao;
+        private RepositorioSQLTeste repTeste;
+        #endregion
+        #region Declaração dos serviços
+        private ServicoDisciplina servicoDisc;
+        private ServicoMateria servicoMateria;
+        private ServicoTeste servicoTeste;
+        private ServicoQuestao servicoQuestao;
+        #endregion
         private ControladorBase controlador = null;
         private static TelaPrincipal telaPrincipal;
         public TelaPrincipal()
@@ -27,7 +39,26 @@ namespace TestesDonaMaria.WinForms
 
             telaPrincipal = this;
 
+            InicializadorRepositorios();
+            InicializarServicos();
         }
+
+        private void InicializadorRepositorios()
+        {
+            repDisciplina = new RepositorioSQLDisciplina();
+            repMateria = new RepositorioSQLMateria();
+            repQuestao = new RepositorioSQLQuestao();
+            repTeste = new RepositorioSQLTeste();
+        }
+
+        private void InicializarServicos()
+        {
+            servicoDisc = new ServicoDisciplina();
+            servicoMateria = new ServicoMateria();
+            servicoTeste = new ServicoTeste(repQuestao);
+            servicoQuestao = new ServicoQuestao();
+        }
+
         public static TelaPrincipal InstanciaAtual => telaPrincipal;
 
         private void ObterEntidade()
@@ -49,7 +80,7 @@ namespace TestesDonaMaria.WinForms
             switch (btn.Name)
             {
                 case "btn_disciplina":
-                    controlador = new ControladorDisciplina(repDisciplina);
+                    controlador = new ControladorDisciplina(repDisciplina, servicoDisc);
                     break;
 
                 case "btn_materia":
@@ -61,7 +92,7 @@ namespace TestesDonaMaria.WinForms
                     break;
 
                 case "btn_teste":
-                    controlador = new ControladorTeste(repTeste, repQuestao, repMateria, repDisciplina);
+                    controlador = new ControladorTeste(repTeste, repQuestao, repMateria, repDisciplina, servicoTeste);
                     break;
             }
 
