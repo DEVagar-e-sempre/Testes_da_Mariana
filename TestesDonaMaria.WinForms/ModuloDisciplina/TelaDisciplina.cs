@@ -1,4 +1,5 @@
-﻿using TestesDonaMaria.Dominio.ModuloDisciplina;
+﻿using FluentResults;
+using TestesDonaMaria.Dominio.ModuloDisciplina;
 using TestesDonaMaria.Infra.ModuloDisciplina;
 
 namespace TestesDonaMaria.WinForms.ModuloDisciplina
@@ -7,6 +8,7 @@ namespace TestesDonaMaria.WinForms.ModuloDisciplina
     {
         private Disciplina disciplina;
         private RepositorioSQLDisciplina repDisc;
+        public event GravarRegistroDelegate<Disciplina> onGravarRegistro;
 
         public TelaDisciplina(RepositorioSQLDisciplina repDisc, bool ehEdicao)
         {
@@ -39,34 +41,26 @@ namespace TestesDonaMaria.WinForms.ModuloDisciplina
 
         private void btn_gravar_Click(object sender, EventArgs e)
         {
-            TelaPrincipal telaPrincipal = TelaPrincipal.InstanciaAtual;
-
             int id = Convert.ToInt32(txb_id.Text);
             string nome = txb_nome.Text;
 
             disciplina = new Disciplina(id, nome);
 
-            if (repDisc.EhRepetido(disciplina))
-            {
-                telaPrincipal.AtualizarRodape("Nome de disciplina já existente, por favor insira um novo nome!");
+            Result resultado = onGravarRegistro(disciplina);
 
+            if (resultado.IsFailed)
+            {
+                string msgErro = resultado.Errors[0].Message;
+                TelaPrincipal.InstanciaAtual.AtualizarRodape(msgErro);
                 DialogResult = DialogResult.None;
+                return;
             }
-            else
-            {
-                string[] erros = disciplina.Validar();
+            TelaPrincipal.InstanciaAtual.AtualizarRodape("Status");
+        }
 
-                if (erros.Length > 0)
-                {
-                    telaPrincipal.AtualizarRodape(erros[0]);
-                    DialogResult = DialogResult.None;
-                }
-                else
-                {
-                    telaPrincipal.AtualizarRodape("Status");
-
-                }
-            }
+        private void btn_cancelar_Click(object sender, EventArgs e)
+        {
+            TelaPrincipal.InstanciaAtual.AtualizarRodape("Status");
         }
     }
 }

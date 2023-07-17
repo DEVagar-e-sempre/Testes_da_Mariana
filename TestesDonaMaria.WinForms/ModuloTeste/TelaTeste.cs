@@ -1,4 +1,5 @@
-﻿using TestesDonaMaria.Dominio.ModuloDisciplina;
+﻿using FluentResults;
+using TestesDonaMaria.Dominio.ModuloDisciplina;
 using TestesDonaMaria.Dominio.ModuloMateria;
 using TestesDonaMaria.Dominio.ModuloQuestao;
 using TestesDonaMaria.Dominio.ModuloTeste;
@@ -22,6 +23,7 @@ namespace TestesDonaMaria.WinForms.ModuloTeste
         private int qtdQuestao;
 
         private Teste teste;
+        public event GravarRegistroDelegate<Teste> onGravarRegistro;
 
 
         public TelaTeste(RepositorioSQLTeste repTeste, RepositorioSQLQuestao repQuestao, RepositorioSQLMateria repMateria, RepositorioSQLDisciplina repDisciplina, bool ehEdicao)
@@ -96,8 +98,6 @@ namespace TestesDonaMaria.WinForms.ModuloTeste
         }
         private void btn_gravar_Click(object sender, EventArgs e)
         {
-            TelaPrincipal telaPrincipal = TelaPrincipal.InstanciaAtual;
-
             string titulo = txb_titulo.Text;
 
             int id = Convert.ToInt32(txtID.Text);
@@ -108,29 +108,19 @@ namespace TestesDonaMaria.WinForms.ModuloTeste
 
             Materia materia = (Materia)cbxMateria.SelectedItem;
 
-
-
             teste = new Teste(id, titulo, materia, numQtdQuestao, this.serie, recuperacao);
             ObterQuestoes(teste);
 
-            if (repTeste.EhRepetido(teste))
+            Result resultado = onGravarRegistro(teste);
+
+            if (resultado.IsFailed)
             {
-                telaPrincipal.AtualizarRodape("Teste com essas caracteristicas já existente, por favor insira um novo Teste!");
-
-                DialogResult = DialogResult.None;
-
-                return;
-            }
-
-            string[] erros = teste.Validar();
-
-            if (erros.Length > 0)
-            {
-                telaPrincipal.AtualizarRodape(erros[0]);
+                string msgErro = resultado.Errors[0].Message;
+                TelaPrincipal.InstanciaAtual.AtualizarRodape(msgErro);
                 DialogResult = DialogResult.None;
                 return;
             }
-            telaPrincipal.AtualizarRodape("Status");
+            TelaPrincipal.InstanciaAtual.AtualizarRodape("Status");
 
         }
 
@@ -176,6 +166,11 @@ namespace TestesDonaMaria.WinForms.ModuloTeste
         {
             this.qtdQuestao = (int)txtQtdQuestao.Value;
             lb_questoesSorteadas.Items.Clear();
+        }
+
+        private void btn_cancelar_Click(object sender, EventArgs e)
+        {
+            TelaPrincipal.InstanciaAtual.AtualizarRodape("Status");
         }
     }
 }

@@ -1,5 +1,7 @@
-﻿using TestesDonaMaria.Dominio.ModuloDisciplina;
+﻿using FluentResults;
+using TestesDonaMaria.Dominio.ModuloDisciplina;
 using TestesDonaMaria.Dominio.ModuloMateria;
+using TestesDonaMaria.Dominio.ModuloQuestao;
 using TestesDonaMaria.Infra.ModuloDisciplina;
 using TestesDonaMaria.Infra.ModuloMateria;
 
@@ -10,6 +12,8 @@ namespace TestesDonaMaria.WinForms.ModuloMateria
         private Materia materia;
         private RepositorioSQLMateria repMateria;
         private RepositorioSQLDisciplina repDisciplina;
+
+        public event GravarRegistroDelegate<Materia> onGravarRegistro;
 
         public TelaMateria(RepositorioSQLMateria repMateria, RepositorioSQLDisciplina repDisciplina, bool ehEdicao)
         {
@@ -64,27 +68,22 @@ namespace TestesDonaMaria.WinForms.ModuloMateria
 
             materia = new Materia(id, nome, disciplina);
 
-            if (repMateria.EhRepetido(materia))
-            {
-                telaPrincipal.AtualizarRodape("Nome de materia já existente, por favor insira um novo nome!");
+            Result resultado = onGravarRegistro(materia);
 
+            if (resultado.IsFailed)
+            {
+                string msgErro = resultado.Errors[0].Message;
+                TelaPrincipal.InstanciaAtual.AtualizarRodape(msgErro);
                 DialogResult = DialogResult.None;
+                return;
             }
-            else
-            {
-                string[] erros = materia.Validar();
+            TelaPrincipal.InstanciaAtual.AtualizarRodape("Status");
 
-                if (erros.Length > 0)
-                {
-                    telaPrincipal.AtualizarRodape(erros[0]);
-                    DialogResult = DialogResult.None;
-                }
-                else
-                {
-                    telaPrincipal.AtualizarRodape("Status");
+        }
 
-                }
-            }
+        private void btn_cancelar_Click(object sender, EventArgs e)
+        {
+            TelaPrincipal.InstanciaAtual.AtualizarRodape("Status");
         }
     }
 }
