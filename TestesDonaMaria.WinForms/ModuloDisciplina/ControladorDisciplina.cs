@@ -3,10 +3,6 @@ using TestesDonaMaria.Infra.ModuloDisciplina;
 
 namespace TestesDonaMaria.WinForms.ModuloDisciplina
 {
-    /* Os controladores terão que ter uma instancia de cada camada de serviço respectivo
-     * as configurações de cada validação terão que estar nessa camada
-     * as instancias da camada de serviço serão passadas por parametro no construtor de cada controlador
-     */
     public class ControladorDisciplina : ControladorBase
     {
         public override string ObterTipo => "Cadastro de Disciplina";
@@ -31,6 +27,7 @@ namespace TestesDonaMaria.WinForms.ModuloDisciplina
 
             if (opcaoEscolhida == DialogResult.OK)
             {
+                //chamar a camada de serviço ao inves do repositorio, Ex: servicoDisc.inserir()
                 repDisciplina.Inserir(telaDisciplina.Disciplina);
                 MessageBox.Show("Disciplina gravado com Sucesso!");
                 CarregarDisciplina();
