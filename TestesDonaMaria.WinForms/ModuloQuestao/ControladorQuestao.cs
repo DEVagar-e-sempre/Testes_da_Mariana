@@ -1,4 +1,6 @@
-﻿using TestesDonaMaria.Dominio.ModuloQuestao;
+﻿using FluentResults;
+using TestesDonaMaria.Aplicacao.ModuloQuestao;
+using TestesDonaMaria.Dominio.ModuloQuestao;
 using TestesDonaMaria.Infra.ModuloDisciplina;
 using TestesDonaMaria.Infra.ModuloMateria;
 using TestesDonaMaria.Infra.ModuloQuestao;
@@ -18,12 +20,14 @@ namespace TestesDonaMaria.WinForms.ModuloQuestao
         private RepositorioSQLDisciplina repDisciplina;
 
         private TabelaQuestao tabelaQuestao;
+        private ServicoQuestao servicoQuestao;
 
-        public ControladorQuestao(RepositorioSQLQuestao repQuestao, RepositorioSQLMateria repMateria, RepositorioSQLDisciplina repDisciplina)
+        public ControladorQuestao(RepositorioSQLQuestao repQuestao, RepositorioSQLMateria repMateria, RepositorioSQLDisciplina repDisciplina, ServicoQuestao servicoQuestao)
         {
             this.repQuestao = repQuestao;
             this.repMateria = repMateria;
             this.repDisciplina = repDisciplina;
+            this.servicoQuestao = servicoQuestao;
         }
 
         public override void Editar()
@@ -38,6 +42,7 @@ namespace TestesDonaMaria.WinForms.ModuloQuestao
 
                 return;
             }
+
             if(repQuestao.TemDependente(questaoSelecionada))
             {
                 MessageBox.Show($"Não é possível editar uma {ObterTipo} que esteja relacionada a um Teste!",
@@ -47,18 +52,17 @@ namespace TestesDonaMaria.WinForms.ModuloQuestao
 
                 return;
             }
+
             TelaQuestao telaQuestao = new TelaQuestao(repQuestao, repMateria, repDisciplina);
 
             telaQuestao.ConfigurarTela(questaoSelecionada);
+
+            telaQuestao.onGravarRegistro += servicoQuestao.Editar;
 
             DialogResult opcaoEscolhida = telaQuestao.ShowDialog();
 
             if (opcaoEscolhida == DialogResult.OK)
             {
-                Questao auxQuestao = telaQuestao.ObterQuestao();
-
-                repQuestao.Editar(auxQuestao.id, auxQuestao);
-
                 CarregarQuestao();
             }
         }
@@ -75,15 +79,17 @@ namespace TestesDonaMaria.WinForms.ModuloQuestao
 
                 return;
             }
-            if (repQuestao.TemDependente(questaoSelecionada))
-            {
-                MessageBox.Show($"Não é possível excluir uma {ObterTipo} que esteja relacionada a um Teste!",
-                    $"Exclusão de {ObterTipo}",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Exclamation);
 
-                return;
-            }
+            //if (repQuestao.TemDependente(questaoSelecionada))
+            //{
+            //    MessageBox.Show($"Não é possível excluir uma {ObterTipo} que esteja relacionada a um Teste!",
+            //        $"Exclusão de {ObterTipo}",
+            //        MessageBoxButtons.OK,
+            //        MessageBoxIcon.Exclamation);
+
+            //    return;
+            //}
+
             DialogResult opcaoEscolhida = MessageBox.Show(
                 $"Deseja excluir o {ObterTipo} selecionado?",
                 $"Exclusão de {ObterTipo}",
@@ -92,7 +98,15 @@ namespace TestesDonaMaria.WinForms.ModuloQuestao
 
             if (opcaoEscolhida == DialogResult.OK)
             {
-                repQuestao.Excluir(questaoSelecionada);
+                Result resultado = servicoQuestao.Excluir(questaoSelecionada);
+
+                if (resultado.IsFailed)
+                {
+                    MessageBox.Show(resultado.Errors[0].Message, "Exclusão de Questão",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    return;
+                }
                 CarregarQuestao();
             }
         }
@@ -101,18 +115,14 @@ namespace TestesDonaMaria.WinForms.ModuloQuestao
         {
             TelaQuestao telaQuestao = new TelaQuestao(repQuestao, repMateria, repDisciplina);
 
+            telaQuestao.onGravarRegistro += servicoQuestao.Inserir;
+
             telaQuestao.DefinirID(repQuestao.ObterProximoID());
 
             DialogResult opcaoEscolhida = telaQuestao.ShowDialog();
 
-            Questao auxQuestao = null;
-
             if (opcaoEscolhida == DialogResult.OK)
             {
-                auxQuestao = telaQuestao.ObterQuestao();
-
-                repQuestao.Inserir(auxQuestao);
-
                 CarregarQuestao();
             }
             /*

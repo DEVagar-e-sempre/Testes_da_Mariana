@@ -79,15 +79,15 @@ namespace TestesDonaMaria.WinForms.ModuloDisciplina
                 return;
             }
 
-            if (repDisciplina.TemDependente(disciplinaSelec))
-            {
-                MessageBox.Show($"Não é possível excluir uma {ObterTipo} que esteja relacionada a uma Materia",
-                    $"Exclusão de {ObterTipo}",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Exclamation);
+            //if (repDisciplina.TemDependente(disciplinaSelec))
+            //{
+            //    MessageBox.Show($"Não é possível excluir uma {ObterTipo} que esteja relacionada a uma Materia",
+            //        $"Exclusão de {ObterTipo}",
+            //        MessageBoxButtons.OK,
+            //        MessageBoxIcon.Exclamation);
 
-                return;
-            }
+            //    return;
+            //}
 
             DialogResult opcaoEscolhida = MessageBox.Show($"Deseja excluir a Disciplina {disciplinaSelec.nome}?",
                 "Exclusão de Disciplinas",

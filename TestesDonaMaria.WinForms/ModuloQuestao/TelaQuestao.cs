@@ -20,7 +20,6 @@ namespace TestesDonaMaria.WinForms.ModuloQuestao
         private bool ehEdicao;
 
         public event GravarRegistroDelegate<Questao> onGravarRegistro;
-
         public TelaQuestao(RepositorioSQLQuestao repQuestao, RepositorioSQLMateria repMateria, RepositorioSQLDisciplina repDisciplina)
         {
             InitializeComponent();

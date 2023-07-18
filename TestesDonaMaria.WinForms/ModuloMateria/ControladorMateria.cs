@@ -1,4 +1,6 @@
-﻿using TestesDonaMaria.Dominio.ModuloDisciplina;
+﻿using FluentResults;
+using TestesDonaMaria.Aplicacao.ModuloMateria;
+using TestesDonaMaria.Dominio.ModuloDisciplina;
 using TestesDonaMaria.Dominio.ModuloMateria;
 using TestesDonaMaria.Infra.ModuloDisciplina;
 using TestesDonaMaria.Infra.ModuloMateria;
@@ -15,16 +17,20 @@ namespace TestesDonaMaria.WinForms.ModuloMateria
         private RepositorioSQLMateria repMateria;
         private TabelaMateria tabelaMateria;
         private TelaMateria telaMateria;
+        private ServicoMateria servicoMateria;
 
-        public ControladorMateria(RepositorioSQLMateria repMateria, RepositorioSQLDisciplina repDisciplina)
+        public ControladorMateria(RepositorioSQLMateria repMateria, RepositorioSQLDisciplina repDisciplina, ServicoMateria servicoMateria)
         {
             this.repMateria = repMateria;
             this.repDisciplina = repDisciplina;
+            this.servicoMateria = servicoMateria;
         }
 
         public override void Inserir()
         {
             telaMateria = new TelaMateria(repMateria, repDisciplina, false);
+
+            telaMateria.onGravarRegistro += servicoMateria.Inserir;
 
             telaMateria.DefinirID(repMateria.ObterProximoID());
 
@@ -32,7 +38,6 @@ namespace TestesDonaMaria.WinForms.ModuloMateria
 
             if (opcaoEscolhida == DialogResult.OK)
             {
-                repMateria.Inserir(telaMateria.MateriaP);
                 MessageBox.Show("Matéria gravado com Sucesso!");
                 CarregarMateria();
             }
@@ -52,13 +57,16 @@ namespace TestesDonaMaria.WinForms.ModuloMateria
             else
             {
                 telaMateria = new TelaMateria(repMateria, repDisciplina, true);
+
                 telaMateria.MateriaP = materiaSelec;
+
+                telaMateria.onGravarRegistro += servicoMateria.Editar;
 
                 DialogResult opcaoEscolhida = telaMateria.ShowDialog();
 
                 if (opcaoEscolhida == DialogResult.OK)
                 {
-                    repMateria.Editar(telaMateria.MateriaP.id, telaMateria.MateriaP);
+                    MessageBox.Show("Materia editada com Sucesso!");
                     CarregarMateria();
                 }
             }
@@ -77,15 +85,15 @@ namespace TestesDonaMaria.WinForms.ModuloMateria
                 return;
             }
 
-            if (repMateria.TemDependente(materiaSelec))
-            {
-                MessageBox.Show($"Não é possível excluir uma {ObterTipo} que esteja relacionada a uma Questao ou Teste",
-                    $"Exclusão de {ObterTipo}",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Exclamation);
+            //if (repMateria.TemDependente(materiaSelec))
+            //{
+            //    MessageBox.Show($"Não é possível excluir uma {ObterTipo} que esteja relacionada a uma Questao ou Teste",
+            //        $"Exclusão de {ObterTipo}",
+            //        MessageBoxButtons.OK,
+            //        MessageBoxIcon.Exclamation);
 
-                return;
-            }
+            //    return;
+            //}
 
             DialogResult opcaoEscolhida = MessageBox.Show($"Deseja excluir a Materia {materiaSelec.nome}?",
                 "Exclusão de Materia",
@@ -94,7 +102,15 @@ namespace TestesDonaMaria.WinForms.ModuloMateria
 
             if (opcaoEscolhida == DialogResult.OK)
             {
-                repMateria.Excluir(materiaSelec);
+                Result resultado = servicoMateria.Excluir(materiaSelec);
+
+                if (resultado.IsFailed)
+                {
+                    MessageBox.Show(resultado.Errors[0].Message, "Exclusão de Matéria",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    return;
+                }
 
                 CarregarMateria();
             }

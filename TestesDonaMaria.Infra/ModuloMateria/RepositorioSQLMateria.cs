@@ -25,11 +25,12 @@ namespace TestesDonaMaria.Infra.ModuloMateria
                                                             D.id = M.disciplina_id ";
         protected override string selecionarPorIdSQL => selecionarTodosSQL + " WHERE M.id = @id";
         protected override string verificarRepeticaoNome => @" SELECT COUNT(*)
-                                                FROM 
-                                                    TBMATERIA
-                                                WHERE 
-                                                    TBMATERIA.NOME = @nome
-                                                AND TBMATERIA.ID != @id";
+                                                                FROM 
+                                                                    TBMATERIA
+                                                                WHERE 
+                                                                    TBMATERIA.NOME = @nome
+                                                                AND 
+                                                                    TBMATERIA.ID != @id";
 
         public RepositorioSQLMateria() : base()
         {
