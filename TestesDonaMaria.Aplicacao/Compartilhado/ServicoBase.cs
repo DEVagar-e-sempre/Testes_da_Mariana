@@ -33,10 +33,21 @@ namespace TestesDonaMaria.Aplicacao.Compartilhado
             {
                 return Result.Fail(erros);
             }
+            try
+            {
+                repRegistro.Inserir(registro);
+                return Result.Ok();
+            }
+            catch (SqlException ex)
+            {
+                string msgErro = "Falha ao tentar inserir o registro. ";
 
-            repRegistro.Inserir(registro);
+                Log.Error(ex, msgErro + "{@registro}", registro);
 
-            return Result.Ok();
+                return Result.Fail(erros);
+            }
+
+
         }
 
         public virtual Result Editar(TEntidade registro)
@@ -47,10 +58,20 @@ namespace TestesDonaMaria.Aplicacao.Compartilhado
 
             if (erros.Count() > 0)
                 return Result.Fail(erros);
+            try
+            {
+                repRegistro.Editar(registro.id, registro);
 
-            repRegistro.Editar(registro.id, registro);
+                return Result.Ok();
+            }
+            catch (SqlException ex)
+            {
+                string msgErro = "Falha ao tentar editar o registro. ";
 
-            return Result.Ok();
+                Log.Error(ex, msgErro + "{@registro}", registro);
+
+                return Result.Fail(erros);
+            }
         }
 
         public virtual Result Excluir(TEntidade registro)
@@ -69,6 +90,8 @@ namespace TestesDonaMaria.Aplicacao.Compartilhado
             catch (SqlException ex)
             {
                 erros.Add(MsgErro);
+
+                Log.Warning(ex, MsgErro + "{@registro}", registro);
 
                 return Result.Fail(erros);
             }
