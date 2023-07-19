@@ -76,7 +76,11 @@ namespace TestesDonaMaria.Infra.ModuloTeste
                                                 AND 
                                                     TBTESTE.MATERIA_ID = @materia_id
                                                 AND TBTESTE.ID != @id";
-        public RepositorioSQLTeste() : base()
+        public RepositorioSQLTeste()
+        {
+        }
+
+        public RepositorioSQLTeste(string conexaoBD) : base(conexaoBD)
         {
         }
 

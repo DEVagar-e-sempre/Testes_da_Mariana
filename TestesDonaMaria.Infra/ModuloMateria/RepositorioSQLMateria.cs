@@ -32,7 +32,11 @@ namespace TestesDonaMaria.Infra.ModuloMateria
                                                                 AND 
                                                                     TBMATERIA.ID != @id";
 
-        public RepositorioSQLMateria() : base()
+        public RepositorioSQLMateria()
+        {
+            
+        }
+        public RepositorioSQLMateria(string conexaoBD) : base(conexaoBD)
         {
         }
 

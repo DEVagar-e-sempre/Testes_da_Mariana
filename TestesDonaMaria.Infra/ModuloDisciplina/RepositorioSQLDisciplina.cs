@@ -20,7 +20,12 @@ namespace TestesDonaMaria.Infra.ModuloDisciplina
                             WHERE TBDisciplina.nome = @nome 
                             AND TBDisciplina.id != @id";
 
-        public RepositorioSQLDisciplina() : base()
+
+        public RepositorioSQLDisciplina()
+        {
+            
+        }
+        public RepositorioSQLDisciplina(string conexaoBD) : base(conexaoBD)
         {
         }
 
