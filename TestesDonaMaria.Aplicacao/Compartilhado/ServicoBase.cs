@@ -1,5 +1,6 @@
 ﻿using FluentResults;
 using Microsoft.Data.SqlClient;
+using Serilog;
 using TestesDonaMaria.Dominio.Compartilhado;
 using TestesDonaMaria.Infra.Compartilhado;
 
@@ -24,6 +25,8 @@ namespace TestesDonaMaria.Aplicacao.Compartilhado
 
         public virtual Result Inserir(TEntidade registro)
         {
+            Log.Debug("Inserindo registro: {@registro}", registro);
+
             List<string> erros = ValidarRegistro(registro);
 
             if (erros.Count() > 0)
@@ -38,6 +41,8 @@ namespace TestesDonaMaria.Aplicacao.Compartilhado
 
         public virtual Result Editar(TEntidade registro)
         {
+            Log.Debug("Editando registro: {@registro}", registro);
+
             List<string> erros = ValidarRegistro(registro);
 
             if (erros.Count() > 0)
@@ -50,6 +55,8 @@ namespace TestesDonaMaria.Aplicacao.Compartilhado
 
         public virtual Result Excluir(TEntidade registro)
         {
+            Log.Debug("Excluindo registro: {@registro}", registro);
+
             List<string> erros = new List<string>();
 
             try

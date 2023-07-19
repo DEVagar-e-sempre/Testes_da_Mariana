@@ -1,4 +1,5 @@
 ﻿using FluentResults;
+using Serilog;
 using TestesDonaMaria.Dominio.ModuloQuestao;
 using TestesDonaMaria.Dominio.ModuloTeste;
 using TestesDonaMaria.Infra.ModuloQuestao;

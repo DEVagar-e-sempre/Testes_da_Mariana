@@ -1,3 +1,7 @@
+using FluentValidation;
+using Serilog;
+using System.Globalization;
+
 namespace TestesDonaMaria.WinForms
 {
     internal static class Program
@@ -10,6 +14,16 @@ namespace TestesDonaMaria.WinForms
         {
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
+
+            ValidatorOptions.Global.LanguageManager.Culture = new CultureInfo("pt-BR");
+
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
+                .WriteTo.Seq("http://localhost:5341")
+                .CreateLogger();
+                //.WriteTo.File("log.txt", rollingInterval: RollingInterval.Day)
+                //.CreateLogger();
+            Log.Debug("Iniciando aplicação");
             ApplicationConfiguration.Initialize();
             Application.Run(new TelaPrincipal());
         }
