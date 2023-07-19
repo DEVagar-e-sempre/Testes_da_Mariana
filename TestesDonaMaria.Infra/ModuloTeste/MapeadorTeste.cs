@@ -13,24 +13,24 @@ namespace TestesDonaMaria.Infra.ModuloTeste
         private Teste teste;
         public override void ConfigurarParametros(SqlCommand comando, Teste teste)
         {
-            comando.Parameters.AddWithValue("@titulo", teste.titulo);
-            comando.Parameters.AddWithValue("@materia_id", teste.materia.id);
-            comando.Parameters.AddWithValue("@quantQuestoes", teste.quantQuestoes);
-            comando.Parameters.AddWithValue("@serie", teste.serie);
-            comando.Parameters.AddWithValue("@recuperacao", teste.recuperacao);
+            comando.Parameters.AddWithValue("@TITULO", teste.titulo);
+            comando.Parameters.AddWithValue("@MATERIA_ID", teste.materia.id);
+            comando.Parameters.AddWithValue("@QUANTQUESTOES", teste.quantQuestoes);
+            comando.Parameters.AddWithValue("@SERIE", teste.serie);
+            comando.Parameters.AddWithValue("@RECUPERACAO", teste.recuperacao);
         }
 
         public void ConfigurarParametrosRelacaoQuestao(SqlCommand comando, int questao_id, int teste_id)
         {
-            comando.Parameters.AddWithValue("@teste_id", teste_id);
-            comando.Parameters.AddWithValue("@questao_id", questao_id);
+            comando.Parameters.AddWithValue("@TESTE_ID", teste_id);
+            comando.Parameters.AddWithValue("@QUESTAO_ID", questao_id);
         }
 
         public void ConfigurarParamentrosAlternativa(SqlCommand comando, Alternativa alternativa)
         {
-            comando.Parameters.AddWithValue("@alternativa", alternativa.alternativa);
-            comando.Parameters.AddWithValue("@questao_id", alternativa.questaoId);
-            comando.Parameters.AddWithValue("@correta", alternativa.correta);
+            comando.Parameters.AddWithValue("@ALTERNATIVA", alternativa.alternativa);
+            comando.Parameters.AddWithValue("@QUESTAO_ID", alternativa.questaoId);
+            comando.Parameters.AddWithValue("@CORRETA", alternativa.correta);
         }
 
         public override Teste ConverterRegistro(SqlDataReader leitorRegistros)
@@ -67,13 +67,13 @@ namespace TestesDonaMaria.Infra.ModuloTeste
 
         public Alternativa ConverterRegistroAlternativa(SqlDataReader leitorRegistros)
         {
-            int id = Convert.ToInt32(leitorRegistros["id"]);
+            int id = Convert.ToInt32(leitorRegistros["ID"]);
 
-            string alternativa = leitorRegistros["alternativa"].ToString();
+            string alternativa = leitorRegistros["ALTERNATIVA"].ToString();
 
-            bool correta = Convert.ToBoolean(leitorRegistros["correta"]);
+            bool correta = Convert.ToBoolean(leitorRegistros["CORRETA"]);
 
-            int questao_id = Convert.ToInt32(leitorRegistros["questao_id"]);
+            int questao_id = Convert.ToInt32(leitorRegistros["QUESTAO_ID"]);
 
             Alternativa alternativaObj = new(id, alternativa, correta, questao_id);
 

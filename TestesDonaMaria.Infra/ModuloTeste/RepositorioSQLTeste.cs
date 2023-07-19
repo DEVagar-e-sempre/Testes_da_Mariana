@@ -8,31 +8,31 @@ namespace TestesDonaMaria.Infra.ModuloTeste
     {
         protected override string inserirSQL => @"INSERT INTO [TBTESTE] 
                                                     (
-                                                        titulo
-                                                        ,materia_id
-                                                        ,quantquestoes
-                                                        ,serie
-                                                        ,recuperacao
+                                                        TITULO
+                                                        ,MATERIA_ID
+                                                        ,QUANTQUESTOES
+                                                        ,SERIE
+                                                        ,RECUPERACAO
                                                     )
                                                     VALUES 
                                                     (
-                                                        @titulo
-                                                        ,@materia_id
-                                                        ,@quantquestoes
-                                                        ,@serie
-                                                        ,@recuperacao
+                                                        @TITULO
+                                                        ,@MATERIA_ID
+                                                        ,@QUANTQUESTOES
+                                                        ,@SERIE
+                                                        ,@RECUPERACAO
                                                     ); SELECT SCOPE_IDENTITY();";
 
         protected override string editarSQL => @"UPDATE [TBTESTE] 
                                                     SET 
-                                                        titulo = @titulo
-                                                        , materia_id = @materia_id
-                                                        , quantQuestoes = @quantQuestoes
-                                                        , serie = @serie
-                                                        ,recuperacao = @recuperacao
-                                                    WHERE id = @id";
+                                                        TITULO = @TITULO
+                                                        , MATERIA_ID = @MATERIA_ID
+                                                        , QUANTQUESTOES = @QUANTQUESTOES
+                                                        , SERIE = @SERIE
+                                                        ,RECUPERACAO = @RECUPERACAO
+                                                    WHERE ID = @ID";
 
-        protected override string excluirSQL => @"DELETE FROM TBTeste WHERE id = @id";
+        protected override string excluirSQL => @"DELETE FROM TBTeste WHERE ID = @ID";
         protected override string selecionarTodosSQL => @"SELECT 
 	                                                           T.[ID]            AS TESTE_ID
                                                               ,T.[TITULO]		 AS TESTE_TITULO
@@ -55,33 +55,38 @@ namespace TestesDonaMaria.Infra.ModuloTeste
                                                           ON   
 	                                                           M.[DISCIPLINA_ID] = D.[ID] ";
 
-        protected override string selecionarPorIdSQL => selecionarTodosSQL + " WHERE T.id = @id";
+        protected override string selecionarPorIdSQL => selecionarTodosSQL + " WHERE T.ID = @ID";
 
-        protected string inserirRelacaoQuestaoSQL => @"INSERT INTO TBTESTE_TBQUESTAO (TESTE_ID, QUESTAO_ID) VALUES (@teste_id, @questao_id)";
+        protected string inserirRelacaoQuestaoSQL => @"INSERT INTO TBTESTE_TBQUESTAO 
+                                                        (
+                                                            TESTE_ID, QUESTAO_ID
+                                                        ) 
+                                                        VALUES 
+                                                        (
+                                                            @TESTE_ID, @QUESTAO_ID
+                                                        )";
 
         protected string carregarQuestaoSQL => @"SELECT 
-	                                                TBTESTE_TBQUESTAO.questao_id 
+	                                                TBTESTE_TBQUESTAO.QUESTAO_ID 
                                                 FROM 
-	                                                TBTeste_TBQuestao INNER JOIN 
-	                                                TBQuestao ON TBQuestao.id = TBTeste_TBQuestao.questao_id 
+	                                                TBTESTE_TBQUESTAO INNER JOIN 
+	                                                TBQUESTAO ON TBQUESTAO.ID = TBTESTE_TBQUESTAO.QUESTAO_ID 
                                                 WHERE 
-	                                                TBTeste_TBQuestao.teste_id = @teste_id";
+	                                                TBTESTE_TBQUESTAO.TESTE_ID = @TESTE_ID";
 
-        protected string excluirRelacaoQuestaoSQL => @"DELETE FROM TBTESTE_TBQUESTAO WHERE TESTE_ID = @teste_id";
+        protected string excluirRelacaoQuestaoSQL => @"DELETE FROM TBTESTE_TBQUESTAO WHERE TESTE_ID = @TESTE_ID";
         protected override string verificarRepeticaoNome => @" SELECT COUNT(*)
-                                                FROM 
-                                                    TBTeste
-                                                WHERE 
-                                                    TBTESTE.TITULO = @titulo 
-                                                AND 
-                                                    TBTESTE.MATERIA_ID = @materia_id
-                                                AND TBTESTE.ID != @id";
+                                                                FROM 
+                                                                    TBTESTE
+                                                                WHERE 
+                                                                    TBTESTE.TITULO = @TITULO 
+                                                                AND 
+                                                                    TBTESTE.MATERIA_ID = @MATERIA_ID
+                                                                AND TBTESTE.ID != @ID";
+
         public RepositorioSQLTeste()
         {
-        }
 
-        public RepositorioSQLTeste(string conexaoBD) : base(conexaoBD)
-        {
         }
 
         public override void Inserir(Teste teste)
@@ -120,7 +125,7 @@ namespace TestesDonaMaria.Infra.ModuloTeste
             Conexao();
 
             SqlCommand comando = new SqlCommand(excluirRelacaoQuestaoSQL, conexao);
-            comando.Parameters.AddWithValue("@teste_id", teste.id);
+            comando.Parameters.AddWithValue("@TESTE_ID", teste.id);
 
             comando.ExecuteNonQuery();
 
@@ -144,9 +149,9 @@ namespace TestesDonaMaria.Infra.ModuloTeste
 
             SqlCommand comando = new SqlCommand(verificarRepeticaoNome, conexao);
 
-            comando.Parameters.AddWithValue("@titulo", registro.titulo);
-            comando.Parameters.AddWithValue("@materia_id", registro.materia.id);
-            comando.Parameters.AddWithValue("@id", registro.id);
+            comando.Parameters.AddWithValue("@TITULO", registro.titulo);
+            comando.Parameters.AddWithValue("@MATERIA_ID", registro.materia.id);
+            comando.Parameters.AddWithValue("@ID", registro.id);
 
             int quantidade = Convert.ToInt32(comando.ExecuteScalar());
 

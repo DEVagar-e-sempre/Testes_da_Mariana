@@ -27,10 +27,12 @@ namespace TestesDonaMaria.WinForms
         private ServicoTeste servicoTeste;
         private ServicoQuestao servicoQuestao;
         #endregion
+
         private ControladorBase controlador = null;
-        private string conexaoBD = @"Data Source=(Localdb)\MSSQLLocaldb;
+        private const string conexaoBD = @"Data Source=(Localdb)\MSSQLLocaldb;
                                         Initial Catalog=TesteMarianaDB;
                                         Integrated Security=True;";
+
         private static TelaPrincipal telaPrincipal;
         public TelaPrincipal()
         {
@@ -48,10 +50,10 @@ namespace TestesDonaMaria.WinForms
 
         private void InicializadorRepositorios()
         {
-            repDisciplina = new RepositorioSQLDisciplina(conexaoBD);
-            repMateria = new RepositorioSQLMateria(conexaoBD);
-            repQuestao = new RepositorioSQLQuestao(conexaoBD);
-            repTeste = new RepositorioSQLTeste(conexaoBD);
+            repDisciplina = new RepositorioSQLDisciplina();
+            repMateria = new RepositorioSQLMateria();
+            repQuestao = new RepositorioSQLQuestao();
+            repTeste = new RepositorioSQLTeste();
         }
 
         private void InicializarServicos()

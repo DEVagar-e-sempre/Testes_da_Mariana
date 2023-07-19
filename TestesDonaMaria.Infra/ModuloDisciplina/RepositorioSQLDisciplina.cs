@@ -5,9 +5,17 @@ namespace TestesDonaMaria.Infra.ModuloDisciplina
 {
     public class RepositorioSQLDisciplina : RepositorioSQLBase<Disciplina, MapeadorDisciplina>
     {
-        protected override string inserirSQL => "INSERT INTO TBDisciplina (nome) VALUES (@nome) SELECT SCOPE_IDENTITY();";
-        protected override string editarSQL => "UPDATE TBDisciplina SET nome = @nome WHERE id = @id";
-        protected override string excluirSQL => "DELETE FROM TBDisciplina WHERE id = @id";
+        protected override string inserirSQL => @"INSERT INTO TBDISCIPLINA 
+                                                        (
+                                                        NOME
+                                                        ) 
+                                                        VALUES 
+                                                        (
+                                                        @NOME
+                                                        ) 
+                                                        SELECT SCOPE_IDENTITY();";
+        protected override string editarSQL => @"UPDATE TBDISCIPLINA SET NOME = @NOME WHERE ID = @ID";
+        protected override string excluirSQL => @"DELETE FROM TBDISCIPLINA WHERE ID = @ID";
         protected override string selecionarTodosSQL => @"SELECT 
                                                             [ID]
                                                             ,[NOME]
@@ -16,17 +24,13 @@ namespace TestesDonaMaria.Infra.ModuloDisciplina
         protected override string selecionarPorIdSQL => selecionarTodosSQL + " WHERE [ID] = @ID";
         protected override string verificarRepeticaoNome => @"
                             SELECT COUNT(*)
-                            FROM TBDisciplina
-                            WHERE TBDisciplina.nome = @nome 
-                            AND TBDisciplina.id != @id";
-
+                            FROM TBDISCIPLINA
+                            WHERE TBDISCIPLINA.NOME = @NOME 
+                            AND TBDISCIPLINA.ID != @ID";
 
         public RepositorioSQLDisciplina()
         {
-            
-        }
-        public RepositorioSQLDisciplina(string conexaoBD) : base(conexaoBD)
-        {
+
         }
 
         public override bool EhRepetido(Disciplina registro)
@@ -35,8 +39,8 @@ namespace TestesDonaMaria.Infra.ModuloDisciplina
 
             SqlCommand comando = new SqlCommand(verificarRepeticaoNome, conexao);
 
-            comando.Parameters.AddWithValue("@nome", registro.nome);
-            comando.Parameters.AddWithValue("@id", registro.id);
+            comando.Parameters.AddWithValue("@NOME", registro.nome);
+            comando.Parameters.AddWithValue("@ID", registro.id);
 
             int quantidade = Convert.ToInt32(comando.ExecuteScalar());
 
@@ -50,13 +54,13 @@ namespace TestesDonaMaria.Infra.ModuloDisciplina
             Conexao();
             string verificarDepedenteSQL = @"
                             SELECT COUNT(*) 
-                            FROM TBMateria 
-                            WHERE TBMateria.disciplina_id = @id
+                            FROM TBMATERIA 
+                            WHERE TBMATERIA.DISCIPLINA_ID = @ID
 ";
 
             SqlCommand comando = new SqlCommand(verificarDepedenteSQL, conexao);
 
-            comando.Parameters.AddWithValue("@id", registro.id);
+            comando.Parameters.AddWithValue("@ID", registro.id);
 
             int quantidade = Convert.ToInt32(comando.ExecuteScalar());
 

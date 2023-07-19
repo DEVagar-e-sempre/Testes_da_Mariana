@@ -6,70 +6,96 @@ namespace TestesDonaMaria.Infra.ModuloQuestao
 {
     public class RepositorioSQLQuestao : RepositorioSQLBase<Questao, MapeadorQuestao>
     {
-        protected override string inserirSQL => "INSERT INTO TBQuestao (titulo, materia_id, serie) VALUES (@titulo, @materia_id, @serie) SELECT SCOPE_IDENTITY();";
+        protected override string inserirSQL => @"INSERT INTO TBQUESTAO 
+                                                    (
+                                                        TITULO
+                                                        , MATERIA_ID
+                                                        , SERIE
+                                                    ) 
+                                                    VALUES 
+                                                    (
+                                                        @TITULO
+                                                        , @MATERIA_ID
+                                                        , @SERIE
+                                                    ) 
+                                                    SELECT SCOPE_IDENTITY();";
 
-        protected override string editarSQL => "UPDATE TBQuestao SET titulo = @titulo, materia_id = @materia_id, serie = @serie WHERE id = @id";
+        protected override string editarSQL => @"UPDATE TBQUESTAO 
+                                                SET 
+                                                TITULO = @TITULO
+                                                , MATERIA_ID = @MATERIA_ID
+                                                , SERIE = @SERIE 
+                                                WHERE ID = @ID";
 
-        protected override string excluirSQL => "DELETE FROM TBQuestao WHERE id = @id";
+        protected override string excluirSQL =>@"DELETE FROM TBQUESTAO 
+                                                WHERE ID = @ID";
 
-        protected override string selecionarTodosSQL => @"
-                                                            SELECT 
-	                                                            Q.id AS QUESTAO_ID,
-	                                                            Q.titulo AS QUESTAO_TITULO,
-	                                                            Q.serie AS QUESTAO_SERIE,
-	                                                            M.id AS MATERIA_ID,
-	                                                            M.nome AS MATERIA_NOME,
-	                                                            D.id AS DISCIPLINA_ID,
-	                                                            D.nome AS DISCIPLINA_NOME
+        protected override string selecionarTodosSQL => @"  SELECT 
+	                                                            Q.ID AS QUESTAO_ID,
+	                                                            Q.TITULO AS QUESTAO_TITULO,
+	                                                            Q.SERIE AS QUESTAO_SERIE,
+	                                                            M.ID AS MATERIA_ID,
+	                                                            M.NOME AS MATERIA_NOME,
+	                                                            D.ID AS DISCIPLINA_ID,
+	                                                            D.NOME AS DISCIPLINA_NOME
                                                             FROM 
-                                                                TBQuestao AS Q
+                                                                TBQUESTAO AS Q
                                                             INNER JOIN 
-                                                                TBMateria AS M ON M.id = Q.materia_id
+                                                                TBMATERIA AS M ON M.ID = Q.MATERIA_ID
                                                             INNER JOIN 
-                                                                TBDisciplina AS D ON D.id = M.disciplina_id
+                                                                TBDISCIPLINA AS D ON D.ID = M.DISCIPLINA_ID
 
 ";
 
-        protected override string selecionarPorIdSQL => selecionarTodosSQL + " WHERE Q.id = @id";
+        protected override string selecionarPorIdSQL => selecionarTodosSQL + " WHERE Q.ID = @ID";
 
-        protected string inserirAlternativaSQL => "INSERT INTO TBAlternativa (alternativa,alternativa_correta, questao_id) VALUES (@alternativa,@alternativa_correta, @questao_id) SELECT SCOPE_IDENTITY();";
+        protected string inserirAlternativaSQL => @"INSERT INTO TBALTERNATIVA 
+                                                    (
+                                                        ALTERNATIVA
+                                                        ,ALTERNATIVA_CORRETA
+                                                        ,QUESTAO_ID
+                                                    ) 
+                                                    VALUES 
+                                                    (
+                                                        @ALTERNATIVA
+                                                        ,@ALTERNATIVA_CORRETA
+                                                        ,@QUESTAO_ID
+                                                    ) 
+                                                    SELECT SCOPE_IDENTITY();";
 
-        protected string carregarAlternativasSQL => "SELECT * FROM TBAlternativa WHERE questao_id = @questao_id";
-        protected string excluirAlternativasSQL => "DELETE FROM TBAlternativa WHERE questao_id = @questao_id";
+        protected string carregarAlternativasSQL => @"SELECT * FROM TBALTERNATIVA WHERE QUESTAO_ID = @QUESTAO_ID";
+        protected string excluirAlternativasSQL => @"DELETE FROM TBALTERNATIVA WHERE QUESTAO_ID = @QUESTAO_ID";
 
         protected string selecionarAleatoriamenteSQL => @"
-                                                        SELECT TOP (@quantidade)
-	                                                        Q.id AS QUESTAO_ID,
-	                                                        Q.titulo AS QUESTAO_TITULO,
-	                                                        Q.serie AS QUESTAO_SERIE,
-	                                                        M.id AS MATERIA_ID,
-	                                                        M.nome AS MATERIA_NOME,
-	                                                        D.id AS DISCIPLINA_ID,
-	                                                        D.nome AS DISCIPLINA_NOME
+                                                        SELECT TOP (@QUANTIDADE)
+	                                                        Q.ID AS QUESTAO_ID,
+	                                                        Q.TITULO AS QUESTAO_TITULO,
+	                                                        Q.SERIE AS QUESTAO_SERIE,
+	                                                        M.ID AS MATERIA_ID,
+	                                                        M.NOME AS MATERIA_NOME,
+	                                                        D.ID AS DISCIPLINA_ID,
+	                                                        D.NOME AS DISCIPLINA_NOME
                                                         FROM 
-                                                            TBQuestao AS Q
+                                                            TBQUESTAO AS Q
                                                         INNER JOIN 
-                                                            TBMateria AS M ON M.id = Q.materia_id
+                                                            TBMATERIA AS M ON M.ID = Q.MATERIA_ID
                                                         INNER JOIN 
-                                                            TBDisciplina AS D ON D.id = M.disciplina_id
-                                                        WHERE Q.serie = @serie AND M.id = @materia_id
+                                                            TBDISCIPLINA AS D ON D.ID = M.DISCIPLINA_ID
+                                                        WHERE Q.SERIE = @SERIE AND M.ID = @MATERIA_ID
                                                         ORDER BY NEWID()
 ";
-        protected string selecionarPorTesteIdSQL => selecionarTodosSQL + " INNER JOIN TBTeste_TBQuestao AS TQ ON TQ.questao_id = Q.id WHERE TQ.teste_id = @teste_id";
+        protected string selecionarPorTesteIdSQL => selecionarTodosSQL + " INNER JOIN TBTESTE_TBQUESTAO AS TQ ON TQ.QUESTAO_ID = Q.ID WHERE TQ.TESTE_ID = @TESTE_ID";
         protected override string verificarRepeticaoNome => @"
                             SELECT COUNT(*)
-                            FROM TBQuestao
-                            WHERE TBQuestao.titulo = titulo
-                            AND TBQuestao.id != @id;";
+                            FROM TBQUESTAO
+                            WHERE TBQUESTAO.TITULO = TITULO
+                            AND TBQUESTAO.ID != @ID;";
 
         public RepositorioSQLQuestao()
         {
-            
+
         }
 
-        public RepositorioSQLQuestao(string conexaoBD) : base(conexaoBD)
-        {
-        }
 
         public override void Inserir(Questao questao)
         {
@@ -107,7 +133,7 @@ namespace TestesDonaMaria.Infra.ModuloQuestao
             List<Questao> questoes = new List<Questao>();
             Conexao();
             SqlCommand comando = new SqlCommand(selecionarPorTesteIdSQL, conexao);
-            comando.Parameters.AddWithValue("@teste_id", teste_id);
+            comando.Parameters.AddWithValue("@TESTE_ID", teste_id);
             SqlDataReader leitorRegistros = comando.ExecuteReader();
             while (leitorRegistros.Read())
             {
@@ -131,9 +157,9 @@ namespace TestesDonaMaria.Infra.ModuloQuestao
 
             SqlCommand comando = new SqlCommand(selecionarAleatoriamenteSQL, conexao);
 
-            comando.Parameters.AddWithValue("@quantidade", quantidade);
-            comando.Parameters.AddWithValue("@materia_id", materia_id);
-            comando.Parameters.AddWithValue("@serie", serie);
+            comando.Parameters.AddWithValue("@QUANTIDADE", quantidade);
+            comando.Parameters.AddWithValue("@MATERIA_ID", materia_id);
+            comando.Parameters.AddWithValue("@SERIE", serie);
 
             SqlDataReader leitorRegistros = comando.ExecuteReader();
 
@@ -166,7 +192,7 @@ namespace TestesDonaMaria.Infra.ModuloQuestao
         {
             Conexao();
             SqlCommand comando = new SqlCommand(excluirAlternativasSQL, conexao);
-            comando.Parameters.AddWithValue("questao_id", questao.id);
+            comando.Parameters.AddWithValue("QUESTAO_ID", questao.id);
             comando.ExecuteNonQuery();
             conexao.Close();
         }
@@ -189,7 +215,7 @@ namespace TestesDonaMaria.Infra.ModuloQuestao
             Conexao();
 
             SqlCommand comando = new SqlCommand(carregarAlternativasSQL, conexao);
-            comando.Parameters.AddWithValue("@questao_id", questao.id);
+            comando.Parameters.AddWithValue("@QUESTAO_ID", questao.id);
 
             SqlDataReader leitorRegistros = comando.ExecuteReader();
 
@@ -209,8 +235,8 @@ namespace TestesDonaMaria.Infra.ModuloQuestao
 
             SqlCommand comando = new SqlCommand(verificarRepeticaoNome, conexao);
 
-            comando.Parameters.AddWithValue("@titulo", registro.enunciado);
-            comando.Parameters.AddWithValue("@id", registro.id);
+            comando.Parameters.AddWithValue("@TITULO", registro.enunciado);
+            comando.Parameters.AddWithValue("@ID", registro.id);
 
             int quantidade = Convert.ToInt32(comando.ExecuteScalar());
 
@@ -224,13 +250,13 @@ namespace TestesDonaMaria.Infra.ModuloQuestao
             Conexao();
             String verificarDepedenteSQL = @"
                             SELECT COUNT(*)
-                            FROM TBTeste_TBQuestao
-                            WHERE TBTeste_TBQuestao.questao_id = @id
+                            FROM TBTESTE_TBQUESTAO
+                            WHERE TBTESTE_TBQUESTAO.QUESTAO_ID = @ID
 ";
 
             SqlCommand comando = new SqlCommand(verificarDepedenteSQL, conexao);
 
-            comando.Parameters.AddWithValue("@id", registro.id);
+            comando.Parameters.AddWithValue("@ID", registro.id);
 
             int quantidade = Convert.ToInt32(comando.ExecuteScalar());
 
