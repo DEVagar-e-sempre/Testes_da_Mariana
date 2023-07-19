@@ -7,7 +7,9 @@ namespace TestesDonaMaria.Infra.Compartilhado
         where TEntidade : EntidadeBase<TEntidade>
         where TMapeador : MapeadorBase<TEntidade>, new()
     {
-        protected string conexaoBD;
+        private const string conexaoBD = @"Data Source=(Localdb)\MSSQLLocaldb;
+                                        Initial Catalog=TesteMarianaDB;
+                                        Integrated Security=True;";
 
         protected SqlConnection conexao;
 
@@ -17,17 +19,12 @@ namespace TestesDonaMaria.Infra.Compartilhado
         protected virtual string editarSQL => "";
         protected virtual string excluirSQL => "";
         protected virtual string selecionarTodosSQL => "";
-        protected virtual string selecionarPorIdSQL => selecionarTodosSQL + " WHERE id = @id";
+        protected virtual string selecionarPorIdSQL => selecionarTodosSQL + " WHERE ID = @ID";
         protected virtual string verificarRepeticaoNome => "";
         
-        public RepositorioSQLBase(string conexaoBD)
+        public RepositorioSQLBase()
         {
             this.mapeador = new TMapeador();
-            this.conexaoBD = conexaoBD;
-        }
-
-        public RepositorioSQLBase()
-        {   
         }
 
         protected void Conexao()
@@ -60,7 +57,7 @@ namespace TestesDonaMaria.Infra.Compartilhado
 
             mapeador.ConfigurarParametros(comando, registroAtualizado);
 
-            comando.Parameters.AddWithValue("@id", id);
+            comando.Parameters.AddWithValue("@ID", id);
 
             comando.ExecuteNonQuery();
 
@@ -73,7 +70,7 @@ namespace TestesDonaMaria.Infra.Compartilhado
 
             SqlCommand comando = new SqlCommand(excluirSQL, conexao);
 
-            comando.Parameters.AddWithValue("@id", registroSelecionado.id);
+            comando.Parameters.AddWithValue("@ID", registroSelecionado.id);
 
             comando.ExecuteNonQuery();
 
@@ -87,7 +84,7 @@ namespace TestesDonaMaria.Infra.Compartilhado
 
             TEntidade registro = null;
 
-            comando.Parameters.AddWithValue("@id", id);
+            comando.Parameters.AddWithValue("@ID", id);
 
             SqlDataReader leitor = comando.ExecuteReader();
 
@@ -125,7 +122,7 @@ namespace TestesDonaMaria.Infra.Compartilhado
         public virtual int ObterProximoID()
         {
             string tipo = typeof(TEntidade).Name;
-            string proximoIdSQL = $"SELECT IDENT_CURRENT('TB{tipo}')";
+            string proximoIdSQL = $"SELECT IDENT_CURRENT('TB{tipo.ToUpper()}')";
             Conexao();
             SqlCommand comando = new SqlCommand(proximoIdSQL, conexao);
             int proximoId = Convert.ToInt32(comando.ExecuteScalar());

@@ -8,16 +8,16 @@ namespace TestesDonaMaria.Infra.ModuloMateria
     {
         public override void ConfigurarParametros(SqlCommand comando, Materia registro)
         {
-            comando.Parameters.AddWithValue("@nome", registro.nome);
-            comando.Parameters.AddWithValue("@disciplina_id", registro.disciplina.id);
+            comando.Parameters.AddWithValue("@NOME", registro.nome);
+            comando.Parameters.AddWithValue("@DISCIPLINA_ID", registro.disciplina.id);
         }
 
         public override Materia ConverterRegistro(SqlDataReader leitorRegistros)
         {
-            int materia_id = Convert.ToInt32(leitorRegistros["materia_id"]);
-            string nome_materia = Convert.ToString(leitorRegistros["materia_nome"]);
-            int disciplina_id = Convert.ToInt32(leitorRegistros["disciplina_id"]);
-            string nome_disciplina = Convert.ToString(leitorRegistros["disciplina_nome"]);
+            int materia_id = Convert.ToInt32(leitorRegistros["MATERIA_ID"]);
+            string nome_materia = Convert.ToString(leitorRegistros["MATERIA_NOME"]);
+            int disciplina_id = Convert.ToInt32(leitorRegistros["DISCIPLINA_ID"]);
+            string nome_disciplina = Convert.ToString(leitorRegistros["DISCIPLINA_NOME"]);
 
             Disciplina disciplina = new Disciplina(disciplina_id, nome_disciplina);
 

@@ -5,39 +5,49 @@ namespace TestesDonaMaria.Infra.ModuloMateria
 {
     public class RepositorioSQLMateria : RepositorioSQLBase<Materia, MapeadorMateria>
     {
-        protected override string inserirSQL => "INSERT INTO TBMateria (nome, disciplina_id) VALUES (@nome, @disciplina_id) SELECT SCOPE_IDENTITY();";
+        protected override string inserirSQL => @"INSERT INTO TBMATERIA 
+                                                (
+                                                NOME
+                                                ,DISCIPLINA_ID
+                                                ) 
+                                                VALUES 
+                                                (
+                                                @NOME
+                                                ,@DISCIPLINA_ID
+                                                ) 
+                                                SELECT SCOPE_IDENTITY();";
 
-        protected override string editarSQL => "UPDATE TBMateria SET nome = @nome, disciplina_id = @disciplina_id WHERE id = @id";
+        protected override string editarSQL => @"UPDATE TBMATERIA 
+                                                SET 
+                                                NOME = @NOME
+                                                ,DISCIPLINA_ID = @DISCIPLINA_ID
+                                                WHERE ID = @ID";
 
-        protected override string excluirSQL => "DELETE FROM TBMateria WHERE id = @id";
+        protected override string excluirSQL => @"DELETE FROM TBMATERIA WHERE ID = @ID";
 
         protected override string selecionarTodosSQL => @"
                                                         SELECT 
-	                                                        M.id AS materia_id, 
-	                                                        M.nome AS materia_nome, 
+	                                                        M.ID AS MATERIA_ID, 
+	                                                        M.NOME AS MATERIA_NOME, 
                                                             
-	                                                        D.id AS disciplina_id, 
-	                                                        D.nome AS disciplina_nome 
+	                                                        D.ID AS DISCIPLINA_ID, 
+	                                                        D.NOME AS DISCIPLINA_NOME 
                                                         FROM 
-                                                            TBMateria AS M
-                                                            INNER JOIN TBDisciplina AS D 
+                                                            TBMATERIA AS M
+                                                            INNER JOIN TBDISCIPLINA AS D 
                                                         ON 
-                                                            D.id = M.disciplina_id ";
-        protected override string selecionarPorIdSQL => selecionarTodosSQL + " WHERE M.id = @id";
+                                                            D.ID = M.DISCIPLINA_ID ";
+        protected override string selecionarPorIdSQL => selecionarTodosSQL + " WHERE M.ID = @ID";
         protected override string verificarRepeticaoNome => @" SELECT COUNT(*)
                                                                 FROM 
                                                                     TBMATERIA
                                                                 WHERE 
-                                                                    TBMATERIA.NOME = @nome
+                                                                    TBMATERIA.NOME = @NOME
                                                                 AND 
-                                                                    TBMATERIA.ID != @id";
-
+                                                                    TBMATERIA.ID != @ID";
         public RepositorioSQLMateria()
         {
-            
-        }
-        public RepositorioSQLMateria(string conexaoBD) : base(conexaoBD)
-        {
+
         }
 
         public override bool EhRepetido(Materia registro)
@@ -46,8 +56,8 @@ namespace TestesDonaMaria.Infra.ModuloMateria
 
             SqlCommand comando = new SqlCommand(verificarRepeticaoNome, conexao);
 
-            comando.Parameters.AddWithValue("@nome", registro.nome);
-            comando.Parameters.AddWithValue("@id", registro.id);
+            comando.Parameters.AddWithValue("@NOME", registro.nome);
+            comando.Parameters.AddWithValue("@ID", registro.id);
 
             int quantidade = Convert.ToInt32(comando.ExecuteScalar());
 
@@ -64,15 +74,15 @@ namespace TestesDonaMaria.Infra.ModuloMateria
 
             string verificarDepedenteSQL = @" SELECT COUNT(*)
                                                 FROM 
-                                                    TBTeste, TBQuestao
+                                                    TBTESTE, TBQUESTAO
                                                 WHERE 
-                                                    TBTeste.materia_id = @id
+                                                    TBTESTE.MATERIA_ID = @ID
                                                 OR
-                                                    TBQuestao.materia_id = @id";
+                                                    TBQUESTAO.MATERIA_ID = @ID";
 
             comando = new SqlCommand(verificarDepedenteSQL, conexao);
 
-            comando.Parameters.AddWithValue("@id", registro.id);
+            comando.Parameters.AddWithValue("@ID", registro.id);
 
             quantidade = Convert.ToInt32(comando.ExecuteScalar());
 
@@ -85,9 +95,9 @@ namespace TestesDonaMaria.Infra.ModuloMateria
             Conexao();
             List<Materia> materias = new List<Materia>();
 
-            SqlCommand comando = new SqlCommand(selecionarTodosSQL + " WHERE disciplina_id = @disciplina_id", conexao);
+            SqlCommand comando = new SqlCommand(selecionarTodosSQL + " WHERE DISCIPLINA_ID = @DISCIPLINA_ID", conexao);
 
-            comando.Parameters.AddWithValue("@disciplina_id", disciplinaId);
+            comando.Parameters.AddWithValue("@DISCIPLINA_ID", disciplinaId);
 
             SqlDataReader leitor = comando.ExecuteReader();
 

@@ -9,9 +9,9 @@ namespace TestesDonaMaria.Infra.ModuloQuestao
     {
         public override void ConfigurarParametros(SqlCommand comando, Questao registro)
         {
-            comando.Parameters.AddWithValue("@titulo", registro.enunciado);
-            comando.Parameters.AddWithValue("@serie", registro.serie);
-            comando.Parameters.AddWithValue("@materia_id", registro.materia.id);
+            comando.Parameters.AddWithValue("@TITULO", registro.enunciado);
+            comando.Parameters.AddWithValue("@SERIE", registro.serie);
+            comando.Parameters.AddWithValue("@MATERIA_ID", registro.materia.id);
 
         }
 
@@ -35,13 +35,13 @@ namespace TestesDonaMaria.Infra.ModuloQuestao
 
         public Alternativa ConverterRegistroAlternativa(SqlDataReader leitorRegistros)
         {
-            int id = Convert.ToInt32(leitorRegistros["id"]);
+            int id = Convert.ToInt32(leitorRegistros["ID"]);
 
-            String alternativa = leitorRegistros["alternativa"].ToString();
+            String alternativa = leitorRegistros["ALTERNATIVA"].ToString();
 
-            bool correta = Convert.ToBoolean(leitorRegistros["alternativa_correta"]);
+            bool correta = Convert.ToBoolean(leitorRegistros["ALTERNATIVA_CORRETA"]);
 
-            int questao_id = Convert.ToInt32(leitorRegistros["questao_id"]);
+            int questao_id = Convert.ToInt32(leitorRegistros["QUESTAO_ID"]);
 
             Alternativa alternativaObj = new(id, alternativa, correta, questao_id);
 
@@ -49,9 +49,9 @@ namespace TestesDonaMaria.Infra.ModuloQuestao
         }
         public void ConfigurarParamentrosAlternativa(SqlCommand comando, Alternativa alternativa)
         {
-            comando.Parameters.AddWithValue("@alternativa", alternativa.alternativa);
-            comando.Parameters.AddWithValue("@questao_id", alternativa.questaoId);
-            comando.Parameters.AddWithValue("@alternativa_correta", alternativa.correta);
+            comando.Parameters.AddWithValue("@ALTERNATIVA", alternativa.alternativa);
+            comando.Parameters.AddWithValue("@QUESTAO_ID", alternativa.questaoId);
+            comando.Parameters.AddWithValue("@ALTERNATIVA_CORRETA", alternativa.correta);
         }
     }
 }
