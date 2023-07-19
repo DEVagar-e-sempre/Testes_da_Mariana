@@ -13,7 +13,7 @@ using TestesDonaMaria.WinForms.ModuloTeste;
 
 namespace TestesDonaMaria.WinForms
 {
-    public partial class TelaPrincipal : Form
+    public partial class TelaPrincipal : Form 
     {
         #region Declaração dos repositorios
         private RepositorioSQLDisciplina repDisciplina;
@@ -28,6 +28,9 @@ namespace TestesDonaMaria.WinForms
         private ServicoQuestao servicoQuestao;
         #endregion
         private ControladorBase controlador = null;
+        private string conexaoBD = @"Data Source=(Localdb)\MSSQLLocaldb;
+                                        Initial Catalog=TesteMarianaDB;
+                                        Integrated Security=True;";
         private static TelaPrincipal telaPrincipal;
         public TelaPrincipal()
         {
@@ -45,10 +48,10 @@ namespace TestesDonaMaria.WinForms
 
         private void InicializadorRepositorios()
         {
-            repDisciplina = new RepositorioSQLDisciplina();
-            repMateria = new RepositorioSQLMateria();
-            repQuestao = new RepositorioSQLQuestao();
-            repTeste = new RepositorioSQLTeste();
+            repDisciplina = new RepositorioSQLDisciplina(conexaoBD);
+            repMateria = new RepositorioSQLMateria(conexaoBD);
+            repQuestao = new RepositorioSQLQuestao(conexaoBD);
+            repTeste = new RepositorioSQLTeste(conexaoBD);
         }
 
         private void InicializarServicos()

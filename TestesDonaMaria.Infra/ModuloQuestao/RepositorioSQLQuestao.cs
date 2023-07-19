@@ -62,7 +62,12 @@ namespace TestesDonaMaria.Infra.ModuloQuestao
                             WHERE TBQuestao.titulo = titulo
                             AND TBQuestao.id != @id;";
 
-        public RepositorioSQLQuestao() : base()
+        public RepositorioSQLQuestao()
+        {
+            
+        }
+
+        public RepositorioSQLQuestao(string conexaoBD) : base(conexaoBD)
         {
         }
 
