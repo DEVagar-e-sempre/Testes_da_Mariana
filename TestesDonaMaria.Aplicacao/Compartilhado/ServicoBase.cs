@@ -1,5 +1,6 @@
 ﻿using FluentResults;
 using Microsoft.Data.SqlClient;
+using Serilog;
 using TestesDonaMaria.Dominio.Compartilhado;
 using TestesDonaMaria.Infra.Compartilhado;
 
@@ -24,32 +25,59 @@ namespace TestesDonaMaria.Aplicacao.Compartilhado
 
         public virtual Result Inserir(TEntidade registro)
         {
+            Log.Debug("Inserindo registro: {@registro}", registro);
+
             List<string> erros = ValidarRegistro(registro);
 
             if (erros.Count() > 0)
             {
                 return Result.Fail(erros);
             }
+            try
+            {
+                repRegistro.Inserir(registro);
+                return Result.Ok();
+            }
+            catch (SqlException ex)
+            {
+                string msgErro = "Falha ao tentar inserir o registro. ";
 
-            repRegistro.Inserir(registro);
+                Log.Error(ex, msgErro + "{@registro}", registro);
 
-            return Result.Ok();
+                return Result.Fail(erros);
+            }
+
+
         }
 
         public virtual Result Editar(TEntidade registro)
         {
+            Log.Debug("Editando registro: {@registro}", registro);
+
             List<string> erros = ValidarRegistro(registro);
 
             if (erros.Count() > 0)
                 return Result.Fail(erros);
+            try
+            {
+                repRegistro.Editar(registro.id, registro);
 
-            repRegistro.Editar(registro.id, registro);
+                return Result.Ok();
+            }
+            catch (SqlException ex)
+            {
+                string msgErro = "Falha ao tentar editar o registro. ";
 
-            return Result.Ok();
+                Log.Error(ex, msgErro + "{@registro}", registro);
+
+                return Result.Fail(erros);
+            }
         }
 
         public virtual Result Excluir(TEntidade registro)
         {
+            Log.Debug("Excluindo registro: {@registro}", registro);
+
             List<string> erros = new List<string>();
 
             try
@@ -62,6 +90,8 @@ namespace TestesDonaMaria.Aplicacao.Compartilhado
             catch (SqlException ex)
             {
                 erros.Add(MsgErro);
+
+                Log.Warning(ex, MsgErro + "{@registro}", registro);
 
                 return Result.Fail(erros);
             }
