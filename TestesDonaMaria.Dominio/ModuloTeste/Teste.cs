@@ -78,5 +78,6 @@ namespace TestesDonaMaria.Dominio.ModuloTeste
             return obj is Teste teste &&
                    id == teste.id;
         }
+
     }
 }

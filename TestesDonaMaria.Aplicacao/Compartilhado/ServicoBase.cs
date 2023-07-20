@@ -1,4 +1,5 @@
 ﻿using FluentResults;
+using FluentValidation.Results;
 using Microsoft.Data.SqlClient;
 using Serilog;
 using TestesDonaMaria.Dominio.Compartilhado;
@@ -11,16 +12,19 @@ namespace TestesDonaMaria.Aplicacao.Compartilhado
      * As configurações de cada validação terão que estar nessa camada
      * Fazer a verificação de repetido aqui
      */
-    public abstract class ServicoBase<TEntidade, TRepositorio>
+    public abstract class ServicoBase<TEntidade, TRepositorio, TValidador>
         where TEntidade : EntidadeBase<TEntidade>
         where TRepositorio : IRepositorioBase<TEntidade>, new()
+        where TValidador : ValidadorBase<TEntidade>, new()
     {
         private TRepositorio repRegistro;
+        private TValidador validadorRegistro;
         protected virtual string MsgErro => "";
 
         public ServicoBase()
         {
             repRegistro = new TRepositorio();
+            validadorRegistro = new TValidador();
         }
 
         public virtual Result Inserir(TEntidade registro)
@@ -99,6 +103,8 @@ namespace TestesDonaMaria.Aplicacao.Compartilhado
 
         private List<string> ValidarRegistro(TEntidade registro)
         {
+            ValidationResult validador = validadorRegistro.Validate(registro);
+
             List<string> erros = new List<string>(registro.Validar());
 
             if (NomeDuplicado(registro))

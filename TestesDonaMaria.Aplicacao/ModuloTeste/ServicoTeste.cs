@@ -7,7 +7,7 @@ using TestesDonaMaria.Infra.ModuloTeste;
 
 namespace TestesDonaMaria.Aplicacao.ModuloTeste
 {
-    public class ServicoTeste : ServicoBase<Teste, RepositorioSQLTeste>
+    public class ServicoTeste : ServicoBase<Teste, RepositorioSQLTeste, ValidadorTeste>
     {
         protected override string MsgErro => "Falha ao tentar remover o teste selecionado...";
         private RepositorioSQLQuestao repQuestao;

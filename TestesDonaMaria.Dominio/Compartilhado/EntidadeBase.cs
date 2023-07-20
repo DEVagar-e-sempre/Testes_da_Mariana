@@ -12,7 +12,5 @@
         public abstract string[] Validar();
 
         public abstract void AtualizarInformacoes(T entidade);
-
-
     }
 }

@@ -73,5 +73,6 @@ namespace TestesDonaMaria.Dominio.ModuloQuestao
             return obj is Questao questao &&
                    id == questao.id;
         }
+
     }
 }

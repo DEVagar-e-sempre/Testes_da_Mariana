@@ -42,5 +42,6 @@
             return obj is Disciplina disciplina &&
                    id == disciplina.id;
         }
+
     }
 }
