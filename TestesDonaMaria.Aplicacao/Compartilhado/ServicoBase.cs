@@ -95,7 +95,7 @@ namespace TestesDonaMaria.Aplicacao.Compartilhado
             {
                 erros.Add(MsgErro);
 
-                Log.Error(ex, MsgErro + "{@registro}", registro);
+                Log.Warning(ex, MsgErro + "{@registro}", registro);
 
                 return Result.Fail(erros);
             }
