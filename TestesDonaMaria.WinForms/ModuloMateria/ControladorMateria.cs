@@ -11,7 +11,6 @@ namespace TestesDonaMaria.WinForms.ModuloMateria
     {
         public override string ObterTipo => "Materia";
         public override bool FiltrarHabilitado => true;
-        public override bool ListarHabilitado => true;
 
         private RepositorioSQLDisciplina repDisciplina;
         private RepositorioSQLMateria repMateria;

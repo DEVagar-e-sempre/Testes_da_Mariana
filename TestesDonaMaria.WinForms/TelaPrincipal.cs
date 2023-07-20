@@ -180,8 +180,6 @@ namespace TestesDonaMaria.WinForms
                     case "btn_pdf":
                         controlador.GerarPDF();
                         break;
-
-
                 }
             }
         }
