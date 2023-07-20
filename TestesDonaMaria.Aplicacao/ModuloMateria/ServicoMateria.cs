@@ -3,7 +3,7 @@ using TestesDonaMaria.Infra.ModuloMateria;
 
 namespace TestesDonaMaria.Aplicacao.ModuloMateria
 {
-    public class ServicoMateria : ServicoBase <Materia, RepositorioSQLMateria>
+    public class ServicoMateria : ServicoBase <Materia, RepositorioSQLMateria, ValidadorMateria>
     {
         protected override string MsgErro => "Esta Materia está relacionada a uma Questão e não pode ser excluída";
         public ServicoMateria() : base() 

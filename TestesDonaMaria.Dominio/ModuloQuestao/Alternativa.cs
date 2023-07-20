@@ -49,5 +49,6 @@
             return obj is Alternativa alternativa &&
                    id == alternativa.id;
         }
+
     }
 }

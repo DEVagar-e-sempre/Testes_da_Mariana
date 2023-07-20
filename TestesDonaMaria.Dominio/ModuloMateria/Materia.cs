@@ -54,5 +54,6 @@ namespace TestesDonaMaria.Dominio.ModuloMateria
             return obj is Materia materia &&
                    id == materia.id;
         }
+
     }
 }
