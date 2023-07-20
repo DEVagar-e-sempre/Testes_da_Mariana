@@ -40,6 +40,7 @@ namespace TestesDonaMaria.Aplicacao.Compartilhado
             try
             {
                 repRegistro.Inserir(registro);
+                Log.Debug("{@registro} Inserido/a com sucesso!", registro);
                 return Result.Ok();
             }
             catch (SqlException ex)
@@ -65,7 +66,7 @@ namespace TestesDonaMaria.Aplicacao.Compartilhado
             try
             {
                 repRegistro.Editar(registro.id, registro);
-
+                Log.Debug("{@registro} Editado/a com sucesso!", registro);
                 return Result.Ok();
             }
             catch (SqlException ex)
@@ -87,7 +88,7 @@ namespace TestesDonaMaria.Aplicacao.Compartilhado
             try
             {
                 repRegistro.Excluir(registro);
-
+                Log.Debug("{@registro} Excluido/a com sucesso!", registro);
                 return Result.Ok();
 
             }
@@ -103,9 +104,7 @@ namespace TestesDonaMaria.Aplicacao.Compartilhado
 
         private List<string> ValidarRegistro(TEntidade registro)
         {
-            ValidationResult validador = validadorRegistro.Validate(registro);
-
-            List<string> erros = new List<string>(registro.Validar());
+            List<string> erros = validadorRegistro.Validate(registro).Errors.Select(x => x.ErrorMessage).ToList();
 
             if (NomeDuplicado(registro))
             {
