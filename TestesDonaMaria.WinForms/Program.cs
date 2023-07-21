@@ -21,8 +21,10 @@ namespace TestesDonaMaria.WinForms
                 .MinimumLevel.Debug()
                 .WriteTo.Seq("http://localhost:5341")
                 .CreateLogger();
+
                 //.WriteTo.File("log.txt", rollingInterval: RollingInterval.Day)
                 //.CreateLogger();
+
             Log.Debug("Iniciando aplicação");
             ApplicationConfiguration.Initialize();
             Application.Run(new TelaPrincipal());
