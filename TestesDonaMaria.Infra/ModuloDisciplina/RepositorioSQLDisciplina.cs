@@ -30,6 +30,11 @@ namespace TestesDonaMaria.Infra.ModuloDisciplina
 
         public RepositorioSQLDisciplina()
         {
+            
+        }
+
+        public RepositorioSQLDisciplina(string conexaoStrBD) : base(conexaoStrBD)
+        {
 
         }
 

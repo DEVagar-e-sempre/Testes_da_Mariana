@@ -86,6 +86,10 @@ namespace TestesDonaMaria.Infra.ModuloTeste
 
         public RepositorioSQLTeste()
         {
+            
+        }
+        public RepositorioSQLTeste(string conexaoStrBD) : base(conexaoStrBD) 
+        {
 
         }
 

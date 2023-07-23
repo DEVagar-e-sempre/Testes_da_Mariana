@@ -93,6 +93,10 @@ namespace TestesDonaMaria.Infra.ModuloQuestao
 
         public RepositorioSQLQuestao()
         {
+            
+        }
+        public RepositorioSQLQuestao(string conexaoStrBD) : base(conexaoStrBD)
+        {
 
         }
 

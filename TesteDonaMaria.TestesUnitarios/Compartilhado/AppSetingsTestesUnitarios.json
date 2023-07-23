@@ -1,0 +1,5 @@
+{
+  "ConnectionStrings": {
+    "SqlServer": "Data Source=(Localdb)\\MSSQLLocalDB;Initial Catalog=TestesUnitariosMarianaDB;Integrated Security=True"
+  }
+}
