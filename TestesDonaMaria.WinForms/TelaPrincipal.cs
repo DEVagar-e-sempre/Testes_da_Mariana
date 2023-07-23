@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Configuration;
 using TestesDonaMaria.Aplicacao.ModuloDisciplina;
 using TestesDonaMaria.Aplicacao.ModuloMateria;
 using TestesDonaMaria.Aplicacao.ModuloQuestao;
@@ -29,9 +30,7 @@ namespace TestesDonaMaria.WinForms
         #endregion
 
         private ControladorBase controlador = null;
-        private const string conexaoBD = @"Data Source=(Localdb)\MSSQLLocaldb;
-                                        Initial Catalog=TesteMarianaDB;
-                                        Integrated Security=True;";
+        private string conexaoStrBD;
 
         private static TelaPrincipal telaPrincipal;
         public TelaPrincipal()
@@ -44,16 +43,23 @@ namespace TestesDonaMaria.WinForms
 
             telaPrincipal = this;
 
+            var configurador = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("AppSettingsWinApp.json")
+                .Build();
+
+            conexaoStrBD = configurador.GetConnectionString("SqlServer");
+
             InicializadorRepositorios();
             InicializarServicos();
         }
 
         private void InicializadorRepositorios()
         {
-            repDisciplina = new RepositorioSQLDisciplina();
-            repMateria = new RepositorioSQLMateria();
-            repQuestao = new RepositorioSQLQuestao();
-            repTeste = new RepositorioSQLTeste();
+            repDisciplina = new RepositorioSQLDisciplina(conexaoStrBD);
+            repMateria = new RepositorioSQLMateria(conexaoStrBD);
+            repQuestao = new RepositorioSQLQuestao(conexaoStrBD);
+            repTeste = new RepositorioSQLTeste(conexaoStrBD);
         }
 
         private void InicializarServicos()

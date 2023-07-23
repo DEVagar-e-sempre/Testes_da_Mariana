@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 using TestesDonaMaria.Dominio.Compartilhado;
 
 namespace TestesDonaMaria.Infra.Compartilhado
@@ -7,9 +8,7 @@ namespace TestesDonaMaria.Infra.Compartilhado
         where TEntidade : EntidadeBase<TEntidade>
         where TMapeador : MapeadorBase<TEntidade>, new()
     {
-        private const string conexaoBD = @"Data Source=(Localdb)\MSSQLLocaldb;
-                                        Initial Catalog=TesteMarianaDB;
-                                        Integrated Security=True;";
+        private string conexaoStrBD = @"Data Source=(Localdb)\MSSQLLocaldb; Initial Catalog=TesteMarianaDB; Integrated Security=True;";
 
         protected SqlConnection conexao;
 
@@ -21,15 +20,20 @@ namespace TestesDonaMaria.Infra.Compartilhado
         protected virtual string selecionarTodosSQL => "";
         protected virtual string selecionarPorIdSQL => selecionarTodosSQL + " WHERE ID = @ID";
         protected virtual string verificarRepeticaoNome => "";
-        
+
+        public RepositorioSQLBase(string conexaoStrBD)
+        {
+            this.conexaoStrBD = conexaoStrBD;
+            this.mapeador = new TMapeador();
+
+        }
         public RepositorioSQLBase()
         {
-            this.mapeador = new TMapeador();
         }
 
         protected void Conexao()
         {
-            conexao = new SqlConnection(conexaoBD);
+            conexao = new SqlConnection(conexaoStrBD);
             
             conexao.Open();
         }
