@@ -48,27 +48,6 @@ namespace TestesDonaMaria.Dominio.ModuloTeste
             this.listaQuestoes = entidade.listaQuestoes;
         }
 
-        public override string[] Validar()
-        {
-            List<String> erros = new();
-            if (string.IsNullOrEmpty(titulo))
-            {
-                erros.Add("O título não pode ser vazio");
-            }
-            if(titulo.Length < 5)
-            {
-                erros.Add("O título deve ter pelo menos 5 caracteres");
-            }
-            if (materia == null)
-            {
-                erros.Add("O teste deve estar associado a uma matéria");
-            }
-            if (quantQuestoes < 2 || listaQuestoes.Count < 2)
-            {
-                erros.Add("O teste deve ter pelo menos 2 questão");
-            }
-            return erros.ToArray();
-        }
         public override string ToString()
         {
             return titulo;

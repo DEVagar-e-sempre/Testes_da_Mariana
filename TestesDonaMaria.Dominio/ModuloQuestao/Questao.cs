@@ -34,32 +34,6 @@ namespace TestesDonaMaria.Dominio.ModuloQuestao
             this.alternativas = entidade.alternativas;
         }
 
-        public override string[] Validar()
-        {
-            List<String> erros = new();
-            if (string.IsNullOrEmpty(enunciado))
-            {
-                erros.Add("O enunciado não pode ser vazio");
-            }
-            if (materia == null)
-            {
-                erros.Add("A questão deve estar associada a uma matéria");
-            }
-            if (alternativas.Count < 2)
-            {
-                erros.Add("A questão deve ter pelo menos 2 alternativas");
-            }
-            if(alternativas.Count(x => x.correta == true) == 0)
-            {
-                erros.Add("A questão deve ter pelo menos uma alternativa correta");
-            }
-            if (alternativas.Count(x => x.correta == true) > 1)
-            {
-                erros.Add("A questão não pode ter mais de uma alternativa correta");
-            }
-            return erros.ToArray();
-        }
-
         public Alternativa ObterAlternativaCorreta()
         {
             return alternativas.Find(x => x.correta == true);

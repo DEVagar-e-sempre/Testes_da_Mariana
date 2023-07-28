@@ -9,8 +9,6 @@
 
         public int id { get; set; }
 
-        public abstract string[] Validar();
-
         public abstract void AtualizarInformacoes(T entidade);
     }
 }

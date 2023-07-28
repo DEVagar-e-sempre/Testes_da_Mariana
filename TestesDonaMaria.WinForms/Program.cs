@@ -26,6 +26,7 @@ namespace TestesDonaMaria.WinForms
                 //.CreateLogger();
 
             Log.Debug("Iniciando aplicação");
+
             ApplicationConfiguration.Initialize();
             Application.Run(new TelaPrincipal());
         }
