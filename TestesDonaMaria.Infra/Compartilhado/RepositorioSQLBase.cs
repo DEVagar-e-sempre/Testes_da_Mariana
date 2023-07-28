@@ -25,7 +25,6 @@ namespace TestesDonaMaria.Infra.Compartilhado
         {
             this.conexaoStrBD = conexaoStrBD;
             this.mapeador = new TMapeador();
-
         }
         public RepositorioSQLBase()
         {

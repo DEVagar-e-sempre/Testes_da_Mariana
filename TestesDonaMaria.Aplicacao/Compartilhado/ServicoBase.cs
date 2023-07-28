@@ -1,5 +1,4 @@
 ﻿using FluentResults;
-using FluentValidation.Results;
 using Microsoft.Data.SqlClient;
 using Serilog;
 using TestesDonaMaria.Dominio.Compartilhado;

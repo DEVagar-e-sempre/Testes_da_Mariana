@@ -20,19 +20,6 @@
             this.nome = entidade.nome;
         }
 
-        public override string[] Validar()
-        {
-            List<string> erros = new List<string>();
-            if (string.IsNullOrEmpty(nome))
-            {
-                erros.Add("O campo Nome é obrigatório!");
-            }
-            if (nome.Length < 5)
-            {
-                erros.Add("O nome da Disciplina deve ter no mínimo 5 caracteres!");
-            }
-            return erros.ToArray();
-        }
         public override string ToString()
         {
             return nome;

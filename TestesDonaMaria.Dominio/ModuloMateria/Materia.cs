@@ -20,25 +20,6 @@ namespace TestesDonaMaria.Dominio.ModuloMateria
             this.disciplina = disciplina;
         }
 
-        public override string[] Validar()
-        {
-            List<string> erros = new List<string>();
-
-            if (string.IsNullOrEmpty(nome))
-            {
-                erros.Add("O campo Nome é obrigatório!");
-            }
-            if (disciplina == null)
-            {
-                erros.Add("É obrigatório a seleção da disciplina!");
-            }
-            if(nome.Length < 5)
-            {
-                erros.Add("O nome da materia deve ter no mínimo 5 caracteres!");
-            }
-            return erros.ToArray();
-        }
-
         public override void AtualizarInformacoes(Materia entidade)
         {
             this.id = entidade.id;

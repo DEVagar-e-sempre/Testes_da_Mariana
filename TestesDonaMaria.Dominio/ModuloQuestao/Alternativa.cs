@@ -27,19 +27,6 @@
             this.questaoId = entidade.questaoId;
         }
 
-        public override string[] Validar()
-        {
-            List<String> erros = new();
-            if (string.IsNullOrEmpty(alternativa))
-            {
-                erros.Add("O campo alternativa não pode se vazio");
-            }
-            if (questaoId == 0)
-            {
-                erros.Add("A alternativa deve estar associada a uma questão");
-            }
-            return erros.ToArray();
-        }
         public override string ToString()
         {
             return alternativa;
